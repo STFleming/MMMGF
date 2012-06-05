@@ -1,6 +1,4 @@
---Tests axel memory usage by trying to write 128bit words
---that count upwards from 0
---2012 James Lawson
+--VHDL entity designed to interface with axel and feed the systolic array.
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -8,7 +6,7 @@ USE IEEE.numeric_std.ALL;
 library work;
 use work.all; 
 
-entity axel_mem_test is
+entity axel_interface_ent is
 generic (
 			DATA_WIDTH : integer := 128 --width of memory data bus (bits), it must be greater or equal than the bin depth 
 		);
@@ -22,9 +20,9 @@ port (
 		vldm	: in std_logic;	-- This is used to tell when data is ready to be read
 		rdm	: out std_logic
 );
-end axel_mem_test;
+end axel_interface_ent;
 
-ARCHITECTURE rtl of axel_mem_test IS
+ARCHITECTURE rtl of axel_interface_ent IS
 TYPE Tstate IS (read_config, Sload, read_data, test2, test3); --posible states
 SIGNAL ss, ss_next : Tstate; --state signals
 SIGNAL val_reg, val_temp : UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --This is a temp storage for the read value

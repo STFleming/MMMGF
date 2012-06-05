@@ -1,0 +1,25 @@
+Running: /vol/cc/opt/Xilinx/13.1/ISE_DS/ISE/bin/lin64/unwrapped/fuse -o testbench -prj highest_testbench.prj testbench_ent 
+ISim O.40d (signature 0xdc0cde0)
+Number of CPUs detected in this system: 8
+Turning on mult-threading, number of parallel sub-compilation jobs: 16 
+Determining compilation order of HDL files
+Parsing VHDL file "axel_interface.vhd" into library work
+Parsing VHDL file "testbench.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 73668 KB
+Fuse CPU Usage: 150 ms
+Using precompiled package standard from library std
+Using precompiled package std_logic_1164 from library ieee
+Using precompiled package numeric_std from library ieee
+Using precompiled package textio from library std
+Using precompiled package std_logic_textio from library ieee
+Using precompiled package math_real from library ieee
+Compiling architecture rtl of entity axel_interface_ent [axel_interface_ent_default]
+Compiling architecture testbench_behav of entity testbench_ent
+Time Resolution for simulation is 1ps.
+Compiled 9 VHDL Units
+Built simulation executable testbench
+Fuse Memory Usage: 108820 KB
+Fuse CPU Usage: 160 ms
+GCC CPU Usage: 290 ms

@@ -1,0 +1,10 @@
+ISim log file
+Running: ./testbench -tclbatch isim.cmd 
+ISim O.40d (signature 0xdc0cde0)
+This is a Full version of ISim.
+Time resolution is 1 ps
+# run all
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Stopped at time : 16246310 ns : File "/homes/sf306/MMMGF/testbench/axel_interface.vhd" Line 92
+# quit
