@@ -33,7 +33,7 @@ SIGNAL expo, expo_reg	 : UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --Stores the exponent
 BEGIN
 
 STATE_PROC: --Combinitorial state update and output process
-PROCESS(ss, fullm, count)
+PROCESS(ss, fullm, count, data_in, vldm, val_reg)
 BEGIN
 wr <= '0'; rdm <= '0';				--default no write 
 data_out <= (OTHERS => '0');	--default clear data
@@ -45,14 +45,16 @@ CASE ss is
 	--This state is the resting state of the device 
 	--It waits for the first read available signal and then loads in the
 	--config data. Once this has occurred it then moves into the state required
-	--to read in hte matrix data.	
+	--to read in the matrix data.	
 	WHEN read_config =>
 		IF (vldm = '1') THEN
 			expo <= UNSIGNED(data_in); --Load in the exponent data from the memory bank
 			rdm <= '1';
 			ss_next <= read_data;
+			--REPORT "Read config data!";
 		ELSE
 			ss_next <= read_config;
+			--REPORT "Waiting for config data.";
 		END IF;
 	-----------------------------------------------------	
 
@@ -60,18 +62,23 @@ CASE ss is
 			IF (vldm = '1') THEN
 				val_temp <= UNSIGNED(data_in) + 10;
 				ss_next <= test2;
+				--REPORT "Got some data";
 			ELSE
 				ss_next <= read_data;
+				--REPORT "Waiting on some data";
 			END IF;	
-	WHEN test2 => ss_next <= test3; rdm<='1';
-	WHEN test3 => ss_next <= Sload;
+	WHEN test2 => ss_next <= test3; rdm<='1'; --REPORT "Requesting next data item";
+	WHEN test3 => ss_next <= Sload; --REPORT "Temp test state.";
 	WHEN Sload =>
 		IF (fullm = '0') THEN 					 		--output data if controler ready
+			--REPORT "Writing out data";
 			wr <= '1';							--initiate write 
 			data_out <= STD_LOGIC_VECTOR(val_reg);--STD_LOGIC_VECTOR(count);--write out the current count
-			count_next <= count+TO_UNSIGNED(1,DATA_WIDTH); --increase the data 
+			count_next <= count+TO_UNSIGNED(1,DATA_WIDTH); --increase the data
+			ss_next <= read_data;
+		ELSE
+			ss_next <= Sload; --REPORT "Waiting to write data"; 
 		END IF;
-		ss_next <= read_data;
 	WHEN OTHERS =>
 		ss_next <= read_config; --should never execute
 END CASE;		
@@ -81,7 +88,7 @@ END PROCESS STATE_PROC;
 SS_PROC: --state update and syncronous reset process
 PROCESS 
 BEGIN
-	wait until rising_edge(clk);
+	WAIT UNTIL clk'EVENT AND clk='1';
 		ss <= ss_next;				--update state
 		count <= count_next;		--update count
 		val_reg <= val_temp;
