@@ -58,6 +58,12 @@ CASE ss is
 		END IF;
 	-----------------------------------------------------	
 
+	---------------READ DATA & PACK THE DATA-------------
+	--This state gets data from the host and packs it together into
+	--one single BRAM entry. This is more complicated than it sounds
+	--since the BRAM entries need to be staggered with reset signals.
+	--For this reason two counters are required to keep track of where
+	--we are.
 	WHEN read_data => --Read in the data in this state
 			IF (vldm = '1') THEN
 				val_temp <= UNSIGNED(data_in) + 10;
@@ -66,7 +72,10 @@ CASE ss is
 			ELSE
 				ss_next <= read_data;
 				--REPORT "Waiting on some data";
-			END IF;	
+			END IF;
+	------------------------------------------------------
+
+	
 	WHEN test2 => ss_next <= test3; rdm<='1'; --REPORT "Requesting next data item";
 	WHEN test3 => ss_next <= Sload; --REPORT "Temp test state.";
 	WHEN Sload =>
