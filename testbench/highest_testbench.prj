@@ -1,2 +1,2 @@
-vhdl work axel_interface.vhd
-vhdl work testbench.vhd
+vhdl work hdl/axel_interface.vhd
+vhdl work hdl/testbench.vhd
