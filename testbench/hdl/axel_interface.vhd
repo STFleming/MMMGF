@@ -25,7 +25,7 @@ port (
 end axel_interface_ent;
 
 ARCHITECTURE rtl of axel_interface_ent IS
-TYPE Tstate IS (read_config, Sload, read_data, test2, test3); --posible states
+TYPE Tstate IS (read_config, Sload, read_data, pack_and_commit, test3); --posible states
 SIGNAL ss, ss_next 				: Tstate; --state signals
 SIGNAL val_reg, val_temp 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --This is a temp storage for the read value
 SIGNAL count, count_next 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
@@ -39,11 +39,18 @@ BEGIN
 STATE_PROC: --Combinitorial state update and output process
 PROCESS(ss, fullm, count, data_in, vldm, val_reg)
 BEGIN
+
+--------------------------DEFAULT VALUES!------------------------------------
 wr <= '0'; rdm <= '0';				--default no write 
 data_out <= (OTHERS => '0');	--default clear data
 count_next <= count;			--default retain count
 val_temp <= val_reg; --Default is the register value
 expo <= expo_reg;
+read_counter <= read_counter_reg;
+commit_count <= commit_count_reg;
+memory_word_in <= memory_word_in_reg;
+-----------------------------------------------------------------------------
+
 CASE ss is
 	-------------READ CONFIG & IDLE STATE----------------
 	--This state is the resting state of the device 
@@ -71,16 +78,18 @@ CASE ss is
 	WHEN read_data => --Read in the data in this state
 			IF (vldm = '1') THEN
 				val_temp <= UNSIGNED(data_in) + 10;
-				ss_next <= test2;
+				ss_next <= pack_and_commit;
 				--REPORT "Got some data";
 			ELSE
 				ss_next <= read_data;
 				--REPORT "Waiting on some data";
 			END IF;
-	------------------------------------------------------
 
 	
-	WHEN test2 => ss_next <= test3; rdm<='1'; --REPORT "Requesting next data item";
+	WHEN pack_and_commit => 
+				ss_next <= test3; rdm<='1'; --REPORT "Requesting next data item";
+	------------------------------------------------------
+
 	WHEN test3 => ss_next <= Sload; --REPORT "Temp test state.";
 	WHEN Sload =>
 		IF (fullm = '0') THEN 					 		--output data if controler ready
