@@ -30,7 +30,9 @@ SIGNAL ss, ss_next 				: Tstate; --state signals
 SIGNAL val_reg, val_temp 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --This is a temp storage for the read value
 SIGNAL count, count_next 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
 SIGNAL expo, expo_reg	 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --Stores the exponent of the operation
-SIGNAL read_counter, read_counter_reg		: BRAM_word_width;
+SIGNAL read_counter, read_counter_reg		: INTEGER; --These are used to count the number of BRAM entries that have already been committed 0 - 2N 
+SIGNAL memory_word_in, memory_word_in_reg	: BRAM_word_width; --These signals are used to send each ram entry to the BRAMs 
+SIGNAL commit_count, commit_count_reg		: INTEGER; --Used to keep track of what point a word is ready to be committed. 
 
 BEGIN
 
@@ -104,6 +106,12 @@ BEGIN
 		count <= count_next;		--update count
 		val_reg <= val_temp;
 		expo_reg <= expo;
+
+		read_counter_reg <= read_counter; --register for counting the number of reads that have been performed inbetween a BRAM word commit.
+		commit_count_reg <= commit_count; --register used to keep track of the total number of commits that have been made to BRAM		
+		memory_word_in_reg <= memory_word_in; --register used to keep the current partial word created to be commited to BRAM	
+	
+
 	IF reset = '1' THEN
 		ss <= read_config; 				--sync reset state
 		expo_reg <= (OTHERS => '0');
