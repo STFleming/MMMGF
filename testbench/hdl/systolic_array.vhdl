@@ -9,8 +9,8 @@ USE ieee.numeric_std.ALL;
 USE ieee.math_real.ALL;
 
 PACKAGE my_types IS
-	CONSTANT matrix_size:INTEGER:=135;
-	CONSTANT field_size:INTEGER:=2;
+	CONSTANT matrix_size:INTEGER:=3;
+	CONSTANT field_size:INTEGER:=5;
 	CONSTANT bit_width   : INTEGER := INTEGER(CEIL(LOG2(REAL(field_size+1))));
         TYPE Input_Wires IS ARRAY ( matrix_size DOWNTO 1 )OF STD_LOGIC_VECTOR((bit_width-1) DOWNTO 0);
 	SUBTYPE BRAM_word_width IS STD_LOGIC_VECTOR((matrix_size*bit_width)-1 DOWNTO 0); --type for the BRAM word
