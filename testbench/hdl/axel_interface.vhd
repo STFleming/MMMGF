@@ -123,7 +123,9 @@ CASE ss is
 
 						ss_next <= read_data; --Read next data item.
 					ELSE
-						REPORT "Data word ready: " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in)));
+                                                REPORT  INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(11 DOWNTO 8)))) & "  " 
+                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(7 DOWNTO 4)))) & "  " 
+                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(3 DOWNTO 0))));
 						memory_word_in <= default_entry; --Fill the entry with all p values for each segment
                                                 
 						--Push the first value into the BRAM word
@@ -134,10 +136,40 @@ CASE ss is
 						read_counter <= 1; --Reset the read counter back to one
 						ss_next <= read_data; --Go to the state to collect the next memory value	
 					END IF;
+	
 				ELSIF commit_count_reg <= (2*my_types.matrix_size - 1) THEN
 					--Here we pack the values from the LSB up (i.e. right to left)
+				               IF read_counter_reg <= ( ( (2*my_types.matrix_size) - 1 ) - commit_count_reg) THEN
+
+                                                --In this case we push another entry onto the BRAM word
+                                                --and then increment the read counter
+                                                memory_word_in( (memory_word_in'LENGTH - 1) DOWNTO my_types.bit_width) 
+                                                <= memory_word_in_reg( ((memory_word_in'LENGTH - 1) - my_types.bit_width) DOWNTO 0); --shift the data
+
+                                                --Push the new value onto the word
+                                                memory_word_in( (my_types.bit_width - 1) DOWNTO 0 )
+                                                <= val_temp;
+
+                                                read_counter <= read_counter_reg + 1; --Increment the read counter
+
+                                                ss_next <= read_data; --Read next data item.
+                                        ELSE
+                                                REPORT 	INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(11 DOWNTO 8)))) & "  " 
+							& INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(7 DOWNTO 4)))) & "  " 
+							& INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(3 DOWNTO 0))));
+                                                memory_word_in <= default_entry; --Fill the entry with all p values for each segment
+
+                                                --Push the first value into the BRAM word
+                                                memory_word_in( (my_types.bit_width - 1) DOWNTO 0 )
+                                                <= val_temp;
+
+                                                commit_count <= commit_count_reg + 1; --Update the commit count
+                                                read_counter <= 1; --Reset the read counter back to one
+                                                ss_next <= read_data; --Go to the state to collect the next memory value        
+                                        END IF;
 				ELSE 
 					--We have finished packing the array and we can leave this state
+					ss_next <= test3;
 				END IF;
 				--memory_word_in <= default_entry; --fill it with the default value 
 				--REPORT "BRAM default:  " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in)));
@@ -150,7 +182,7 @@ CASE ss is
 			wr <= '1';							--initiate write 
 			data_out(my_types.bit_width-1 DOWNTO 0) <= STD_LOGIC_VECTOR(val_reg);--STD_LOGIC_VECTOR(count);--write out the current count
 			count_next <= count+TO_UNSIGNED(1,DATA_WIDTH); --increase the data
-			ss_next <= read_data;
+			ss_next <= Sload;
 		ELSE
 			ss_next <= Sload; --REPORT "Waiting to write data"; 
 		END IF;
