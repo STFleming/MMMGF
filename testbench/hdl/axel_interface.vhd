@@ -116,6 +116,9 @@ BEGIN
 		ss <= read_config; 				--sync reset state
 		expo_reg <= (OTHERS => '0');
 		count <= TO_UNSIGNED(0, DATA_WIDTH);
+		read_counter_reg <= 0; --Default all the counters to zero
+		commit_count_reg <= 0;
+		memory_word_in_reg <= (OTHERS => '0');
 	END IF;
 END PROCESS SS_PROC;
 
