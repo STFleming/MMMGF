@@ -96,7 +96,7 @@ WAIT UNTIL clk'EVENT AND clk='1';
 
 --The initial data value when the device is first started
 IF (transmit_counter = 0) THEN
-	data_in <= STD_LOGIC_VECTOR(TO_UNSIGNED(transmit_value + 100, DATA_WIDTH));
+	data_in <= STD_LOGIC_VECTOR(TO_UNSIGNED(transmit_value, DATA_WIDTH));
 	reset <= '0'; --Turn the reset signal off
 END IF;
 
@@ -106,7 +106,7 @@ IF ((rdm = '1') AND (transmit_counter < matrix_size*matrix_size)) THEN --This me
 	vldm <= '0'; --Data is unstable as it is changing, NOT AUTHORISED TO READ
 	transmit_value <= transmit_value + 1; --Increment the value
 	transmit_counter <= transmit_counter + 1; --Increment counter
-	data_in <= STD_LOGIC_VECTOR(TO_UNSIGNED(transmit_value + 100, DATA_WIDTH));
+	data_in <= STD_LOGIC_VECTOR(TO_UNSIGNED(transmit_value, DATA_WIDTH));
 
 	--Test output to determine that the correct data is being fed into the array
 	REPORT "Feeding the data: " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(data_in))) & "  count:  " & INTEGER'IMAGE(transmit_counter);	

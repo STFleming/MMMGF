@@ -27,7 +27,7 @@ end axel_interface_ent;
 ARCHITECTURE rtl of axel_interface_ent IS
 TYPE Tstate IS (read_config, Sload, read_data, pack_and_commit, test3); --posible states
 SIGNAL ss, ss_next 				: Tstate; --state signals
-SIGNAL val_reg, val_temp 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --This is a temp storage for the read value
+SIGNAL val_reg, val_temp 			: STD_LOGIC_VECTOR (my_types.bit_width - 1 DOWNTO 0); --This is a temp storage for the read value
 SIGNAL count, count_next 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
 SIGNAL expo, expo_reg	 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --Stores the exponent of the operation
 SIGNAL read_counter, read_counter_reg		: INTEGER; --These are used to count the number of BRAM entries that have already been committed 0 - 2N 
@@ -84,10 +84,8 @@ CASE ss is
 			expo <= UNSIGNED(data_in); --Load in the exponent data from the memory bank
 			rdm <= '1';
 			ss_next <= read_data;
-			--REPORT "Read config data!";
 		ELSE
 			ss_next <= read_config;
-			--REPORT "Waiting for config data.";
 		END IF;
 	-----------------------------------------------------	
 
@@ -99,17 +97,50 @@ CASE ss is
 	--we are.
 	WHEN read_data => --Read in the data in this state
 			IF (vldm = '1') THEN
-				val_temp <= UNSIGNED(data_in) + 10;
+				val_temp <= data_in( (my_types.bit_width - 1) DOWNTO 0 ); --In this case we are not using the full 128 bits
 				ss_next <= pack_and_commit;
 			ELSE
 				ss_next <= read_data;
 			END IF;
 
 	
-	WHEN pack_and_commit => 
-				ss_next <= test3; rdm<='1'; 
-				memory_word_in <= default_entry; --fill it with the default value 
-				REPORT "BRAM default:  " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in)));
+	WHEN pack_and_commit =>  --This state packs the data into the triangular manner with the reset signals
+				rdm<='1'; --Fetch the next word. 
+				IF commit_count_reg <= (my_types.matrix_size - 1) THEN 
+					--Here we pack the values in from the MSB down (i.e. left to right)
+					IF read_counter_reg <= commit_count_reg THEN
+					
+						--In this case we push another entry onto the BRAM word
+						--and then increment the read counter
+						memory_word_in( ((memory_word_in'LENGTH - 1) - my_types.bit_width) DOWNTO 0) 
+						<= memory_word_in_reg((memory_word_in'LENGTH - 1) DOWNTO my_types.bit_width); --shift the data to the right
+						
+						--Push the new value onto the word
+						memory_word_in( (memory_word_in'LENGTH - 1) DOWNTO (memory_word_in'LENGTH - my_types.bit_width) )
+						<= val_temp; 	
+
+						read_counter <= read_counter_reg + 1; --Increment the read counter
+
+						ss_next <= read_data; --Read next data item.
+					ELSE
+						REPORT "Data word ready: " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in)));
+						memory_word_in <= default_entry; --Fill the entry with all p values for each segment
+                                                
+						--Push the first value into the BRAM word
+						memory_word_in( (memory_word_in'LENGTH - 1) DOWNTO (memory_word_in'LENGTH - my_types.bit_width) )
+                                                <= val_temp;
+			
+						commit_count <= commit_count_reg + 1; --Update the commit count
+						read_counter <= 1; --Reset the read counter back to one
+						ss_next <= read_data; --Go to the state to collect the next memory value	
+					END IF;
+				ELSIF commit_count_reg <= (2*my_types.matrix_size - 1) THEN
+					--Here we pack the values from the LSB up (i.e. right to left)
+				ELSE 
+					--We have finished packing the array and we can leave this state
+				END IF;
+				--memory_word_in <= default_entry; --fill it with the default value 
+				--REPORT "BRAM default:  " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in)));
 	------------------------------------------------------
 
 	WHEN test3 => ss_next <= Sload; --REPORT "Temp test state.";
@@ -117,7 +148,7 @@ CASE ss is
 		IF (fullm = '0') THEN 					 		--output data if controler ready
 			--REPORT "Writing out data";
 			wr <= '1';							--initiate write 
-			data_out <= STD_LOGIC_VECTOR(val_reg);--STD_LOGIC_VECTOR(count);--write out the current count
+			data_out(my_types.bit_width-1 DOWNTO 0) <= STD_LOGIC_VECTOR(val_reg);--STD_LOGIC_VECTOR(count);--write out the current count
 			count_next <= count+TO_UNSIGNED(1,DATA_WIDTH); --increase the data
 			ss_next <= read_data;
 		ELSE
@@ -149,7 +180,7 @@ BEGIN
 		count <= TO_UNSIGNED(0, DATA_WIDTH);
 		read_counter_reg <= 0; --Default all the counters to zero
 		commit_count_reg <= 0;
-		memory_word_in_reg <= (OTHERS => '0');
+		memory_word_in_reg <= default_entry; --Fill each segment with the reset value.i
 	END IF;
 END PROCESS SS_PROC;
 
