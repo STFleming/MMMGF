@@ -3,8 +3,10 @@
 library ieee;
 use ieee.std_logic_1164.all;
 USE IEEE.numeric_std.ALL;
-library work;
-use work.all; 
+
+LIBRARY work;
+USE work.my_types.ALL;
+USE work.ALL; 
 
 entity axel_interface_ent is
 generic (
@@ -24,11 +26,11 @@ end axel_interface_ent;
 
 ARCHITECTURE rtl of axel_interface_ent IS
 TYPE Tstate IS (read_config, Sload, read_data, test2, test3); --posible states
-SIGNAL ss, ss_next : Tstate; --state signals
-SIGNAL val_reg, val_temp : UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --This is a temp storage for the read value
-SIGNAL count, count_next : UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
-SIGNAL expo, expo_reg	 : UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --Stores the exponent of the operation
-
+SIGNAL ss, ss_next 				: Tstate; --state signals
+SIGNAL val_reg, val_temp 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --This is a temp storage for the read value
+SIGNAL count, count_next 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
+SIGNAL expo, expo_reg	 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --Stores the exponent of the operation
+SIGNAL read_counter, read_counter_reg		: BRAM_word_width;
 
 BEGIN
 

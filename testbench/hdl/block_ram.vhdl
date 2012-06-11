@@ -25,11 +25,11 @@ ENTITY bram_ent IS
 				bit_width		:			INTEGER:= 3 );
 				
 	PORT(	 	clk 				:	IN		STD_LOGIC;
-				w_e				:	IN		STD_LOGIC; --Write enable input
+				w_e			:	IN		STD_LOGIC; --Write enable input
 				addr_in			:	IN		INTEGER; --Address for the BRAM
-				addr_out			:	IN		INTEGER;
+				addr_out		:	IN		INTEGER;
 				input_data		:	IN		BRAM_word_width;
-				output_data		:	OUT	BRAM_word_width	);
+				output_data		:	OUT		BRAM_word_width	);
 				
 END bram_ent;
 --#####################################################
