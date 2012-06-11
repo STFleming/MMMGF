@@ -34,6 +34,28 @@ SIGNAL read_counter, read_counter_reg		: INTEGER; --These are used to count the 
 SIGNAL memory_word_in, memory_word_in_reg	: BRAM_word_width; --These signals are used to send each ram entry to the BRAMs 
 SIGNAL commit_count, commit_count_reg		: INTEGER; --Used to keep track of what point a word is ready to be committed. 
 
+--###############################################################################
+--FUNCTION FOR CALCULATING THE DEFAULT VALUE OF THE BRAM WORD
+-------------------------------------------------------------
+-- Fill all b segements of each BRAM entry with the value p
+-------------------------------------------------------------
+IMPURE FUNCTION default_entry RETURN BRAM_word_width IS
+
+CONSTANT        RESET_VALUE             :       STD_LOGIC_VECTOR((my_types.bit_width-1) DOWNTO 0) 
+						:= STD_LOGIC_VECTOR(TO_UNSIGNED(my_types.field_size, my_types.bit_width));
+
+VARIABLE	A			:	BRAM_word_width;	
+
+BEGIN
+        pack : FOR i IN 1 TO ((A'LENGTH)/my_types.bit_width) LOOP
+                A( ((i*my_types.bit_width)-1) DOWNTO ((i-1)*my_types.bit_width) ) := RESET_VALUE;
+        END LOOP pack;
+
+        RETURN A;
+END default_entry;
+--###############################################################################
+
+
 BEGIN
 
 STATE_PROC: --Combinitorial state update and output process
@@ -79,15 +101,15 @@ CASE ss is
 			IF (vldm = '1') THEN
 				val_temp <= UNSIGNED(data_in) + 10;
 				ss_next <= pack_and_commit;
-				--REPORT "Got some data";
 			ELSE
 				ss_next <= read_data;
-				--REPORT "Waiting on some data";
 			END IF;
 
 	
 	WHEN pack_and_commit => 
-				ss_next <= test3; rdm<='1'; --REPORT "Requesting next data item";
+				ss_next <= test3; rdm<='1'; 
+				memory_word_in <= default_entry; --fill it with the default value 
+				REPORT "BRAM default:  " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in)));
 	------------------------------------------------------
 
 	WHEN test3 => ss_next <= Sload; --REPORT "Temp test state.";
