@@ -26,13 +26,14 @@ end axel_interface_ent;
 
 ARCHITECTURE rtl of axel_interface_ent IS
 TYPE Tstate IS (read_config, Sload, read_data, pack_and_commit, test3); --posible states
-SIGNAL ss, ss_next 				: Tstate; --state signals
-SIGNAL val_reg, val_temp 			: STD_LOGIC_VECTOR (my_types.bit_width - 1 DOWNTO 0); --This is a temp storage for the read value
-SIGNAL count, count_next 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
-SIGNAL expo, expo_reg	 			: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --Stores the exponent of the operation
-SIGNAL read_counter, read_counter_reg		: INTEGER; --These are used to count the number of BRAM entries that have already been committed 0 - 2N 
-SIGNAL memory_word_in, memory_word_in_reg	: BRAM_word_width; --These signals are used to send each ram entry to the BRAMs 
-SIGNAL commit_count, commit_count_reg		: INTEGER; --Used to keep track of what point a word is ready to be committed. 
+SIGNAL ss, ss_next 					: Tstate; --state signals
+SIGNAL val_reg, val_temp 				: STD_LOGIC_VECTOR (my_types.bit_width - 1 DOWNTO 0); --This is a temp storage for the read value
+SIGNAL count, count_next 				: UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
+SIGNAL expo, expo_reg	 				: UNSIGNED (DATA_WIDTH-1 DOWNTO 0); --Stores the exponent of the operation
+SIGNAL read_counter, read_counter_reg			: INTEGER; --These are used to count the number of BRAM entries that have already been committed 
+SIGNAL memory_word_in_top, memory_word_in_top_reg	: BRAM_word_width; --These signals are used to send each ram entry to the BRAMs
+SIGNAL memory_word_in_left, memort_word_in_left_reg	: BRAM_word_width; 
+SIGNAL commit_count, commit_count_reg			: INTEGER; --Used to keep track of what point a word is ready to be committed. 
 
 --###############################################################################
 --FUNCTION FOR CALCULATING THE DEFAULT VALUE OF THE BRAM WORD
@@ -70,7 +71,7 @@ val_temp <= val_reg; --Default is the register value
 expo <= expo_reg;
 read_counter <= read_counter_reg;
 commit_count <= commit_count_reg;
-memory_word_in <= memory_word_in_reg;
+memory_word_in_top <= memory_word_in_top_reg;
 -----------------------------------------------------------------------------
 
 CASE ss is
@@ -109,35 +110,35 @@ CASE ss is
 				IF commit_count_reg <= (my_types.matrix_size - 1) THEN 
 					--Here we pack the values in from the MSB down (i.e. left to right)
 					IF read_counter_reg <= commit_count_reg THEN
-				           --REPORT "LS commit_count_reg:  " & INTEGER'IMAGE(commit_count_reg);	
+
 						--In this case we push another entry onto the BRAM word
 						--and then increment the read counter
-						memory_word_in( ((memory_word_in'LENGTH - 1) - my_types.bit_width) DOWNTO 0) 
-						<= memory_word_in_reg((memory_word_in'LENGTH - 1) DOWNTO my_types.bit_width); --shift the data to the right
+						memory_word_in_top( ((memory_word_in_top'LENGTH - 1) - my_types.bit_width) DOWNTO 0) 
+						<= memory_word_in_top_reg((memory_word_in_top'LENGTH - 1) DOWNTO my_types.bit_width); --shift the data
 						
 						--Push the new value onto the word
-						memory_word_in( (memory_word_in'LENGTH - 1) DOWNTO (memory_word_in'LENGTH - my_types.bit_width) )
+						memory_word_in_top( (memory_word_in_top'LENGTH - 1) DOWNTO (memory_word_in_top'LENGTH - my_types.bit_width))
 						<= val_temp; 	
 
 						read_counter <= read_counter_reg + 1; --Increment the read counter
 
 						ss_next <= read_data; --Read next data item.
 					ELSE
-                                                REPORT  --INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(15 DOWNTO 12)))) & " " &
-							INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(11 DOWNTO 8)))) & "  " 
-                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(7 DOWNTO 4)))) & "  " 
-                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(3 DOWNTO 0))));
-						memory_word_in <= default_entry; --Fill the entry with all p values for each segment
+                                                REPORT  --INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(15 DOWNTO 12)))) & " " &
+							INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(11 DOWNTO 8)))) & "  " 
+                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(7 DOWNTO 4)))) & "  " 
+                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(3 DOWNTO 0))));
+						memory_word_in_top <= default_entry; --Fill the entry with all p values for each segment
                                                	
 						commit_count <= commit_count_reg + 1; --Update the commit count
  
 						IF (commit_count_reg + 1 <= (my_types.matrix_size - 1)) THEN
 							--Push the first value into the BRAM word
-							memory_word_in( (memory_word_in'LENGTH - 1) DOWNTO (memory_word_in'LENGTH - my_types.bit_width) )
+							memory_word_in_top((memory_word_in_top'LENGTH - 1) DOWNTO (memory_word_in_top'LENGTH - my_types.bit_width))
                                                 	<= val_temp;
 						ELSE
 							--Push the value in from the other direction
-							memory_word_in( (my_types.bit_width - 1) DOWNTO 0 )
+							memory_word_in_top( (my_types.bit_width - 1) DOWNTO 0 )
                                                 	<= val_temp;
 						END IF;
 	
@@ -148,28 +149,28 @@ CASE ss is
 				ELSIF commit_count_reg < (2*my_types.matrix_size - 1) THEN
 					--Here we pack the values from the LSB up (i.e. right to left)
 				               IF read_counter_reg <= ( ( ((2*my_types.matrix_size) - 1 ) - commit_count_reg) - 1 ) THEN
-						--REPORT "commit_count_reg:  " & INTEGER'IMAGE( ((2*my_types.matrix_size)-1) - commit_count_reg);
-                                                --In this case we push another entry onto the BRAM word
+                                             
+					   	--In this case we push another entry onto the BRAM word
                                                 --and then increment the read counter
-                                                memory_word_in( (memory_word_in'LENGTH - 1) DOWNTO my_types.bit_width) 
-                                                <= memory_word_in_reg( ((memory_word_in'LENGTH - 1) - my_types.bit_width) DOWNTO 0); --shift the data
+                                                memory_word_in_top( (memory_word_in_top'LENGTH - 1) DOWNTO my_types.bit_width) 
+                                                <= memory_word_in_top_reg( ((memory_word_in_top'LENGTH - 1) - my_types.bit_width) DOWNTO 0);--shift the data
 
                                                 --Push the new value onto the word
-                                                memory_word_in( (my_types.bit_width - 1) DOWNTO 0 )
+                                                memory_word_in_top( (my_types.bit_width - 1) DOWNTO 0 )
                                                 <= val_temp;
 
                                                 read_counter <= read_counter_reg + 1; --Increment the read counter
 
                                                 ss_next <= read_data; --Read next data item.
                                         ELSE
-                                                REPORT  --INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(15 DOWNTO 12)))) & " " &
-                                                        INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(11 DOWNTO 8)))) & "  " 
-                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(7 DOWNTO 4)))) & "  " 
-                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in(3 DOWNTO 0))));						
-                                                memory_word_in <= default_entry; --Fill the entry with all p values for each segment
+                                                REPORT  --INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(15 DOWNTO 12)))) & " " &
+                                                        INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(11 DOWNTO 8)))) & "  " 
+                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(7 DOWNTO 4)))) & "  " 
+                                                        & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(3 DOWNTO 0))));						
+                                                memory_word_in_top <= default_entry; --Fill the entry with all p values for each segment
 
                                                 --Push the first value into the BRAM word
-                                                memory_word_in( (my_types.bit_width - 1) DOWNTO 0 )
+                                                memory_word_in_top( (my_types.bit_width - 1) DOWNTO 0 )
                                                 <= val_temp;
 
                                                 commit_count <= commit_count_reg + 1; --Update the commit count
@@ -180,8 +181,6 @@ CASE ss is
 					--We have finished packing the array and we can leave this state
 					ss_next <= test3;
 				END IF;
-				--memory_word_in <= default_entry; --fill it with the default value 
-				--REPORT "BRAM default:  " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in)));
 	------------------------------------------------------
 
 	WHEN test3 => ss_next <= Sload; --REPORT "Temp test state.";
@@ -212,7 +211,7 @@ BEGIN
 
 		read_counter_reg <= read_counter; --register for counting the number of reads that have been performed inbetween a BRAM word commit.
 		commit_count_reg <= commit_count; --register used to keep track of the total number of commits that have been made to BRAM		
-		memory_word_in_reg <= memory_word_in; --register used to keep the current partial word created to be commited to BRAM	
+		memory_word_in_top_reg <= memory_word_in_top; --register used to keep the current partial word created to be commited to BRAM	
 	
 
 	IF reset = '1' THEN
@@ -221,7 +220,7 @@ BEGIN
 		count <= TO_UNSIGNED(0, DATA_WIDTH);
 		read_counter_reg <= 0; --Default all the counters to zero
 		commit_count_reg <= 0;
-		memory_word_in_reg <= default_entry; --Fill each segment with the reset value.i
+		memory_word_in_top_reg <= default_entry; --Fill each segment with the reset value.i
 	END IF;
 END PROCESS SS_PROC;
 
