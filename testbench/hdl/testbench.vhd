@@ -22,7 +22,7 @@ USE work.ALL;
 ENTITY testbench_ent IS
 --Testbenches require no I/O typically
 generic (
-			matrix_size 	: INTEGER := 3; --Only send a 3 by 3 matrix 
+			matrix_size 	: INTEGER := my_types.matrix_size; --Only send a 3 by 3 matrix 
                         DATA_WIDTH 	: integer := 128 --width of memory data bus (bits), it must be greater or equal than the bin depth 
                 );
 END testbench_ent;
