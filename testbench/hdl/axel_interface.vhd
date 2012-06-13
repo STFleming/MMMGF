@@ -160,7 +160,7 @@ CASE ss is
                                         END IF;
 				ELSE 
 					--We have finished packing the array and we can leave this state
-					ss_next <= read_data1;
+					ss_next <= read_data1; rd1 <= '1';
 				END IF;
 	------------------------------------------------------
 	WHEN word_ready => rd0 <='1';
