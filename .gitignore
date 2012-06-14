@@ -1,0 +1,85 @@
+#Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+#Diretories
+testbench/isim/
+axel/xlnx_auto_0_xdb/
+/axel/_xmsgs/
+/axel/xst/
+/axel/isim/
+
+#simulation outputs
+*.cmd
+*.log
+*.xmsgs
+*.wdb
+*.swp
+
+#All the synthesis outputs
+.bld
+.lso
+.map
+.mrp
+.ngm
+.xrpt
+.ngd
+.srp
+.hex
+.bgn
+.bit
+.xwbt
+.drc
+.ncd
+.ngc
+.pad
+.csv
+.txt
+.par
+.pcf
+.ptwx
+.xml
+.twr
+.twx
+.unroutes
+.xpi
+.xmsgs
+.o
+.lst
+.wdb
+
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db

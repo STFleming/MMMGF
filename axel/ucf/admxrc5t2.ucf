@@ -1,0 +1,964 @@
+##########################################################
+#                                                        #
+#   ADM-XRC-5T2 CONSTRAINTS FILE                         #
+#   Compatible with board revision: 1, 2                 #
+#                                                        #
+#   project: myapp                                       #
+#                                                        #
+##########################################################
+
+##########################################################
+#                                                        #
+#   Set stepping level to ES, so that bitstream is       #
+#   compatible with devices of all steppings.            #
+#                                                        #
+##########################################################
+CONFIG STEPPING = ES;
+
+##########################################################
+#                                                        #
+#   General purpose clock, from programmable clock       #
+#   generator.                                           #
+#                                                        #
+##########################################################
+NET "mclka_p"        LOC = "AK4";
+NET "mclka_p"        IOSTANDARD = "LVPECL_25";
+NET "mclka_n"        LOC = "AK3";
+NET "mclka_n"        IOSTANDARD = "LVPECL_25";
+INST "mclka_gtp_wrap/GTP_inst" LOC = "GTP_DUAL_X0Y4"; # LX330T
+
+NET "mclkb_p"        LOC = "V4";
+NET "mclkb_p"        IOSTANDARD = "LVPECL_25";
+NET "mclkb_n"        LOC = "V3";
+NET "mclkb_n"        IOSTANDARD = "LVPECL_25";
+
+##########################################################
+#                                                        #
+#   LVPECL reference clock, from crystal oscillator      #
+#                                                        #
+##########################################################
+NET "refclk200_p"    LOC = "J17";
+NET "refclk200_p"    IOSTANDARD = "LVPECL_25";
+NET "refclk200_n"    LOC = "K17";
+NET "refclk200_n"    IOSTANDARD = "LVPECL_25";
+
+##########################################################
+#                                                        #
+#   Local bus address, data and control pins             #
+#   Connected to PCI-to-local Bus Bridge                 #
+#                                                        #
+##########################################################
+NET "lad<0>"         LOC = "Y8";
+NET "lad<1>"         LOC = "Y9";
+NET "lad<2>"         LOC = "W10";
+NET "lad<3>"         LOC = "W11";
+NET "lad<4>"         LOC = "Y10";
+NET "lad<5>"         LOC = "AA9";
+NET "lad<6>"         LOC = "AA10";
+NET "lad<7>"         LOC = "AA11";
+NET "lad<8>"         LOC = "R7";
+NET "lad<9>"         LOC = "T5";
+NET "lad<10>"        LOC = "R5";
+NET "lad<11>"        LOC = "E7";
+NET "lad<12>"        LOC = "T6";
+NET "lad<13>"        LOC = "T7";
+NET "lad<14>"        LOC = "U6";
+NET "lad<15>"        LOC = "U7";
+NET "lad<16>"        LOC = "N6";
+NET "lad<17>"        LOC = "E9";
+NET "lad<18>"        LOC = "M6";
+NET "lad<19>"        LOC = "L6";
+NET "lad<20>"        LOC = "V6";
+NET "lad<21>"        LOC = "R8";
+NET "lad<22>"        LOC = "L5";
+NET "lad<23>"        LOC = "N8";
+NET "lad<24>"        LOC = "V8";
+NET "lad<25>"        LOC = "W8";
+NET "lad<26>"        LOC = "K5";
+NET "lad<27>"        LOC = "J6";
+NET "lad<28>"        LOC = "W7";
+NET "lad<29>"        LOC = "Y7";
+NET "lad<30>"        LOC = "J5";
+NET "lad<31>"        LOC = "H6";
+NET "lad<32>"        LOC = "P7";
+NET "lad<33>"        LOC = "F15";
+NET "lad<34>"        LOC = "E15";
+NET "lad<35>"        LOC = "P10";
+NET "lad<36>"        LOC = "R10";
+NET "lad<37>"        LOC = "E14";
+NET "lad<38>"        LOC = "D13";
+NET "lad<39>"        LOC = "N10";
+NET "lad<40>"        LOC = "P11";
+NET "lad<41>"        LOC = "D12";
+NET "lad<42>"        LOC = "E12";
+NET "lad<43>"        LOC = "P12";
+NET "lad<44>"        LOC = "N11";
+NET "lad<45>"        LOC = "E13";
+NET "lad<46>"        LOC = "F14";
+NET "lad<47>"        LOC = "G14";
+NET "lad<48>"        LOC = "G13";
+NET "lad<49>"        LOC = "L11";
+NET "lad<50>"        LOC = "L12";
+NET "lad<51>"        LOC = "L10";
+NET "lad<52>"        LOC = "K10";
+NET "lad<53>"        LOC = "H15";
+NET "lad<54>"        LOC = "H14";
+NET "lad<55>"        LOC = "J10";
+NET "lad<56>"        LOC = "H10";
+NET "lad<57>"        LOC = "H13";
+NET "lad<58>"        LOC = "J13";
+NET "lad<59>"        LOC = "J11";
+NET "lad<60>"        LOC = "K12";
+NET "lad<61>"        LOC = "K13";
+NET "lad<62>"        LOC = "K14";
+NET "lad<63>"        LOC = "F10";
+NET "lad<*>"         IOSTANDARD = "LVCMOS18";
+
+NET "lbe_l<0>"       LOC = "W6";
+NET "lbe_l<1>"       LOC = "F7";
+NET "lbe_l<2>"       LOC = "N9";
+NET "lbe_l<3>"       LOC = "G6";
+NET "lbe_l<4>"       LOC = "E10";
+NET "lbe_l<5>"       LOC = "F11";
+NET "lbe_l<6>"       LOC = "F12";
+NET "lbe_l<7>"       LOC = "G11";
+NET "lbe_l<*>"       IOSTANDARD = "LVCMOS18";
+
+#NET "l64_l"	     LOC = "J7";
+#NET "l64_l"          IOSTANDARD = "LVCMOS18";
+NET "lads_l"         LOC = "F6";
+NET "lads_l"         IOSTANDARD = "LVCMOS18";
+NET "lblast_l"       LOC = "AA7";
+NET "lblast_l"       IOSTANDARD = "LVCMOS18";
+NET "lbterm_l"       LOC = "L9";
+NET "lbterm_l"       IOSTANDARD = "LVCMOS18";
+NET "lclk"           LOC = "J16";
+NET "lclk"           IOSTANDARD = "LVCMOS33";
+#NET "leot_l"         LOC = "U11";
+#NET "leot_l"         IOSTANDARD = "LVCMOS18";
+NET "lready_l"       LOC = "M9";
+NET "lready_l"       IOSTANDARD = "LVCMOS18";
+NET "lreset_l"       LOC = "K9";
+NET "lreset_l"       IOSTANDARD = "LVCMOS18";
+NET "lwrite"         LOC = "M7";
+NET "lwrite"         IOSTANDARD = "LVCMOS18";
+
+##########################################################
+#                                                        #
+#   Local bus arbitration pins                           #
+#   Connected to PCI-to-local Bus Bridge                 #
+#                                                        #
+##########################################################
+NET "fholda"         LOC = "K7";
+NET "fholda"         IOSTANDARD = "LVCMOS18";
+
+##########################################################
+#                                                        #
+#   Recommended pin performance attributes               #
+#                                                        #
+##########################################################
+NET "lad<*>"         FAST;
+NET "lready_l"       FAST;
+NET "lbterm_l"       FAST;
+
+#
+# DCM and PMCD location constraints
+#
+# 5VLX220T & 5VLX330T: DCM_ADV_X0Y0 - DCM_ADV_X0Y5 in bottom half
+#                      DCM_ADV_X0Y6 - DCM_ADV_X0Y11 in top half
+#
+INST "lclk_dcm_0/dll_lclk" LOC = "DCM_ADV_X0Y6"; # for J16, top half
+
+##########################################################
+#                                                        #
+#   DDR-II SDRAM Bank 0                                  #
+#                                                        #
+##########################################################
+
+NET "ra0<0>"         LOC = "R34";		
+NET "ra0<1>"         LOC = "P35";		
+NET "ra0<2>"         LOC = "N35";
+NET "ra0<3>"         LOC = "M36";
+NET "ra0<4>"         LOC = "L37";
+NET "ra0<5>"         LOC = "M37";
+NET "ra0<6>"         LOC = "N36";
+NET "ra0<7>"         LOC = "P36";
+NET "ra0<8>"         LOC = "V33";
+NET "ra0<9>"         LOC = "W33";
+NET "ra0<10>"        LOC = "Y33";		
+NET "ra0<11>"        LOC = "W32";		
+NET "ra0<12>"        LOC = "N33";
+NET "ra0<13>"        LOC = "T32";
+NET "ra0<14>"        LOC = "U32";	
+NET "ra0<15>"        LOC = "N34";  # BA<0>
+NET "ra0<16>"        LOC = "M34";  # BA<1>
+NET "ra0<17>"        LOC = "M33";  # BA<2>
+NET "ra0<*>"         IOSTANDARD = "SSTL18_I";
+
+NET "rd0<0>"         LOC = "L36";
+NET "rd0<1>"         LOC = "K35";
+NET "rd0<2>"         LOC = "J35";
+NET "rd0<3>"         LOC = "H35";
+NET "rd0<4>"         LOC = "J36";
+NET "rd0<5>"         LOC = "K37";
+NET "rd0<6>"         LOC = "J37";
+NET "rd0<7>"         LOC = "U34";
+NET "rd0<8>"         LOC = "U36";
+NET "rd0<9>"         LOC = "V36";
+NET "rd0<10>"        LOC = "F36";
+NET "rd0<11>"        LOC = "G36";
+NET "rd0<12>"        LOC = "F37";
+NET "rd0<13>"        LOC = "E38";
+NET "rd0<14>"        LOC = "D37";
+NET "rd0<15>"        LOC = "V35";
+NET "rd0<16>"        LOC = "H34";
+NET "rd0<17>"        LOC = "G33";
+NET "rd0<18>"        LOC = "H33";
+NET "rd0<19>"        LOC = "G32";
+NET "rd0<20>"        LOC = "G31";
+NET "rd0<21>"        LOC = "H31";
+NET "rd0<22>"        LOC = "J31";
+NET "rd0<23>"        LOC = "F35";
+NET "rd0<24>"        LOC = "E32";
+NET "rd0<25>"        LOC = "E33";
+NET "rd0<26>"        LOC = "K33";
+NET "rd0<27>"        LOC = "J33";
+NET "rd0<28>"        LOC = "K32";
+NET "rd0<29>"        LOC = "L32";
+NET "rd0<30>"        LOC = "L31";
+NET "rd0<31>"        LOC = "P33";
+NET "rd0<*>"         IOSTANDARD = "SSTL18_II";
+
+NET "rc0<0>"         LOC = "T35";  # DM<0>
+NET "rc0<0>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<1>"         LOC = "V34";  # DM<1>
+NET "rc0<1>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<2>"         LOC = "E35";  # DM<2>
+NET "rc0<2>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<3>"         LOC = "P32";  # DM<3>
+NET "rc0<3>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<4>"         LOC = "T34";  # DQS<0>
+NET "rc0<4>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<5>"         LOC = "R35";  # DQS<1>
+NET "rc0<5>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<6>"         LOC = "E34";  # DQS<2>
+NET "rc0<6>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<7>"         LOC = "F31";  # DQS<3>
+NET "rc0<7>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<8>"         LOC = "U33";  # DQS#<0>
+NET "rc0<8>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<9>"         LOC = "T36";  # DQS#<1>
+NET "rc0<9>"         IOSTANDARD = "SSTL18_I";
+NET "rc0<10>"        LOC = "F34";  # DQS#<2>
+NET "rc0<10>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<11>"        LOC = "F32";  # DQS#<3>
+NET "rc0<11>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<12>"        LOC = "Y32";  # CK<0>
+NET "rc0<12>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<13>"        LOC = "U31";  # CK<1>
+NET "rc0<13>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<14>"        LOC = "AA32"; # CK#<0>
+NET "rc0<14>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<15>"        LOC = "T31";  # CK#<1>
+NET "rc0<15>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<16>"        LOC = "P31";  # CKE
+NET "rc0<16>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<17>"        LOC = "R32";  # ODT
+NET "rc0<17>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<18>"        LOC = "N31";  # WE#
+NET "rc0<18>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<19>"        LOC = "M32";  # CAS#
+NET "rc0<19>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<20>"        LOC = "M31";  # RAS#
+NET "rc0<20>"        IOSTANDARD = "SSTL18_I";
+NET "rc0<21>"        LOC = "R33";  # CS#
+NET "rc0<21>"        IOSTANDARD = "SSTL18_I";
+
+##########################################################
+#                                                        #
+#   DDR-II SDRAM Bank 1                                  #
+#                                                        #
+#   NOTE: traces for A<14:13> not present on             #
+#   revision 1 PCB                                       #
+#                                                        #
+##########################################################
+
+NET "ra1<0>"         LOC = "AB33";
+NET "ra1<1>"         LOC = "AB32";
+NET "ra1<2>"         LOC = "AC33";
+NET "ra1<3>"         LOC = "AD32";
+NET "ra1<4>"         LOC = "AD33";
+NET "ra1<5>"         LOC = "AE32";
+NET "ra1<6>"         LOC = "AE33";
+NET "ra1<7>"         LOC = "AE34";
+NET "ra1<8>"         LOC = "AJ35";
+NET "ra1<9>"         LOC = "AK35";
+NET "ra1<10>"        LOC = "AL36";
+NET "ra1<11>"        LOC = "AL35";
+NET "ra1<12>"        LOC = "AG31";
+NET "ra1<13>"        LOC = "AL32"; # NOTE: error on PCB revision 1; see comment below
+NET "ra1<14>"        LOC = "AM32"; # NOTE: error on PCB revision 1; see comment below
+NET "ra1<15>"        LOC = "AF31"; # BA<0>
+NET "ra1<16>"        LOC = "AF32"; # BA<1>
+NET "ra1<17>"        LOC = "AG33"; # BA<2>
+NET "ra1<*>"         IOSTANDARD = "SSTL18_I";
+#
+# On PCB revision 1 there is an error such that pins AL32 and AM32 on the FPGA, which
+# should have been connected to DDR SDRAM bank 1, actually go nowhere. While the "MEMORY"
+# reference design can function correctly without these pins, it limits the size of
+# memory devices that can be fitted to ADM-XRC-5T2 PCB revision 1 such that the maximum
+# size of a DDR SDRAM bank 2 is 256 MByte.
+#
+# This error has been corrected on ADM-XRC-5T2 PCB revision 2.
+#
+
+NET "rd1<0>"         LOC = "AV39";
+NET "rd1<1>"         LOC = "AU38";
+NET "rd1<2>"         LOC = "AU37";
+NET "rd1<3>"         LOC = "AT37";
+NET "rd1<4>"         LOC = "AR38";
+NET "rd1<5>"         LOC = "AR37";
+NET "rd1<6>"         LOC = "AT36";
+NET "rd1<7>"         LOC = "AE35";
+NET "rd1<8>"         LOC = "AH35";
+NET "rd1<9>"         LOC = "AG36";
+NET "rd1<10>"        LOC = "AP35";
+NET "rd1<11>"        LOC = "AN36";
+NET "rd1<12>"        LOC = "AM36";
+NET "rd1<13>"        LOC = "AN34";
+NET "rd1<14>"        LOC = "AM34";
+NET "rd1<15>"        LOC = "AH36";
+NET "rd1<16>"        LOC = "AV35";
+NET "rd1<17>"        LOC = "AU36";
+NET "rd1<18>"        LOC = "AT35";
+NET "rd1<19>"        LOC = "AU34";
+NET "rd1<20>"        LOC = "AT34";
+NET "rd1<21>"        LOC = "AR35";
+NET "rd1<22>"        LOC = "AR34";
+NET "rd1<23>"        LOC = "AU32";
+NET "rd1<24>"        LOC = "AT32";
+NET "rd1<25>"        LOC = "AT31";
+NET "rd1<26>"        LOC = "AR32";
+NET "rd1<27>"        LOC = "AP32";
+NET "rd1<28>"        LOC = "AR33";
+NET "rd1<29>"        LOC = "AN33";
+NET "rd1<30>"        LOC = "AM33";
+NET "rd1<31>"        LOC = "AK33";
+NET "rd1<*>"         IOSTANDARD = "SSTL18_II";
+
+NET "rc1<0>"         LOC = "AF34"; # DM<0>
+NET "rc1<0>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<1>"         LOC = "AJ36"; # DM<1>
+NET "rc1<1>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<2>"         LOC = "AU33"; # DM<2>
+NET "rc1<2>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<3>"         LOC = "AJ33"; # DM<3>
+NET "rc1<3>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<4>"         LOC = "AF35"; # DQS<0>
+NET "rc1<4>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<5>"         LOC = "AH34"; # DQS<1>
+NET "rc1<5>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<6>"         LOC = "AV33"; # DQS<2>
+NET "rc1<6>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<7>"         LOC = "AV31"; # DQS<3>
+NET "rc1<7>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<8>"         LOC = "AF36"; # DQS#<0>
+NET "rc1<8>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<9>"         LOC = "AG34"; # DQS#<1>
+NET "rc1<9>"         IOSTANDARD = "SSTL18_I";
+NET "rc1<10>"        LOC = "AV34"; # DQS#<2>
+NET "rc1<10>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<11>"        LOC = "AU31"; # DQS#<3>
+NET "rc1<11>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<12>"        LOC = "AL34"; # CK<0>
+NET "rc1<12>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<13>"        LOC = "AL31"; # CK<1>
+NET "rc1<13>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<14>"        LOC = "AK34"; # CK#<0>
+NET "rc1<14>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<15>"        LOC = "AM31"; # CK#<1>
+NET "rc1<15>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<16>"        LOC = "AJ31"; # CKE
+NET "rc1<16>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<17>"        LOC = "AK32"; # ODT
+NET "rc1<17>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<18>"        LOC = "AH31"; # WE#
+NET "rc1<18>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<19>"        LOC = "AH33"; # CAS#
+NET "rc1<19>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<20>"        LOC = "AG32"; # RAS#
+NET "rc1<20>"        IOSTANDARD = "SSTL18_I";
+NET "rc1<21>"        LOC = "AJ32"; # CS#
+NET "rc1<21>"        IOSTANDARD = "SSTL18_I";
+
+##########################################################
+#                                                        #
+#   DDR-II SDRAM Bank 2                                  #
+#                                                        #
+##########################################################
+
+NET "ra2<0>"         LOC = "B29";
+NET "ra2<1>"         LOC = "C28";
+NET "ra2<2>"	     LOC = "B36";
+NET "ra2<3>"         LOC = "B39";
+NET "ra2<4>"         LOC = "A39";
+NET "ra2<5>"         LOC = "A40";
+NET "ra2<6>"         LOC = "A41";
+NET "ra2<7>"         LOC = "B41";
+NET "ra2<8>"         LOC = "B42";
+NET "ra2<9>"         LOC = "C41";
+NET "ra2<10>"        LOC = "D28";
+NET "ra2<11>"        LOC = "D40";
+NET "ra2<12>"        LOC = "D41";
+NET "ra2<13>"        LOC = "E42";
+NET "ra2<14>"        LOC = "D42";
+NET "ra2<15>"        LOC = "F30";  # BA<0>
+NET "ra2<16>"        LOC = "E30";  # BA<0>
+NET "ra2<17>"        LOC = "E29";  # BA<0>
+NET "ra2<*>"         IOSTANDARD = "SSTL18_I";
+
+NET "rd2<0>"         LOC = "D35";
+NET "rd2<1>"         LOC = "A35";
+NET "rd2<2>"         LOC = "A34";
+NET "rd2<3>"         LOC = "B34";
+NET "rd2<4>"         LOC = "C34";
+NET "rd2<5>"         LOC = "D33";
+NET "rd2<6>"         LOC = "D32";
+NET "rd2<7>"         LOC = "B33";
+NET "rd2<8>"         LOC = "B32";
+NET "rd2<9>"         LOC = "A32";
+NET "rd2<10>"        LOC = "A31";
+NET "rd2<11>"        LOC = "A30";
+NET "rd2<12>"        LOC = "B31";
+NET "rd2<13>"        LOC = "C30";
+NET "rd2<14>"        LOC = "C31";
+NET "rd2<15>"        LOC = "D31";
+NET "rd2<16>"        LOC = "E24";
+NET "rd2<17>"        LOC = "C24";
+NET "rd2<18>"        LOC = "B24";
+NET "rd2<19>"        LOC = "A24";
+NET "rd2<20>"        LOC = "B23";
+NET "rd2<21>"        LOC = "B22";
+NET "rd2<22>"        LOC = "C23";
+NET "rd2<23>"        LOC = "D22";
+NET "rd2<24>"        LOC = "B21";
+NET "rd2<25>"        LOC = "A22";
+NET "rd2<26>"        LOC = "A21";
+NET "rd2<27>"        LOC = "A20";
+NET "rd2<28>"        LOC = "C20";
+NET "rd2<29>"        LOC = "C21";
+NET "rd2<30>"        LOC = "D21";
+NET "rd2<31>"        LOC = "D20";
+NET "rd2<*>"         IOSTANDARD = "SSTL18_II";
+
+NET "rc2<0>"         LOC = "B37";  # DM<0>
+NET "rc2<0>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<1>"         LOC = "D36";  # DM<1>
+NET "rc2<1>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<2>"         LOC = "D27";  # DM<2>
+NET "rc2<2>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<3>"         LOC = "E25";  # DM<3>
+NET "rc2<3>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<4>"         LOC = "A37";  # DQS<0>
+NET "rc2<4>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<5>"         LOC = "C36";  # DQS<1>
+NET "rc2<5>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<6>"         LOC = "E28";  # DQS<2>
+NET "rc2<6>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<7>"         LOC = "D25";  # DQS<3>
+NET "rc2<7>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<8>"         LOC = "A36";  # DQS#<0>
+NET "rc2<8>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<9>"         LOC = "C35";  # DQS#<1>
+NET "rc2<9>"         IOSTANDARD = "SSTL18_I";
+NET "rc2<10>"        LOC = "E27";  # DQS#<2>
+NET "rc2<10>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<11>"        LOC = "D26";  # DQS#<3>
+NET "rc2<11>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<12>"        LOC = "C39";  # CK<0>
+NET "rc2<12>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<13>"        LOC = "A26";  # CK<1>
+NET "rc2<13>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<14>"        LOC = "C40";  # CK#<0>
+NET "rc2<14>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<15>"        LOC = "A25";  # CK#<1>
+NET "rc2<15>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<16>"        LOC = "C26";  # CKE
+NET "rc2<16>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<17>"        LOC = "A29";  # ODT
+NET "rc2<17>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<18>"        LOC = "A27";  # WE#
+NET "rc2<18>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<19>"        LOC = "D30";  # CAS#
+NET "rc2<19>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<20>"        LOC = "B28";  # RAS#
+NET "rc2<20>"        IOSTANDARD = "SSTL18_I";
+NET "rc2<21>"        LOC = "C29";  # CS#
+NET "rc2<21>"        IOSTANDARD = "SSTL18_I";
+
+##########################################################
+#                                                        #
+#   DDR-II SDRAM Bank 3                                  #
+#                                                        #
+##########################################################
+
+NET "ra3<0>"         LOC = "AY42";
+NET "ra3<1>"         LOC = "AW42";
+NET "ra3<2>"         LOC = "AW41";
+NET "ra3<3>"         LOC = "AW40";
+NET "ra3<4>"         LOC = "AY40";
+NET "ra3<5>"         LOC = "BA41";
+NET "ra3<6>"         LOC = "BA42";
+NET "ra3<7>"         LOC = "BB41";
+NET "ra3<8>"         LOC = "BB32";
+NET "ra3<9>"         LOC = "BB31";
+NET "ra3<10>"        LOC = "BA30";
+NET "ra3<11>"        LOC = "BA31";
+NET "ra3<12>"        LOC = "BB29";
+NET "ra3<13>"        LOC = "AY19";
+NET "ra3<14>"        LOC = "AY20";
+NET "ra3<15>"        LOC = "BB28"; # BA<0>
+NET "ra3<16>"        LOC = "BB27"; # BA<1>
+NET "ra3<17>"        LOC = "BA27"; # BA<2>
+NET "ra3<*>"         IOSTANDARD = "SSTL18_I";
+
+NET "rd3<0>"         LOC = "BA40";
+NET "rd3<1>"         LOC = "BB38";
+NET "rd3<2>"         LOC = "BA39";
+NET "rd3<3>"         LOC = "AY38";
+NET "rd3<4>"         LOC = "AW37";
+NET "rd3<5>"         LOC = "AW38";
+NET "rd3<6>"         LOC = "AY39";
+NET "rd3<7>"         LOC = "BB37";
+NET "rd3<8>"         LOC = "AY35";
+NET "rd3<9>"         LOC = "AW35";
+NET "rd3<10>"        LOC = "BB33";
+NET "rd3<11>"        LOC = "BA34";
+NET "rd3<12>"        LOC = "AY33";
+NET "rd3<13>"        LOC = "AW33";
+NET "rd3<14>"        LOC = "AW32";
+NET "rd3<15>"        LOC = "AY32";
+NET "rd3<16>"        LOC = "AW30";
+NET "rd3<17>"        LOC = "AV29";
+NET "rd3<18>"        LOC = "AW28";
+NET "rd3<19>"        LOC = "AY27";
+NET "rd3<20>"        LOC = "AY28";
+NET "rd3<21>"        LOC = "AY29";
+NET "rd3<22>"        LOC = "BA29";
+NET "rd3<23>"        LOC = "BB24";
+NET "rd3<24>"        LOC = "AV26";
+NET "rd3<25>"        LOC = "AW26";
+NET "rd3<26>"        LOC = "BB21";
+NET "rd3<27>"        LOC = "BA22";
+NET "rd3<28>"        LOC = "AY22";
+NET "rd3<29>"        LOC = "AW23";
+NET "rd3<30>"        LOC = "AW22";
+NET "rd3<31>"        LOC = "BB20";
+NET "rd3<*>"         IOSTANDARD = "SSTL18_II";
+
+NET "rc3<0>"         LOC = "BA37"; # DM<0>
+NET "rc3<0>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<1>"         LOC = "BA32"; # DM<1>
+NET "rc3<1>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<2>"         LOC = "BA24"; # DM<2>
+NET "rc3<2>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<3>"         LOC = "BA21"; # DM<3>
+NET "rc3<3>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<4>"         LOC = "AY37"; # DQS<0>
+NET "rc3<4>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<5>"         LOC = "BB36"; # DQS<1>
+NET "rc3<5>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<6>"         LOC = "AY24"; # DQS<2>
+NET "rc3<6>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<7>"         LOC = "AV28"; # DQS<3>
+NET "rc3<7>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<8>"         LOC = "AW36"; # DQS#<0>
+NET "rc3<8>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<9>"         LOC = "BA36"; # DQS#<1>
+NET "rc3<9>"         IOSTANDARD = "SSTL18_I";
+NET "rc3<10>"        LOC = "AW25"; # DQS#<2>
+NET "rc3<10>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<11>"        LOC = "AW27"; # DQS#<3>
+NET "rc3<11>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<12>"        LOC = "AY30"; # CK<0>
+NET "rc3<12>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<13>"        LOC = "AW21"; # CK<1>
+NET "rc3<13>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<14>"        LOC = "AW31"; # CK#<0>
+NET "rc3<14>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<15>"        LOC = "AW20"; # CK#<1>
+NET "rc3<15>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<16>"        LOC = "AY25"; # CKE
+NET "rc3<16>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<17>"        LOC = "BA19"; # ODT
+NET "rc3<17>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<18>"        LOC = "BA25"; # WE#
+NET "rc3<18>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<19>"        LOC = "BB26"; # CAS#
+NET "rc3<19>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<20>"        LOC = "BA26"; # RAS#
+NET "rc3<20>"        IOSTANDARD = "SSTL18_I";
+NET "rc3<21>"        LOC = "BA20"; # CS#
+NET "rc3<21>"        IOSTANDARD = "SSTL18_I";
+
+##########################################################
+#                                                        #
+#   DDR-II SSRAM Bank 4                                  #
+#                                                        #
+##########################################################
+
+NET "ra4<0>"         LOC = "AP26";
+NET "ra4<1>"         LOC = "AT30";
+NET "ra4<2>"         LOC = "AT14";
+NET "ra4<3>"         LOC = "AR14";
+NET "ra4<4>"         LOC = "AR17";
+NET "ra4<5>"         LOC = "AT26";
+NET "ra4<6>"         LOC = "AM19";
+NET "ra4<7>"         LOC = "AT15";
+NET "ra4<8>"         LOC = "AR15";
+NET "ra4<9>"         LOC = "AL24";
+NET "ra4<10>"        LOC = "AM16";
+NET "ra4<11>"        LOC = "AL15";
+NET "ra4<12>"        LOC = "AK17";
+NET "ra4<13>"        LOC = "AL16";
+NET "ra4<14>"        LOC = "AM17";
+NET "ra4<15>"        LOC = "AL17";
+NET "ra4<16>"        LOC = "AP28";
+NET "ra4<17>"        LOC = "AM26";
+NET "ra4<18>"        LOC = "AM27";
+NET "ra4<19>"        LOC = "AN30";
+NET "ra4<20>"        LOC = "AL27";
+NET "ra4<21>"        LOC = "AP30";
+NET "ra4<22>"        LOC = "AP27";
+NET "ra4<23>"        LOC = "AN29";
+NET "ra4<*>"         IOSTANDARD = "HSTL_I_DCI";
+
+#
+# DQ<8:0>  controlled by BWE#<0>
+# DQ<17:9> controlled by BWE#<1>
+#
+NET "rd4<0>"         LOC = "AT29"; # DQ<0>
+NET "rd4<1>"         LOC = "AT17"; # DQ<1>
+NET "rd4<2>"         LOC = "AL19"; # DQ<2>
+NET "rd4<3>"         LOC = "AU28"; # DQ<3>
+NET "rd4<4>"         LOC = "AL25"; # DQ<4>
+NET "rd4<5>"         LOC = "AP17"; # DQ<5>
+NET "rd4<6>"         LOC = "AK24"; # DQ<6>
+NET "rd4<7>"         LOC = "AK25"; # DQ<7>
+NET "rd4<8>"         LOC = "AN18"; # DQ<9>
+NET "rd4<9>"         LOC = "AM18"; # DQ<10>
+NET "rd4<10>"        LOC = "AR29"; # DQ<11>
+NET "rd4<11>"        LOC = "AR30"; # DQ<12>
+NET "rd4<12>"        LOC = "AN25"; # DQ<13>
+NET "rd4<13>"        LOC = "AP25"; # DQ<14>
+NET "rd4<14>"        LOC = "AT19"; # DQ<15>
+NET "rd4<15>"        LOC = "AM24"; # DQ<16>
+NET "rd4<*>"         IOSTANDARD = "HSTL_II";
+
+NET "rc4<0>"         LOC = "AN26"; # BWE#<0>
+NET "rc4<0>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<1>"         LOC = "AR27"; # BWE#<1>
+NET "rc4<1>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<2>"         LOC = "AT16"; # ADV/LD#
+NET "rc4<2>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<3>"         LOC = "AT27"; # R/W#
+NET "rc4<3>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<4>"         LOC = "AK18"; # K
+NET "rc4<4>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<5>"         LOC = "AK19"; # K#
+NET "rc4<5>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<6>"         LOC = "AN20"; # CQ
+NET "rc4<6>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<7>"         LOC = "AN19"; # CQ#
+NET "rc4<7>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc4<8>"         LOC = "AL26"; # DOFF#
+NET "rc4<8>"         IOSTANDARD = "HSTL_I_DCI";
+
+##########################################################
+#                                                        #
+#   DDR-II SSRAM Bank 5                                  #
+#                                                        #
+##########################################################
+
+NET "ra5<0>"         LOC = "G27";
+NET "ra5<1>"         LOC = "P17";
+NET "ra5<2>"         LOC = "E18";
+NET "ra5<3>"         LOC = "E17";
+NET "ra5<4>"         LOC = "H16";
+NET "ra5<5>"         LOC = "G16";
+NET "ra5<6>"         LOC = "F16";
+NET "ra5<7>"         LOC = "K19";
+NET "ra5<8>"         LOC = "F17";
+NET "ra5<9>"         LOC = "G17";
+NET "ra5<10>"        LOC = "N15";
+NET "ra5<11>"        LOC = "M16";
+NET "ra5<12>"        LOC = "P18";
+NET "ra5<13>"        LOC = "N16";
+NET "ra5<14>"        LOC = "N14";
+NET "ra5<15>"        LOC = "F27";
+NET "ra5<16>"        LOC = "N26";
+NET "ra5<17>"        LOC = "N29";
+NET "ra5<18>"        LOC = "N28";
+NET "ra5<19>"        LOC = "M29";
+NET "ra5<20>"        LOC = "P25";
+NET "ra5<21>"        LOC = "N30";
+NET "ra5<22>"        LOC = "P27";
+NET "ra5<23>"        LOC = "P26";
+NET "ra5<*>"         IOSTANDARD = "HSTL_I_DCI";
+
+#
+# DQ<8:0>  controlled by BWE#<0>
+# DQ<17:9> controlled by BWE#<1>
+#
+NET "rd5<0>"         LOC = "K25";  # DQ<0>
+NET "rd5<1>"         LOC = "J27";  # DQ<1>
+NET "rd5<2>"         LOC = "L19";  # DQ<2>
+NET "rd5<3>"         LOC = "H26";  # DQ<3>
+NET "rd5<4>"         LOC = "H29";  # DQ<4>
+NET "rd5<5>"         LOC = "G18";  # DQ<5>
+NET "rd5<6>"         LOC = "H30";  # DQ<6>
+NET "rd5<7>"         LOC = "F29";  # DQ<7>
+NET "rd5<8>"         LOC = "K18";  # DQ<9>
+NET "rd5<9>"         LOC = "L26";  # DQ<10>
+NET "rd5<10>"        LOC = "L25";  # DQ<11>
+NET "rd5<11>"        LOC = "M24";  # DQ<12>
+NET "rd5<12>"        LOC = "L24";  # DQ<13>
+NET "rd5<13>"        LOC = "L20";  # DQ<14>
+NET "rd5<14>"        LOC = "M19";  # DQ<15>
+NET "rd5<15>"        LOC = "M18";  # DQ<16>
+NET "rd5<*>"         IOSTANDARD = "HSTL_II";
+
+NET "rc5<0>"         LOC = "K27";  # BWE#<0>
+NET "rc5<0>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<1>"         LOC = "J28";  # BWE#<1>
+NET "rc5<1>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<2>"         LOC = "G29";  # ADV/LD#
+NET "rc5<2>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<3>"         LOC = "J26";  # R/W#
+NET "rc5<3>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<4>"         LOC = "G28";  # K
+NET "rc5<4>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<5>"         LOC = "H28";  # K#
+NET "rc5<5>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<6>"         LOC = "J18";  # CQ
+NET "rc5<6>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<7>"         LOC = "H18";  # CQ#
+NET "rc5<7>"         IOSTANDARD = "HSTL_I_DCI";
+NET "rc5<8>"         LOC = "N25";  # DOFF#
+NET "rc5<8>"         IOSTANDARD = "HSTL_I_DCI";
+
+##########################################################
+#                                                        #
+#   User MGT                                             #
+#                                                        #
+##########################################################
+NET "rxn<0>"         LOC = "V1";
+NET "rxp<0>"         LOC = "U1";
+NET "rxn<1>"         LOC = "W1";
+NET "rxp<1>"         LOC = "Y1";
+NET "rxn<2>"         LOC = "M1";
+NET "rxp<2>"         LOC = "L1";
+NET "rxn<3>"         LOC = "N1";
+NET "rxp<3>"         LOC = "P1";
+
+NET "txn<0>"         LOC = "U2";
+NET "txp<0>"         LOC = "T2";
+NET "txn<1>"         LOC = "Y2";
+NET "txp<1>"         LOC = "AA2";
+NET "txn<2>"         LOC = "L2";
+NET "txp<2>"         LOC = "K2";
+NET "txn<3>"         LOC = "P2";
+NET "txp<3>"         LOC = "R2";
+
+#---------- Set placement for tile0_rocketio_wrapper_i/GTP_DUAL ------
+INST "admxrc5t2_main_0/U_MGT/seriallink_i/tile0_seriallink_i/gtp_dual_i" LOC="GTP_DUAL_X0Y6";
+
+#---------- Set placement for tile1_rocketio_wrapper_i/GTP_DUAL ------
+INST "admxrc5t2_main_0/U_MGT/seriallink_i/tile1_seriallink_i/gtp_dual_i" LOC="GTP_DUAL_X0Y7";
+
+
+##########################################################
+#                                                        #
+# Timing specifications for local bus clock domain       #
+# (all delays in nanoseconds)                            #
+#                                                        #
+# Assumptions:                                           #
+#                                                        #
+#   - Target freq. for this design = 80.0MHz             #
+#     => tlclk = 12.5ns                                  #
+#                                                        #
+#   - Safety margin for timing = 1.0ns                   #
+#     => tmargin = 1.0ns                                 #
+#                                                        #
+# Timing values from ADM-XPL Bridge rev01 manual:        #
+#                                                        #
+#   tsu(brdg) = 6.0ns (worst pin)                        #
+#   tco(brdg) = 4.5ns (worst pin)                        #
+#                                                        #
+#   Note that to keep the number of TIMESPECs small,     #
+#   we do not write individual TIMESPEC constraints      #
+#   for each pin of the Bridge. Instead, we write        #
+#   TIMESPECs for the worst pins. This trades off some   #
+#   performance, that could be gained by having loose    #
+#   TIMESPECs for some pins, for simplicity.             #
+#                                                        #
+# Derivation of TIMESPECs:                               #
+#                                                        #
+#   => tlclk' = tlclk - tmargin                          #
+#      tlclk' = 12.5 - 1.0 = 11.5ns                      #
+#                                                        #
+#   => tsu(FPGA) = tlclk - tco(brdg) - tmargin           #
+#      tsu(FPGA) = 12.5 - 4.5 - 1.0 = 8.0ns              #
+#                                                        #
+#   => tco(FPGA) = tlclk - tsu(brdg) - tmargin           #
+#      tco(FPGA) = 12.5 - 6.0 - 1.0 = 5.5ns              #
+#                                                        #
+##########################################################
+
+NET "clk" TNM = "FFS:LCLK_FFS";
+NET "clk" TNM = "RAMS:LCLK_RAMS";
+
+TIMEGRP "LCLK_PAD"       = pads(lclk);
+TIMEGRP "LAD_PADS"       = pads(lad<*>);
+TIMEGRP "LBE_PADS"       = pads(lbe_l<*>);
+TIMEGRP "LADS_PAD"       = pads(lads_l);
+TIMEGRP "LWRITE_PAD"     = pads(lwrite);
+TIMEGRP "LBLAST_PAD"     = pads(lblast_l);
+TIMEGRP "LBTERM_PAD"     = pads(lbterm_l);
+TIMEGRP "LREADY_PAD"     = pads(lready_l);
+TIMEGRP "FHOLDA_PAD"     = pads(fholda);
+
+TIMEGRP "LBUS_PADS"      = "LAD_PADS":
+                           "LBE_PADS":
+                           "LADS_PAD":
+                           "LWRITE_PAD":
+                           "LBLAST_PAD":
+                           "LBTERM_PAD":
+                           "LREADY_PAD":
+                           "FHOLDA_PAD";
+
+# Reset distribution
+NET "lreset_l"  MAXDELAY   = 100.0ns;
+
+# Internal timing, tclk'
+NET "lclk" PERIOD = 11.5ns HIGH 50%;
+
+# FPGA clock-to-output, tco(FPGA)
+TIMEGRP "LBUS_PADS" OFFSET = OUT 5.5ns AFTER  "lclk";
+
+# FPGA setup, tsu(FPGA)
+TIMEGRP "LBUS_PADS" OFFSET = IN 8.0ns BEFORE "lclk";
+
+##########################################################
+#                                                        #
+# Timing specifications for memory clock domain          #
+# (all delays in nanoseconds)                            #
+#                                                        #
+# Assumptions:                                           #
+#                                                        #
+#   - Target freq. for this design = 333.33MHz.          #
+#                                                        #
+#     => tmclk = 3.0ns                                   #
+#                                                        #
+#   - Safety margin for timing = 0.25ns                  #
+#     => tmargin = 0.25ns                                #
+#                                                        #
+# Derivation of TIMESPECs:                               #
+#                                                        #
+#   => tmclk' = tmclk - tmargin                          #
+#      tmclk' = 3.0 - 0.25 = 2.75ns                      #
+#                                                        #
+##########################################################
+
+PIN "admxrc5t2_main_0/memory_banks_0/memclk_0/pll_0.CLKOUT0" TNM = "FFS:MEMCLK2X90_FFS";
+PIN "admxrc5t2_main_0/memory_banks_0/memclk_0/pll_0.CLKOUT1" TNM = "FFS:MEMCLK45_FFS";
+PIN "admxrc5t2_main_0/memory_banks_0/memclk_0/pll_0.CLKOUT2" TNM = "FFS:MEMCLK2X0_FFS";
+PIN "admxrc5t2_main_0/memory_banks_0/memclk_0/pll_0.CLKOUT3" TNM = "FFS:MEMCLK0_FFS";
+PIN "admxrc5t2_main_0/memory_banks_0/memclk_0/pll_0.CLKOUT3" TNM = "RAMS:MEMCLK0_RAMS";
+TIMEGRP "MEMCLK_FFS"     = "MEMCLK0_FFS":"MEMCLK45_FFS":"MEMCLK2X0_FFS":"MEMCLK2X90_FFS";
+
+TIMEGRP "RA0_PADS"       = pads(ra0<*>);
+TIMEGRP "RC0_PADS"       = pads(rc0<*>);
+TIMEGRP "RD0_PADS"       = pads(rd0<*>);
+
+TIMEGRP "RA1_PADS"       = pads(ra1<*>);
+TIMEGRP "RC1_PADS"       = pads(rc1<*>);
+TIMEGRP "RD1_PADS"       = pads(rd1<*>);
+
+TIMEGRP "RA2_PADS"       = pads(ra2<*>);
+TIMEGRP "RC2_PADS"       = pads(rc2<*>);
+TIMEGRP "RD2_PADS"       = pads(rd2<*>);
+
+TIMEGRP "RA3_PADS"       = pads(ra3<*>);
+TIMEGRP "RC3_PADS"       = pads(rc3<*>);
+TIMEGRP "RD3_PADS"       = pads(rd3<*>);
+
+TIMEGRP "RA4_PADS"       = pads(ra4<*>);
+TIMEGRP "RC4_PADS"       = pads(rc4<*>);
+TIMEGRP "RD4_PADS"       = pads(rd4<*>);
+
+TIMEGRP "RA5_PADS"       = pads(ra5<*>);
+TIMEGRP "RC5_PADS"       = pads(rc5<*>);
+TIMEGRP "RD5_PADS"       = pads(rd5<*>);
+
+# Group together ZBT SRAM pads
+TIMEGRP "MEM_PADS"       = "RA0_PADS":
+                           "RC0_PADS":
+                           "RD0_PADS":
+                           "RA1_PADS":
+                           "RC1_PADS":
+                           "RD1_PADS":
+                           "RA2_PADS":
+                           "RC2_PADS":
+                           "RD2_PADS":
+                           "RA3_PADS":
+                           "RC3_PADS":
+                           "RD3_PADS":
+                           "RA4_PADS":
+                           "RC4_PADS":
+                           "RD4_PADS":
+                           "RA5_PADS":
+                           "RC5_PADS":
+                           "RD5_PADS";
+
+# Internal timing, tmclk'
+NET "mclka_ibufg" PERIOD = 2.75ns HIGH 50%;
+
+# Internal timing, trefclk'
+NET "refclk_ibufg" PERIOD = 4.5ns HIGH 50%;
+
+# Clock-to-out for memory pads
+TIMESPEC "TS_FFS_MEM_PADS" = FROM "MEMCLK_FFS" TO "MEM_PADS" 3.5 ns;
+
+# Cross-clock-domain timing
+# This should be somewhat less than one clock cycle of the memory clock domain
+# (6.0 ns in this case).
+TIMESPEC "TS_M_FFS_TO_L_FFS"   = FROM "MEMCLK0_FFS" TO "LCLK_FFS" 4.0ns DATAPATHONLY;
+TIMESPEC "TS_M_FFS_TO_L_RAMS"  = FROM "MEMCLK0_FFS" TO "LCLK_RAMS" 4.0ns DATAPATHONLY;
+TIMESPEC "TS_M_RAMS_TO_L_FFS"  = FROM "MEMCLK0_RAMS" TO "LCLK_FFS" 4.0ns DATAPATHONLY;
+TIMESPEC "TS_M_RAMS_TO_L_RAMS" = FROM "MEMCLK0_RAMS" TO "LCLK_RAMS" 4.0ns DATAPATHONLY;
+TIMESPEC "TS_L_FFS_TO_M_FFS"   = FROM "LCLK_FFS" TO "MEMCLK0_FFS" 4.0ns DATAPATHONLY;
+TIMESPEC "TS_L_FFS_TO_M_RAMS"  = FROM "LCLK_FFS" TO "MEMCLK0_RAMS" 4.0ns DATAPATHONLY;
+TIMESPEC "TS_L_RAMS_TO_M_FFS"  = FROM "LCLK_RAMS" TO "MEMCLK0_FFS" 4.0ns DATAPATHONLY;
+TIMESPEC "TS_L_RAMS_TO_M_RAMS" = FROM "LCLK_RAMS" TO "MEMCLK0_RAMS" 4.0ns DATAPATHONLY;
+
+#
+# Certain nets in originating in the LCLK domain that are fed into the
+# memory clock domain are not timing-critical. It helps the design as a
+# whole to meet timing if such nets are flagged with the TIG constraint
+# (timing ignore).
+#
+NET "admxrc5t2_main_0/mode_reg*" TIG = "TS_M_FFS_TO_L_FFS", "TS_M_FFS_TO_L_RAMS",
+                                      "TS_M_RAMS_TO_L_FFS", "TS_M_RAMS_TO_L_RAMS",
+                                      "TS_L_FFS_TO_M_FFS", "TS_L_FFS_TO_M_RAMS",
+                                      "TS_L_RAMS_TO_M_FFS", "TS_L_RAMS_TO_M_RAMS";
+
+# MGT Clock Constraints
+NET "admxrc5t2_main_0/U_MGT/tile0_refclk_i" PERIOD = 3.2 ns;
+
+NET "admxrc5t2_main_0/U_MGT/tile0_txusrclk0_i" TNM_NET = "tile0_txusrclk0_i";
+TIMESPEC "TS_tile0_txusrclk0_i" = PERIOD "tile0_txusrclk0_i" 3.2;
+
+NET "admxrc5t2_main_0/mgt_clk" TNM_NET = "mgt_clk";
+TIMESPEC "TS_mgt_clk" = PERIOD "mgt_clk" 6.4;
+

@@ -1,0 +1,9 @@
+run
+-ifn cfg/admxrc5t2.prj
+-ifmt mixed
+-opt_mode SPEED
+-opt_level 1
+-ofmt NGC
+-ofn admxrc5t2.ngc
+-p xc5vlx330t-ff1738-1
+-top admxrc5t2

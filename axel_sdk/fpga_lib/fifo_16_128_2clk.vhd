@@ -1,0 +1,6946 @@
+--------------------------------------------------------------------------------
+-- Copyright (c) 1995-2009 Xilinx, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
+--   ____  ____
+--  /   /\/   /
+-- /___/  \  /    Vendor: Xilinx
+-- \   \   \/     Version: L.57
+--  \   \         Application: netgen
+--  /   /         Filename: fifo_16_128_2clk.vhd
+-- /___/   /\     Timestamp: Mon Jan 11 19:30:09 2010
+-- \   \  /  \ 
+--  \___\/\___\
+--             
+-- Command	: -intstyle ise -w -sim -ofmt vhdl ./tmp/_cg/fifo_16_128_2clk.ngc ./tmp/_cg/fifo_16_128_2clk.vhd 
+-- Device	: 5vlx330tff1738-2
+-- Input file	: ./tmp/_cg/fifo_16_128_2clk.ngc
+-- Output file	: ./tmp/_cg/fifo_16_128_2clk.vhd
+-- # of Entities	: 1
+-- Design Name	: fifo_16_128_2clk
+-- Xilinx	: /vol/cc/opt/Xilinx/11.1/ISE
+--             
+-- Purpose:    
+--     This VHDL netlist is a verification model and uses simulation 
+--     primitives which may not represent the true implementation of the 
+--     device, however the netlist is functionally correct and should not 
+--     be modified. This file cannot be synthesized and should only be used 
+--     with supported simulation tools.
+--             
+-- Reference:  
+--     Command Line Tools User Guide, Chapter 23
+--     Synthesis and Simulation Design Guide, Chapter 6
+--             
+--------------------------------------------------------------------------------
+
+
+-- synthesis translate_off
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+use UNISIM.VPKG.ALL;
+
+entity fifo_16_128_2clk is
+  port (
+    valid : out STD_LOGIC; 
+    rd_en : in STD_LOGIC := 'X'; 
+    prog_full : out STD_LOGIC; 
+    wr_en : in STD_LOGIC := 'X'; 
+    full : out STD_LOGIC; 
+    empty : out STD_LOGIC; 
+    wr_clk : in STD_LOGIC := 'X'; 
+    rst : in STD_LOGIC := 'X'; 
+    rd_clk : in STD_LOGIC := 'X'; 
+    dout : out STD_LOGIC_VECTOR ( 127 downto 0 ); 
+    din : in STD_LOGIC_VECTOR ( 15 downto 0 ) 
+  );
+end fifo_16_128_2clk;
+
+architecture STRUCTURE of fifo_16_128_2clk is
+  signal BU2_U0_grf_rf_mem_tmp_ram_rd_en : STD_LOGIC; 
+  signal BU2_N24 : STD_LOGIC; 
+  signal BU2_N22 : STD_LOGIC; 
+  signal BU2_N20 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000304_591 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000150_590 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or000046_589 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000219_588 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000128_587 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux000325_586 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux00038_585 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_ram_regout_en : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_0_rt_445 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_1_rt_444 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_2_rt_442 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_3_rt_440 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_4_rt_438 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_5_rt_436 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_6_rt_434 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_7_rt_432 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_8_rt_430 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_9_rt_428 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_10_rt_426 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count1 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count4 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count2 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count3 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count7 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count5 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count6 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count10 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count8 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count9 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_comp1 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_comp2 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux0003 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_not0001 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_wr_rst_d1_372 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_fb_316 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_i_mux0000 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_0_rt_306 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_1_rt_305 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_2_rt_303 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_3_rt_301 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_4_rt_299 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_5_rt_297 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_6_rt_295 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_7_rt_293 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count1 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count2 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count3 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count4 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count5 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count6 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count7 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0009 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0008 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0007 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0006 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0005 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0004 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0003 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0002 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0001 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0000 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0006 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0005 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0004 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0003 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0002 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0001 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0000 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0006 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0005 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0004 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0003 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0002 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0001 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0000 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0006 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0005 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0004 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0003 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0002 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0001 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0000 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_wr_rst_comb : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_rd_rst_comb : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_wr_rst_asreg_166 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_rd_rst_asreg_165 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_wr_rst_asreg_d2_164 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_wr_rst_asreg_d1_163 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_rd_rst_asreg_d2_162 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_rstblk_rd_rst_asreg_d1_161 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_fb_i_160 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_i_or0000 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_157 : STD_LOGIC; 
+  signal BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000 : STD_LOGIC; 
+  signal BU2_N1 : STD_LOGIC; 
+  signal NLW_VCC_P_UNCONNECTED : STD_LOGIC; 
+  signal NLW_GND_G_UNCONNECTED : STD_LOGIC; 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED : STD_LOGIC;
+ 
+  signal NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED : STD_LOGIC;
+ 
+  signal din_2 : STD_LOGIC_VECTOR ( 15 downto 0 ); 
+  signal dout_3 : STD_LOGIC_VECTOR ( 127 downto 0 ); 
+  signal BU2_U0_grf_rf_mem_dout_mem : STD_LOGIC_VECTOR ( 127 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_count_d2 : STD_LOGIC_VECTOR ( 10 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy : STD_LOGIC_VECTOR ( 9 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_count_d1 : STD_LOGIC_VECTOR ( 10 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_wpntr_count : STD_LOGIC_VECTOR ( 10 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1 : STD_LOGIC_VECTOR ( 5 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet : STD_LOGIC_VECTOR ( 4 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1 : STD_LOGIC_VECTOR ( 5 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet : STD_LOGIC_VECTOR ( 4 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad : STD_LOGIC_VECTOR ( 11 downto 1 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000 : STD_LOGIC_VECTOR ( 11 downto 1 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut : STD_LOGIC_VECTOR ( 11 downto 1 ); 
+  signal BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy : STD_LOGIC_VECTOR ( 10 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state : STD_LOGIC_VECTOR ( 1 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001 : STD_LOGIC_VECTOR ( 1 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_count_d1 : STD_LOGIC_VECTOR ( 7 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy : STD_LOGIC_VECTOR ( 6 downto 0 ); 
+  signal BU2_U0_grf_rf_gl0_rd_rpntr_count : STD_LOGIC_VECTOR ( 7 downto 0 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc : STD_LOGIC_VECTOR ( 7 downto 0 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg : STD_LOGIC_VECTOR ( 10 downto 0 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc : STD_LOGIC_VECTOR ( 10 downto 0 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1 : STD_LOGIC_VECTOR ( 7 downto 0 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg : STD_LOGIC_VECTOR ( 7 downto 0 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1 : STD_LOGIC_VECTOR ( 10 downto 3 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin : STD_LOGIC_VECTOR ( 10 downto 3 ); 
+  signal BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin : STD_LOGIC_VECTOR ( 7 downto 0 ); 
+  signal BU2_U0_grf_rf_rstblk_wr_rst_reg : STD_LOGIC_VECTOR ( 1 downto 0 ); 
+  signal BU2_U0_grf_rf_rstblk_rd_rst_reg : STD_LOGIC_VECTOR ( 2 downto 0 ); 
+  signal BU2_rd_data_count : STD_LOGIC_VECTOR ( 0 downto 0 ); 
+begin
+  dout(127) <= dout_3(127);
+  dout(126) <= dout_3(126);
+  dout(125) <= dout_3(125);
+  dout(124) <= dout_3(124);
+  dout(123) <= dout_3(123);
+  dout(122) <= dout_3(122);
+  dout(121) <= dout_3(121);
+  dout(120) <= dout_3(120);
+  dout(119) <= dout_3(119);
+  dout(118) <= dout_3(118);
+  dout(117) <= dout_3(117);
+  dout(116) <= dout_3(116);
+  dout(115) <= dout_3(115);
+  dout(114) <= dout_3(114);
+  dout(113) <= dout_3(113);
+  dout(112) <= dout_3(112);
+  dout(111) <= dout_3(111);
+  dout(110) <= dout_3(110);
+  dout(109) <= dout_3(109);
+  dout(108) <= dout_3(108);
+  dout(107) <= dout_3(107);
+  dout(106) <= dout_3(106);
+  dout(105) <= dout_3(105);
+  dout(104) <= dout_3(104);
+  dout(103) <= dout_3(103);
+  dout(102) <= dout_3(102);
+  dout(101) <= dout_3(101);
+  dout(100) <= dout_3(100);
+  dout(99) <= dout_3(99);
+  dout(98) <= dout_3(98);
+  dout(97) <= dout_3(97);
+  dout(96) <= dout_3(96);
+  dout(95) <= dout_3(95);
+  dout(94) <= dout_3(94);
+  dout(93) <= dout_3(93);
+  dout(92) <= dout_3(92);
+  dout(91) <= dout_3(91);
+  dout(90) <= dout_3(90);
+  dout(89) <= dout_3(89);
+  dout(88) <= dout_3(88);
+  dout(87) <= dout_3(87);
+  dout(86) <= dout_3(86);
+  dout(85) <= dout_3(85);
+  dout(84) <= dout_3(84);
+  dout(83) <= dout_3(83);
+  dout(82) <= dout_3(82);
+  dout(81) <= dout_3(81);
+  dout(80) <= dout_3(80);
+  dout(79) <= dout_3(79);
+  dout(78) <= dout_3(78);
+  dout(77) <= dout_3(77);
+  dout(76) <= dout_3(76);
+  dout(75) <= dout_3(75);
+  dout(74) <= dout_3(74);
+  dout(73) <= dout_3(73);
+  dout(72) <= dout_3(72);
+  dout(71) <= dout_3(71);
+  dout(70) <= dout_3(70);
+  dout(69) <= dout_3(69);
+  dout(68) <= dout_3(68);
+  dout(67) <= dout_3(67);
+  dout(66) <= dout_3(66);
+  dout(65) <= dout_3(65);
+  dout(64) <= dout_3(64);
+  dout(63) <= dout_3(63);
+  dout(62) <= dout_3(62);
+  dout(61) <= dout_3(61);
+  dout(60) <= dout_3(60);
+  dout(59) <= dout_3(59);
+  dout(58) <= dout_3(58);
+  dout(57) <= dout_3(57);
+  dout(56) <= dout_3(56);
+  dout(55) <= dout_3(55);
+  dout(54) <= dout_3(54);
+  dout(53) <= dout_3(53);
+  dout(52) <= dout_3(52);
+  dout(51) <= dout_3(51);
+  dout(50) <= dout_3(50);
+  dout(49) <= dout_3(49);
+  dout(48) <= dout_3(48);
+  dout(47) <= dout_3(47);
+  dout(46) <= dout_3(46);
+  dout(45) <= dout_3(45);
+  dout(44) <= dout_3(44);
+  dout(43) <= dout_3(43);
+  dout(42) <= dout_3(42);
+  dout(41) <= dout_3(41);
+  dout(40) <= dout_3(40);
+  dout(39) <= dout_3(39);
+  dout(38) <= dout_3(38);
+  dout(37) <= dout_3(37);
+  dout(36) <= dout_3(36);
+  dout(35) <= dout_3(35);
+  dout(34) <= dout_3(34);
+  dout(33) <= dout_3(33);
+  dout(32) <= dout_3(32);
+  dout(31) <= dout_3(31);
+  dout(30) <= dout_3(30);
+  dout(29) <= dout_3(29);
+  dout(28) <= dout_3(28);
+  dout(27) <= dout_3(27);
+  dout(26) <= dout_3(26);
+  dout(25) <= dout_3(25);
+  dout(24) <= dout_3(24);
+  dout(23) <= dout_3(23);
+  dout(22) <= dout_3(22);
+  dout(21) <= dout_3(21);
+  dout(20) <= dout_3(20);
+  dout(19) <= dout_3(19);
+  dout(18) <= dout_3(18);
+  dout(17) <= dout_3(17);
+  dout(16) <= dout_3(16);
+  dout(15) <= dout_3(15);
+  dout(14) <= dout_3(14);
+  dout(13) <= dout_3(13);
+  dout(12) <= dout_3(12);
+  dout(11) <= dout_3(11);
+  dout(10) <= dout_3(10);
+  dout(9) <= dout_3(9);
+  dout(8) <= dout_3(8);
+  dout(7) <= dout_3(7);
+  dout(6) <= dout_3(6);
+  dout(5) <= dout_3(5);
+  dout(4) <= dout_3(4);
+  dout(3) <= dout_3(3);
+  dout(2) <= dout_3(2);
+  dout(1) <= dout_3(1);
+  dout(0) <= dout_3(0);
+  din_2(15) <= din(15);
+  din_2(14) <= din(14);
+  din_2(13) <= din(13);
+  din_2(12) <= din(12);
+  din_2(11) <= din(11);
+  din_2(10) <= din(10);
+  din_2(9) <= din(9);
+  din_2(8) <= din(8);
+  din_2(7) <= din(7);
+  din_2(6) <= din(6);
+  din_2(5) <= din(5);
+  din_2(4) <= din(4);
+  din_2(3) <= din(3);
+  din_2(2) <= din(2);
+  din_2(1) <= din(1);
+  din_2(0) <= din(0);
+  VCC_0 : VCC
+    port map (
+      P => NLW_VCC_P_UNCONNECTED
+    );
+  GND_1 : GND
+    port map (
+      G => NLW_GND_G_UNCONNECTED
+    );
+  BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP : RAMB36_EXP
+    generic map(
+      DOA_REG => 0,
+      DOB_REG => 0,
+      INIT_7E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      SRVAL_A => X"000000000",
+      SRVAL_B => X"000000000",
+      INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_10 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_11 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_12 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_13 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_14 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_15 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_16 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_17 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_18 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_19 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_20 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_21 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_22 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_23 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_24 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_25 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_26 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_27 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_28 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_29 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_30 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_31 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_32 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_33 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_34 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_35 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_36 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_37 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_38 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_39 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_40 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_41 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_42 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_43 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_44 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_45 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_46 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_47 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_48 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_49 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_50 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_51 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_52 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_53 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_54 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_55 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_56 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_57 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_58 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_59 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_60 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_61 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_62 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_63 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_64 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_65 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_66 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_67 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_68 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_69 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_70 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_71 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_72 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_73 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_74 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_75 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_76 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_77 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_78 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_79 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_FILE => "NONE",
+      RAM_EXTENSION_A => "NONE",
+      RAM_EXTENSION_B => "NONE",
+      READ_WIDTH_A => 4,
+      READ_WIDTH_B => 36,
+      SIM_COLLISION_CHECK => "ALL",
+      SIM_MODE => "SAFE",
+      INIT_A => X"000000000",
+      INIT_B => X"000000000",
+      WRITE_MODE_A => "READ_FIRST",
+      WRITE_MODE_B => "READ_FIRST",
+      WRITE_WIDTH_A => 4,
+      WRITE_WIDTH_B => 36,
+      INITP_0F => X"0000000000000000000000000000000000000000000000000000000000000000"
+    )
+    port map (
+      ENAU => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENAL => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENBU => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      ENBL => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      SSRAU => BU2_rd_data_count(0),
+      SSRAL => BU2_rd_data_count(0),
+      SSRBU => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      SSRBL => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      CLKAU => wr_clk,
+      CLKAL => wr_clk,
+      CLKBU => rd_clk,
+      CLKBL => rd_clk,
+      REGCLKAU => wr_clk,
+      REGCLKAL => wr_clk,
+      REGCLKBU => rd_clk,
+      REGCLKBL => rd_clk,
+      REGCEAU => BU2_rd_data_count(0),
+      REGCEAL => BU2_rd_data_count(0),
+      REGCEBU => BU2_rd_data_count(0),
+      REGCEBL => BU2_rd_data_count(0),
+      CASCADEINLATA => BU2_rd_data_count(0),
+      CASCADEINLATB => BU2_rd_data_count(0),
+      CASCADEINREGA => BU2_rd_data_count(0),
+      CASCADEINREGB => BU2_rd_data_count(0),
+      CASCADEOUTLATA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED
+,
+      CASCADEOUTLATB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED
+,
+      CASCADEOUTREGA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED
+,
+      CASCADEOUTREGB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED
+,
+      DIA(31) => BU2_rd_data_count(0),
+      DIA(30) => BU2_rd_data_count(0),
+      DIA(29) => BU2_rd_data_count(0),
+      DIA(28) => BU2_rd_data_count(0),
+      DIA(27) => BU2_rd_data_count(0),
+      DIA(26) => BU2_rd_data_count(0),
+      DIA(25) => BU2_rd_data_count(0),
+      DIA(24) => BU2_rd_data_count(0),
+      DIA(23) => BU2_rd_data_count(0),
+      DIA(22) => BU2_rd_data_count(0),
+      DIA(21) => BU2_rd_data_count(0),
+      DIA(20) => BU2_rd_data_count(0),
+      DIA(19) => BU2_rd_data_count(0),
+      DIA(18) => BU2_rd_data_count(0),
+      DIA(17) => BU2_rd_data_count(0),
+      DIA(16) => BU2_rd_data_count(0),
+      DIA(15) => BU2_rd_data_count(0),
+      DIA(14) => BU2_rd_data_count(0),
+      DIA(13) => BU2_rd_data_count(0),
+      DIA(12) => BU2_rd_data_count(0),
+      DIA(11) => BU2_rd_data_count(0),
+      DIA(10) => BU2_rd_data_count(0),
+      DIA(9) => BU2_rd_data_count(0),
+      DIA(8) => BU2_rd_data_count(0),
+      DIA(7) => BU2_rd_data_count(0),
+      DIA(6) => BU2_rd_data_count(0),
+      DIA(5) => BU2_rd_data_count(0),
+      DIA(4) => BU2_rd_data_count(0),
+      DIA(3) => din_2(15),
+      DIA(2) => din_2(14),
+      DIA(1) => din_2(13),
+      DIA(0) => din_2(12),
+      DIPA(3) => BU2_rd_data_count(0),
+      DIPA(2) => BU2_rd_data_count(0),
+      DIPA(1) => BU2_rd_data_count(0),
+      DIPA(0) => BU2_rd_data_count(0),
+      DIB(31) => BU2_rd_data_count(0),
+      DIB(30) => BU2_rd_data_count(0),
+      DIB(29) => BU2_rd_data_count(0),
+      DIB(28) => BU2_rd_data_count(0),
+      DIB(27) => BU2_rd_data_count(0),
+      DIB(26) => BU2_rd_data_count(0),
+      DIB(25) => BU2_rd_data_count(0),
+      DIB(24) => BU2_rd_data_count(0),
+      DIB(23) => BU2_rd_data_count(0),
+      DIB(22) => BU2_rd_data_count(0),
+      DIB(21) => BU2_rd_data_count(0),
+      DIB(20) => BU2_rd_data_count(0),
+      DIB(19) => BU2_rd_data_count(0),
+      DIB(18) => BU2_rd_data_count(0),
+      DIB(17) => BU2_rd_data_count(0),
+      DIB(16) => BU2_rd_data_count(0),
+      DIB(15) => BU2_rd_data_count(0),
+      DIB(14) => BU2_rd_data_count(0),
+      DIB(13) => BU2_rd_data_count(0),
+      DIB(12) => BU2_rd_data_count(0),
+      DIB(11) => BU2_rd_data_count(0),
+      DIB(10) => BU2_rd_data_count(0),
+      DIB(9) => BU2_rd_data_count(0),
+      DIB(8) => BU2_rd_data_count(0),
+      DIB(7) => BU2_rd_data_count(0),
+      DIB(6) => BU2_rd_data_count(0),
+      DIB(5) => BU2_rd_data_count(0),
+      DIB(4) => BU2_rd_data_count(0),
+      DIB(3) => BU2_rd_data_count(0),
+      DIB(2) => BU2_rd_data_count(0),
+      DIB(1) => BU2_rd_data_count(0),
+      DIB(0) => BU2_rd_data_count(0),
+      DIPB(3) => BU2_rd_data_count(0),
+      DIPB(2) => BU2_rd_data_count(0),
+      DIPB(1) => BU2_rd_data_count(0),
+      DIPB(0) => BU2_rd_data_count(0),
+      ADDRAL(15) => BU2_rd_data_count(0),
+      ADDRAL(14) => BU2_rd_data_count(0),
+      ADDRAL(13) => BU2_rd_data_count(0),
+      ADDRAL(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAL(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAL(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAL(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAL(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAL(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAL(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAL(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAL(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAL(1) => BU2_rd_data_count(0),
+      ADDRAL(0) => BU2_rd_data_count(0),
+      ADDRAU(14) => BU2_rd_data_count(0),
+      ADDRAU(13) => BU2_rd_data_count(0),
+      ADDRAU(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAU(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAU(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAU(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAU(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAU(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAU(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAU(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAU(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAU(1) => BU2_rd_data_count(0),
+      ADDRAU(0) => BU2_rd_data_count(0),
+      ADDRBL(15) => BU2_rd_data_count(0),
+      ADDRBL(14) => BU2_rd_data_count(0),
+      ADDRBL(13) => BU2_rd_data_count(0),
+      ADDRBL(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBL(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBL(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBL(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBL(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBL(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBL(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBL(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBL(4) => BU2_rd_data_count(0),
+      ADDRBL(3) => BU2_rd_data_count(0),
+      ADDRBL(2) => BU2_rd_data_count(0),
+      ADDRBL(1) => BU2_rd_data_count(0),
+      ADDRBL(0) => BU2_rd_data_count(0),
+      ADDRBU(14) => BU2_rd_data_count(0),
+      ADDRBU(13) => BU2_rd_data_count(0),
+      ADDRBU(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBU(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBU(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBU(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBU(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBU(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBU(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBU(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBU(4) => BU2_rd_data_count(0),
+      ADDRBU(3) => BU2_rd_data_count(0),
+      ADDRBU(2) => BU2_rd_data_count(0),
+      ADDRBU(1) => BU2_rd_data_count(0),
+      ADDRBU(0) => BU2_rd_data_count(0),
+      WEAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEBU(7) => BU2_rd_data_count(0),
+      WEBU(6) => BU2_rd_data_count(0),
+      WEBU(5) => BU2_rd_data_count(0),
+      WEBU(4) => BU2_rd_data_count(0),
+      WEBU(3) => BU2_rd_data_count(0),
+      WEBU(2) => BU2_rd_data_count(0),
+      WEBU(1) => BU2_rd_data_count(0),
+      WEBU(0) => BU2_rd_data_count(0),
+      WEBL(7) => BU2_rd_data_count(0),
+      WEBL(6) => BU2_rd_data_count(0),
+      WEBL(5) => BU2_rd_data_count(0),
+      WEBL(4) => BU2_rd_data_count(0),
+      WEBL(3) => BU2_rd_data_count(0),
+      WEBL(2) => BU2_rd_data_count(0),
+      WEBL(1) => BU2_rd_data_count(0),
+      WEBL(0) => BU2_rd_data_count(0),
+      DOA(31) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED,
+      DOA(30) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED,
+      DOA(29) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED,
+      DOA(28) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED,
+      DOA(27) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED,
+      DOA(26) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED,
+      DOA(25) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED,
+      DOA(24) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED,
+      DOA(23) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED,
+      DOA(22) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED,
+      DOA(21) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED,
+      DOA(20) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED,
+      DOA(19) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED,
+      DOA(18) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED,
+      DOA(17) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED,
+      DOA(16) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED,
+      DOA(15) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED,
+      DOA(14) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED,
+      DOA(13) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED,
+      DOA(12) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED,
+      DOA(11) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED,
+      DOA(10) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED,
+      DOA(9) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED,
+      DOA(8) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED,
+      DOA(7) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED,
+      DOA(6) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED,
+      DOA(5) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED,
+      DOA(4) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED,
+      DOA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED,
+      DOA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED,
+      DOA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED,
+      DOA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED,
+      DOPA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED,
+      DOPA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED,
+      DOPA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED,
+      DOPA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED,
+      DOB(31) => BU2_U0_grf_rf_mem_dout_mem(127),
+      DOB(30) => BU2_U0_grf_rf_mem_dout_mem(126),
+      DOB(29) => BU2_U0_grf_rf_mem_dout_mem(125),
+      DOB(28) => BU2_U0_grf_rf_mem_dout_mem(124),
+      DOB(27) => BU2_U0_grf_rf_mem_dout_mem(111),
+      DOB(26) => BU2_U0_grf_rf_mem_dout_mem(110),
+      DOB(25) => BU2_U0_grf_rf_mem_dout_mem(109),
+      DOB(24) => BU2_U0_grf_rf_mem_dout_mem(108),
+      DOB(23) => BU2_U0_grf_rf_mem_dout_mem(95),
+      DOB(22) => BU2_U0_grf_rf_mem_dout_mem(94),
+      DOB(21) => BU2_U0_grf_rf_mem_dout_mem(93),
+      DOB(20) => BU2_U0_grf_rf_mem_dout_mem(92),
+      DOB(19) => BU2_U0_grf_rf_mem_dout_mem(79),
+      DOB(18) => BU2_U0_grf_rf_mem_dout_mem(78),
+      DOB(17) => BU2_U0_grf_rf_mem_dout_mem(77),
+      DOB(16) => BU2_U0_grf_rf_mem_dout_mem(76),
+      DOB(15) => BU2_U0_grf_rf_mem_dout_mem(63),
+      DOB(14) => BU2_U0_grf_rf_mem_dout_mem(62),
+      DOB(13) => BU2_U0_grf_rf_mem_dout_mem(61),
+      DOB(12) => BU2_U0_grf_rf_mem_dout_mem(60),
+      DOB(11) => BU2_U0_grf_rf_mem_dout_mem(47),
+      DOB(10) => BU2_U0_grf_rf_mem_dout_mem(46),
+      DOB(9) => BU2_U0_grf_rf_mem_dout_mem(45),
+      DOB(8) => BU2_U0_grf_rf_mem_dout_mem(44),
+      DOB(7) => BU2_U0_grf_rf_mem_dout_mem(31),
+      DOB(6) => BU2_U0_grf_rf_mem_dout_mem(30),
+      DOB(5) => BU2_U0_grf_rf_mem_dout_mem(29),
+      DOB(4) => BU2_U0_grf_rf_mem_dout_mem(28),
+      DOB(3) => BU2_U0_grf_rf_mem_dout_mem(15),
+      DOB(2) => BU2_U0_grf_rf_mem_dout_mem(14),
+      DOB(1) => BU2_U0_grf_rf_mem_dout_mem(13),
+      DOB(0) => BU2_U0_grf_rf_mem_dout_mem(12),
+      DOPB(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED,
+      DOPB(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED,
+      DOPB(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED,
+      DOPB(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_3_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED
+    );
+  BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP : RAMB36_EXP
+    generic map(
+      DOA_REG => 0,
+      DOB_REG => 0,
+      INIT_7E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      SRVAL_A => X"000000000",
+      SRVAL_B => X"000000000",
+      INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_10 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_11 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_12 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_13 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_14 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_15 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_16 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_17 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_18 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_19 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_20 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_21 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_22 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_23 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_24 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_25 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_26 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_27 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_28 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_29 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_30 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_31 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_32 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_33 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_34 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_35 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_36 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_37 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_38 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_39 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_40 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_41 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_42 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_43 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_44 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_45 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_46 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_47 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_48 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_49 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_50 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_51 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_52 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_53 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_54 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_55 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_56 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_57 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_58 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_59 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_60 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_61 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_62 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_63 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_64 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_65 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_66 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_67 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_68 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_69 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_70 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_71 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_72 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_73 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_74 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_75 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_76 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_77 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_78 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_79 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_FILE => "NONE",
+      RAM_EXTENSION_A => "NONE",
+      RAM_EXTENSION_B => "NONE",
+      READ_WIDTH_A => 4,
+      READ_WIDTH_B => 36,
+      SIM_COLLISION_CHECK => "ALL",
+      SIM_MODE => "SAFE",
+      INIT_A => X"000000000",
+      INIT_B => X"000000000",
+      WRITE_MODE_A => "READ_FIRST",
+      WRITE_MODE_B => "READ_FIRST",
+      WRITE_WIDTH_A => 4,
+      WRITE_WIDTH_B => 36,
+      INITP_0F => X"0000000000000000000000000000000000000000000000000000000000000000"
+    )
+    port map (
+      ENAU => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENAL => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENBU => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      ENBL => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      SSRAU => BU2_rd_data_count(0),
+      SSRAL => BU2_rd_data_count(0),
+      SSRBU => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      SSRBL => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      CLKAU => wr_clk,
+      CLKAL => wr_clk,
+      CLKBU => rd_clk,
+      CLKBL => rd_clk,
+      REGCLKAU => wr_clk,
+      REGCLKAL => wr_clk,
+      REGCLKBU => rd_clk,
+      REGCLKBL => rd_clk,
+      REGCEAU => BU2_rd_data_count(0),
+      REGCEAL => BU2_rd_data_count(0),
+      REGCEBU => BU2_rd_data_count(0),
+      REGCEBL => BU2_rd_data_count(0),
+      CASCADEINLATA => BU2_rd_data_count(0),
+      CASCADEINLATB => BU2_rd_data_count(0),
+      CASCADEINREGA => BU2_rd_data_count(0),
+      CASCADEINREGB => BU2_rd_data_count(0),
+      CASCADEOUTLATA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED
+,
+      CASCADEOUTLATB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED
+,
+      CASCADEOUTREGA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED
+,
+      CASCADEOUTREGB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED
+,
+      DIA(31) => BU2_rd_data_count(0),
+      DIA(30) => BU2_rd_data_count(0),
+      DIA(29) => BU2_rd_data_count(0),
+      DIA(28) => BU2_rd_data_count(0),
+      DIA(27) => BU2_rd_data_count(0),
+      DIA(26) => BU2_rd_data_count(0),
+      DIA(25) => BU2_rd_data_count(0),
+      DIA(24) => BU2_rd_data_count(0),
+      DIA(23) => BU2_rd_data_count(0),
+      DIA(22) => BU2_rd_data_count(0),
+      DIA(21) => BU2_rd_data_count(0),
+      DIA(20) => BU2_rd_data_count(0),
+      DIA(19) => BU2_rd_data_count(0),
+      DIA(18) => BU2_rd_data_count(0),
+      DIA(17) => BU2_rd_data_count(0),
+      DIA(16) => BU2_rd_data_count(0),
+      DIA(15) => BU2_rd_data_count(0),
+      DIA(14) => BU2_rd_data_count(0),
+      DIA(13) => BU2_rd_data_count(0),
+      DIA(12) => BU2_rd_data_count(0),
+      DIA(11) => BU2_rd_data_count(0),
+      DIA(10) => BU2_rd_data_count(0),
+      DIA(9) => BU2_rd_data_count(0),
+      DIA(8) => BU2_rd_data_count(0),
+      DIA(7) => BU2_rd_data_count(0),
+      DIA(6) => BU2_rd_data_count(0),
+      DIA(5) => BU2_rd_data_count(0),
+      DIA(4) => BU2_rd_data_count(0),
+      DIA(3) => din_2(11),
+      DIA(2) => din_2(10),
+      DIA(1) => din_2(9),
+      DIA(0) => din_2(8),
+      DIPA(3) => BU2_rd_data_count(0),
+      DIPA(2) => BU2_rd_data_count(0),
+      DIPA(1) => BU2_rd_data_count(0),
+      DIPA(0) => BU2_rd_data_count(0),
+      DIB(31) => BU2_rd_data_count(0),
+      DIB(30) => BU2_rd_data_count(0),
+      DIB(29) => BU2_rd_data_count(0),
+      DIB(28) => BU2_rd_data_count(0),
+      DIB(27) => BU2_rd_data_count(0),
+      DIB(26) => BU2_rd_data_count(0),
+      DIB(25) => BU2_rd_data_count(0),
+      DIB(24) => BU2_rd_data_count(0),
+      DIB(23) => BU2_rd_data_count(0),
+      DIB(22) => BU2_rd_data_count(0),
+      DIB(21) => BU2_rd_data_count(0),
+      DIB(20) => BU2_rd_data_count(0),
+      DIB(19) => BU2_rd_data_count(0),
+      DIB(18) => BU2_rd_data_count(0),
+      DIB(17) => BU2_rd_data_count(0),
+      DIB(16) => BU2_rd_data_count(0),
+      DIB(15) => BU2_rd_data_count(0),
+      DIB(14) => BU2_rd_data_count(0),
+      DIB(13) => BU2_rd_data_count(0),
+      DIB(12) => BU2_rd_data_count(0),
+      DIB(11) => BU2_rd_data_count(0),
+      DIB(10) => BU2_rd_data_count(0),
+      DIB(9) => BU2_rd_data_count(0),
+      DIB(8) => BU2_rd_data_count(0),
+      DIB(7) => BU2_rd_data_count(0),
+      DIB(6) => BU2_rd_data_count(0),
+      DIB(5) => BU2_rd_data_count(0),
+      DIB(4) => BU2_rd_data_count(0),
+      DIB(3) => BU2_rd_data_count(0),
+      DIB(2) => BU2_rd_data_count(0),
+      DIB(1) => BU2_rd_data_count(0),
+      DIB(0) => BU2_rd_data_count(0),
+      DIPB(3) => BU2_rd_data_count(0),
+      DIPB(2) => BU2_rd_data_count(0),
+      DIPB(1) => BU2_rd_data_count(0),
+      DIPB(0) => BU2_rd_data_count(0),
+      ADDRAL(15) => BU2_rd_data_count(0),
+      ADDRAL(14) => BU2_rd_data_count(0),
+      ADDRAL(13) => BU2_rd_data_count(0),
+      ADDRAL(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAL(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAL(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAL(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAL(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAL(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAL(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAL(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAL(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAL(1) => BU2_rd_data_count(0),
+      ADDRAL(0) => BU2_rd_data_count(0),
+      ADDRAU(14) => BU2_rd_data_count(0),
+      ADDRAU(13) => BU2_rd_data_count(0),
+      ADDRAU(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAU(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAU(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAU(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAU(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAU(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAU(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAU(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAU(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAU(1) => BU2_rd_data_count(0),
+      ADDRAU(0) => BU2_rd_data_count(0),
+      ADDRBL(15) => BU2_rd_data_count(0),
+      ADDRBL(14) => BU2_rd_data_count(0),
+      ADDRBL(13) => BU2_rd_data_count(0),
+      ADDRBL(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBL(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBL(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBL(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBL(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBL(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBL(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBL(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBL(4) => BU2_rd_data_count(0),
+      ADDRBL(3) => BU2_rd_data_count(0),
+      ADDRBL(2) => BU2_rd_data_count(0),
+      ADDRBL(1) => BU2_rd_data_count(0),
+      ADDRBL(0) => BU2_rd_data_count(0),
+      ADDRBU(14) => BU2_rd_data_count(0),
+      ADDRBU(13) => BU2_rd_data_count(0),
+      ADDRBU(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBU(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBU(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBU(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBU(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBU(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBU(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBU(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBU(4) => BU2_rd_data_count(0),
+      ADDRBU(3) => BU2_rd_data_count(0),
+      ADDRBU(2) => BU2_rd_data_count(0),
+      ADDRBU(1) => BU2_rd_data_count(0),
+      ADDRBU(0) => BU2_rd_data_count(0),
+      WEAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEBU(7) => BU2_rd_data_count(0),
+      WEBU(6) => BU2_rd_data_count(0),
+      WEBU(5) => BU2_rd_data_count(0),
+      WEBU(4) => BU2_rd_data_count(0),
+      WEBU(3) => BU2_rd_data_count(0),
+      WEBU(2) => BU2_rd_data_count(0),
+      WEBU(1) => BU2_rd_data_count(0),
+      WEBU(0) => BU2_rd_data_count(0),
+      WEBL(7) => BU2_rd_data_count(0),
+      WEBL(6) => BU2_rd_data_count(0),
+      WEBL(5) => BU2_rd_data_count(0),
+      WEBL(4) => BU2_rd_data_count(0),
+      WEBL(3) => BU2_rd_data_count(0),
+      WEBL(2) => BU2_rd_data_count(0),
+      WEBL(1) => BU2_rd_data_count(0),
+      WEBL(0) => BU2_rd_data_count(0),
+      DOA(31) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED,
+      DOA(30) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED,
+      DOA(29) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED,
+      DOA(28) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED,
+      DOA(27) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED,
+      DOA(26) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED,
+      DOA(25) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED,
+      DOA(24) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED,
+      DOA(23) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED,
+      DOA(22) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED,
+      DOA(21) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED,
+      DOA(20) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED,
+      DOA(19) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED,
+      DOA(18) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED,
+      DOA(17) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED,
+      DOA(16) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED,
+      DOA(15) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED,
+      DOA(14) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED,
+      DOA(13) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED,
+      DOA(12) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED,
+      DOA(11) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED,
+      DOA(10) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED,
+      DOA(9) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED,
+      DOA(8) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED,
+      DOA(7) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED,
+      DOA(6) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED,
+      DOA(5) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED,
+      DOA(4) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED,
+      DOA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED,
+      DOA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED,
+      DOA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED,
+      DOA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED,
+      DOPA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED,
+      DOPA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED,
+      DOPA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED,
+      DOPA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED,
+      DOB(31) => BU2_U0_grf_rf_mem_dout_mem(123),
+      DOB(30) => BU2_U0_grf_rf_mem_dout_mem(122),
+      DOB(29) => BU2_U0_grf_rf_mem_dout_mem(121),
+      DOB(28) => BU2_U0_grf_rf_mem_dout_mem(120),
+      DOB(27) => BU2_U0_grf_rf_mem_dout_mem(107),
+      DOB(26) => BU2_U0_grf_rf_mem_dout_mem(106),
+      DOB(25) => BU2_U0_grf_rf_mem_dout_mem(105),
+      DOB(24) => BU2_U0_grf_rf_mem_dout_mem(104),
+      DOB(23) => BU2_U0_grf_rf_mem_dout_mem(91),
+      DOB(22) => BU2_U0_grf_rf_mem_dout_mem(90),
+      DOB(21) => BU2_U0_grf_rf_mem_dout_mem(89),
+      DOB(20) => BU2_U0_grf_rf_mem_dout_mem(88),
+      DOB(19) => BU2_U0_grf_rf_mem_dout_mem(75),
+      DOB(18) => BU2_U0_grf_rf_mem_dout_mem(74),
+      DOB(17) => BU2_U0_grf_rf_mem_dout_mem(73),
+      DOB(16) => BU2_U0_grf_rf_mem_dout_mem(72),
+      DOB(15) => BU2_U0_grf_rf_mem_dout_mem(59),
+      DOB(14) => BU2_U0_grf_rf_mem_dout_mem(58),
+      DOB(13) => BU2_U0_grf_rf_mem_dout_mem(57),
+      DOB(12) => BU2_U0_grf_rf_mem_dout_mem(56),
+      DOB(11) => BU2_U0_grf_rf_mem_dout_mem(43),
+      DOB(10) => BU2_U0_grf_rf_mem_dout_mem(42),
+      DOB(9) => BU2_U0_grf_rf_mem_dout_mem(41),
+      DOB(8) => BU2_U0_grf_rf_mem_dout_mem(40),
+      DOB(7) => BU2_U0_grf_rf_mem_dout_mem(27),
+      DOB(6) => BU2_U0_grf_rf_mem_dout_mem(26),
+      DOB(5) => BU2_U0_grf_rf_mem_dout_mem(25),
+      DOB(4) => BU2_U0_grf_rf_mem_dout_mem(24),
+      DOB(3) => BU2_U0_grf_rf_mem_dout_mem(11),
+      DOB(2) => BU2_U0_grf_rf_mem_dout_mem(10),
+      DOB(1) => BU2_U0_grf_rf_mem_dout_mem(9),
+      DOB(0) => BU2_U0_grf_rf_mem_dout_mem(8),
+      DOPB(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED,
+      DOPB(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED,
+      DOPB(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED,
+      DOPB(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_2_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED
+    );
+  BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP : RAMB36_EXP
+    generic map(
+      DOA_REG => 0,
+      DOB_REG => 0,
+      INIT_7E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      SRVAL_A => X"000000000",
+      SRVAL_B => X"000000000",
+      INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_10 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_11 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_12 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_13 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_14 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_15 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_16 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_17 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_18 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_19 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_20 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_21 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_22 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_23 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_24 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_25 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_26 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_27 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_28 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_29 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_30 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_31 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_32 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_33 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_34 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_35 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_36 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_37 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_38 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_39 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_40 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_41 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_42 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_43 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_44 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_45 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_46 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_47 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_48 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_49 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_50 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_51 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_52 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_53 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_54 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_55 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_56 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_57 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_58 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_59 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_60 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_61 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_62 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_63 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_64 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_65 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_66 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_67 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_68 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_69 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_70 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_71 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_72 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_73 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_74 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_75 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_76 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_77 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_78 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_79 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_FILE => "NONE",
+      RAM_EXTENSION_A => "NONE",
+      RAM_EXTENSION_B => "NONE",
+      READ_WIDTH_A => 4,
+      READ_WIDTH_B => 36,
+      SIM_COLLISION_CHECK => "ALL",
+      SIM_MODE => "SAFE",
+      INIT_A => X"000000000",
+      INIT_B => X"000000000",
+      WRITE_MODE_A => "READ_FIRST",
+      WRITE_MODE_B => "READ_FIRST",
+      WRITE_WIDTH_A => 4,
+      WRITE_WIDTH_B => 36,
+      INITP_0F => X"0000000000000000000000000000000000000000000000000000000000000000"
+    )
+    port map (
+      ENAU => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENAL => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENBU => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      ENBL => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      SSRAU => BU2_rd_data_count(0),
+      SSRAL => BU2_rd_data_count(0),
+      SSRBU => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      SSRBL => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      CLKAU => wr_clk,
+      CLKAL => wr_clk,
+      CLKBU => rd_clk,
+      CLKBL => rd_clk,
+      REGCLKAU => wr_clk,
+      REGCLKAL => wr_clk,
+      REGCLKBU => rd_clk,
+      REGCLKBL => rd_clk,
+      REGCEAU => BU2_rd_data_count(0),
+      REGCEAL => BU2_rd_data_count(0),
+      REGCEBU => BU2_rd_data_count(0),
+      REGCEBL => BU2_rd_data_count(0),
+      CASCADEINLATA => BU2_rd_data_count(0),
+      CASCADEINLATB => BU2_rd_data_count(0),
+      CASCADEINREGA => BU2_rd_data_count(0),
+      CASCADEINREGB => BU2_rd_data_count(0),
+      CASCADEOUTLATA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED
+,
+      CASCADEOUTLATB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED
+,
+      CASCADEOUTREGA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED
+,
+      CASCADEOUTREGB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED
+,
+      DIA(31) => BU2_rd_data_count(0),
+      DIA(30) => BU2_rd_data_count(0),
+      DIA(29) => BU2_rd_data_count(0),
+      DIA(28) => BU2_rd_data_count(0),
+      DIA(27) => BU2_rd_data_count(0),
+      DIA(26) => BU2_rd_data_count(0),
+      DIA(25) => BU2_rd_data_count(0),
+      DIA(24) => BU2_rd_data_count(0),
+      DIA(23) => BU2_rd_data_count(0),
+      DIA(22) => BU2_rd_data_count(0),
+      DIA(21) => BU2_rd_data_count(0),
+      DIA(20) => BU2_rd_data_count(0),
+      DIA(19) => BU2_rd_data_count(0),
+      DIA(18) => BU2_rd_data_count(0),
+      DIA(17) => BU2_rd_data_count(0),
+      DIA(16) => BU2_rd_data_count(0),
+      DIA(15) => BU2_rd_data_count(0),
+      DIA(14) => BU2_rd_data_count(0),
+      DIA(13) => BU2_rd_data_count(0),
+      DIA(12) => BU2_rd_data_count(0),
+      DIA(11) => BU2_rd_data_count(0),
+      DIA(10) => BU2_rd_data_count(0),
+      DIA(9) => BU2_rd_data_count(0),
+      DIA(8) => BU2_rd_data_count(0),
+      DIA(7) => BU2_rd_data_count(0),
+      DIA(6) => BU2_rd_data_count(0),
+      DIA(5) => BU2_rd_data_count(0),
+      DIA(4) => BU2_rd_data_count(0),
+      DIA(3) => din_2(7),
+      DIA(2) => din_2(6),
+      DIA(1) => din_2(5),
+      DIA(0) => din_2(4),
+      DIPA(3) => BU2_rd_data_count(0),
+      DIPA(2) => BU2_rd_data_count(0),
+      DIPA(1) => BU2_rd_data_count(0),
+      DIPA(0) => BU2_rd_data_count(0),
+      DIB(31) => BU2_rd_data_count(0),
+      DIB(30) => BU2_rd_data_count(0),
+      DIB(29) => BU2_rd_data_count(0),
+      DIB(28) => BU2_rd_data_count(0),
+      DIB(27) => BU2_rd_data_count(0),
+      DIB(26) => BU2_rd_data_count(0),
+      DIB(25) => BU2_rd_data_count(0),
+      DIB(24) => BU2_rd_data_count(0),
+      DIB(23) => BU2_rd_data_count(0),
+      DIB(22) => BU2_rd_data_count(0),
+      DIB(21) => BU2_rd_data_count(0),
+      DIB(20) => BU2_rd_data_count(0),
+      DIB(19) => BU2_rd_data_count(0),
+      DIB(18) => BU2_rd_data_count(0),
+      DIB(17) => BU2_rd_data_count(0),
+      DIB(16) => BU2_rd_data_count(0),
+      DIB(15) => BU2_rd_data_count(0),
+      DIB(14) => BU2_rd_data_count(0),
+      DIB(13) => BU2_rd_data_count(0),
+      DIB(12) => BU2_rd_data_count(0),
+      DIB(11) => BU2_rd_data_count(0),
+      DIB(10) => BU2_rd_data_count(0),
+      DIB(9) => BU2_rd_data_count(0),
+      DIB(8) => BU2_rd_data_count(0),
+      DIB(7) => BU2_rd_data_count(0),
+      DIB(6) => BU2_rd_data_count(0),
+      DIB(5) => BU2_rd_data_count(0),
+      DIB(4) => BU2_rd_data_count(0),
+      DIB(3) => BU2_rd_data_count(0),
+      DIB(2) => BU2_rd_data_count(0),
+      DIB(1) => BU2_rd_data_count(0),
+      DIB(0) => BU2_rd_data_count(0),
+      DIPB(3) => BU2_rd_data_count(0),
+      DIPB(2) => BU2_rd_data_count(0),
+      DIPB(1) => BU2_rd_data_count(0),
+      DIPB(0) => BU2_rd_data_count(0),
+      ADDRAL(15) => BU2_rd_data_count(0),
+      ADDRAL(14) => BU2_rd_data_count(0),
+      ADDRAL(13) => BU2_rd_data_count(0),
+      ADDRAL(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAL(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAL(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAL(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAL(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAL(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAL(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAL(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAL(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAL(1) => BU2_rd_data_count(0),
+      ADDRAL(0) => BU2_rd_data_count(0),
+      ADDRAU(14) => BU2_rd_data_count(0),
+      ADDRAU(13) => BU2_rd_data_count(0),
+      ADDRAU(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAU(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAU(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAU(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAU(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAU(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAU(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAU(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAU(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAU(1) => BU2_rd_data_count(0),
+      ADDRAU(0) => BU2_rd_data_count(0),
+      ADDRBL(15) => BU2_rd_data_count(0),
+      ADDRBL(14) => BU2_rd_data_count(0),
+      ADDRBL(13) => BU2_rd_data_count(0),
+      ADDRBL(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBL(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBL(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBL(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBL(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBL(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBL(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBL(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBL(4) => BU2_rd_data_count(0),
+      ADDRBL(3) => BU2_rd_data_count(0),
+      ADDRBL(2) => BU2_rd_data_count(0),
+      ADDRBL(1) => BU2_rd_data_count(0),
+      ADDRBL(0) => BU2_rd_data_count(0),
+      ADDRBU(14) => BU2_rd_data_count(0),
+      ADDRBU(13) => BU2_rd_data_count(0),
+      ADDRBU(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBU(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBU(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBU(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBU(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBU(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBU(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBU(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBU(4) => BU2_rd_data_count(0),
+      ADDRBU(3) => BU2_rd_data_count(0),
+      ADDRBU(2) => BU2_rd_data_count(0),
+      ADDRBU(1) => BU2_rd_data_count(0),
+      ADDRBU(0) => BU2_rd_data_count(0),
+      WEAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEBU(7) => BU2_rd_data_count(0),
+      WEBU(6) => BU2_rd_data_count(0),
+      WEBU(5) => BU2_rd_data_count(0),
+      WEBU(4) => BU2_rd_data_count(0),
+      WEBU(3) => BU2_rd_data_count(0),
+      WEBU(2) => BU2_rd_data_count(0),
+      WEBU(1) => BU2_rd_data_count(0),
+      WEBU(0) => BU2_rd_data_count(0),
+      WEBL(7) => BU2_rd_data_count(0),
+      WEBL(6) => BU2_rd_data_count(0),
+      WEBL(5) => BU2_rd_data_count(0),
+      WEBL(4) => BU2_rd_data_count(0),
+      WEBL(3) => BU2_rd_data_count(0),
+      WEBL(2) => BU2_rd_data_count(0),
+      WEBL(1) => BU2_rd_data_count(0),
+      WEBL(0) => BU2_rd_data_count(0),
+      DOA(31) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED,
+      DOA(30) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED,
+      DOA(29) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED,
+      DOA(28) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED,
+      DOA(27) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED,
+      DOA(26) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED,
+      DOA(25) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED,
+      DOA(24) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED,
+      DOA(23) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED,
+      DOA(22) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED,
+      DOA(21) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED,
+      DOA(20) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED,
+      DOA(19) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED,
+      DOA(18) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED,
+      DOA(17) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED,
+      DOA(16) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED,
+      DOA(15) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED,
+      DOA(14) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED,
+      DOA(13) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED,
+      DOA(12) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED,
+      DOA(11) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED,
+      DOA(10) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED,
+      DOA(9) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED,
+      DOA(8) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED,
+      DOA(7) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED,
+      DOA(6) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED,
+      DOA(5) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED,
+      DOA(4) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED,
+      DOA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED,
+      DOA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED,
+      DOA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED,
+      DOA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED,
+      DOPA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED,
+      DOPA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED,
+      DOPA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED,
+      DOPA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED,
+      DOB(31) => BU2_U0_grf_rf_mem_dout_mem(119),
+      DOB(30) => BU2_U0_grf_rf_mem_dout_mem(118),
+      DOB(29) => BU2_U0_grf_rf_mem_dout_mem(117),
+      DOB(28) => BU2_U0_grf_rf_mem_dout_mem(116),
+      DOB(27) => BU2_U0_grf_rf_mem_dout_mem(103),
+      DOB(26) => BU2_U0_grf_rf_mem_dout_mem(102),
+      DOB(25) => BU2_U0_grf_rf_mem_dout_mem(101),
+      DOB(24) => BU2_U0_grf_rf_mem_dout_mem(100),
+      DOB(23) => BU2_U0_grf_rf_mem_dout_mem(87),
+      DOB(22) => BU2_U0_grf_rf_mem_dout_mem(86),
+      DOB(21) => BU2_U0_grf_rf_mem_dout_mem(85),
+      DOB(20) => BU2_U0_grf_rf_mem_dout_mem(84),
+      DOB(19) => BU2_U0_grf_rf_mem_dout_mem(71),
+      DOB(18) => BU2_U0_grf_rf_mem_dout_mem(70),
+      DOB(17) => BU2_U0_grf_rf_mem_dout_mem(69),
+      DOB(16) => BU2_U0_grf_rf_mem_dout_mem(68),
+      DOB(15) => BU2_U0_grf_rf_mem_dout_mem(55),
+      DOB(14) => BU2_U0_grf_rf_mem_dout_mem(54),
+      DOB(13) => BU2_U0_grf_rf_mem_dout_mem(53),
+      DOB(12) => BU2_U0_grf_rf_mem_dout_mem(52),
+      DOB(11) => BU2_U0_grf_rf_mem_dout_mem(39),
+      DOB(10) => BU2_U0_grf_rf_mem_dout_mem(38),
+      DOB(9) => BU2_U0_grf_rf_mem_dout_mem(37),
+      DOB(8) => BU2_U0_grf_rf_mem_dout_mem(36),
+      DOB(7) => BU2_U0_grf_rf_mem_dout_mem(23),
+      DOB(6) => BU2_U0_grf_rf_mem_dout_mem(22),
+      DOB(5) => BU2_U0_grf_rf_mem_dout_mem(21),
+      DOB(4) => BU2_U0_grf_rf_mem_dout_mem(20),
+      DOB(3) => BU2_U0_grf_rf_mem_dout_mem(7),
+      DOB(2) => BU2_U0_grf_rf_mem_dout_mem(6),
+      DOB(1) => BU2_U0_grf_rf_mem_dout_mem(5),
+      DOB(0) => BU2_U0_grf_rf_mem_dout_mem(4),
+      DOPB(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED,
+      DOPB(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED,
+      DOPB(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED,
+      DOPB(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_1_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED
+    );
+  BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP : RAMB36_EXP
+    generic map(
+      DOA_REG => 0,
+      DOB_REG => 0,
+      INIT_7E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      SRVAL_A => X"000000000",
+      SRVAL_B => X"000000000",
+      INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_05 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_06 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_07 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_08 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_09 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_0F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_10 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_11 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_12 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_13 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_14 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_15 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_16 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_17 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_18 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_19 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_1F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_20 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_21 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_22 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_23 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_24 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_25 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_26 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_27 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_28 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_29 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_2F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_30 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_31 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_32 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_33 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_34 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_35 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_36 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_37 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_38 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_39 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_3F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_40 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_41 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_42 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_43 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_44 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_45 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_46 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_47 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_48 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_49 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_4F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_50 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_51 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_52 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_53 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_54 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_55 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_56 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_57 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_58 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_59 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_5F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_60 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_61 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_62 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_63 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_64 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_65 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_66 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_67 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_68 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_69 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_6F => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_70 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_71 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_72 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_73 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_74 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_75 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_76 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_77 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_78 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_79 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7A => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7B => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7C => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_7D => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INITP_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_FILE => "NONE",
+      RAM_EXTENSION_A => "NONE",
+      RAM_EXTENSION_B => "NONE",
+      READ_WIDTH_A => 4,
+      READ_WIDTH_B => 36,
+      SIM_COLLISION_CHECK => "ALL",
+      SIM_MODE => "SAFE",
+      INIT_A => X"000000000",
+      INIT_B => X"000000000",
+      WRITE_MODE_A => "READ_FIRST",
+      WRITE_MODE_B => "READ_FIRST",
+      WRITE_WIDTH_A => 4,
+      WRITE_WIDTH_B => 36,
+      INITP_0F => X"0000000000000000000000000000000000000000000000000000000000000000"
+    )
+    port map (
+      ENAU => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENAL => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      ENBU => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      ENBL => BU2_U0_grf_rf_mem_tmp_ram_rd_en,
+      SSRAU => BU2_rd_data_count(0),
+      SSRAL => BU2_rd_data_count(0),
+      SSRBU => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      SSRBL => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      CLKAU => wr_clk,
+      CLKAL => wr_clk,
+      CLKBU => rd_clk,
+      CLKBL => rd_clk,
+      REGCLKAU => wr_clk,
+      REGCLKAL => wr_clk,
+      REGCLKBU => rd_clk,
+      REGCLKBL => rd_clk,
+      REGCEAU => BU2_rd_data_count(0),
+      REGCEAL => BU2_rd_data_count(0),
+      REGCEBU => BU2_rd_data_count(0),
+      REGCEBL => BU2_rd_data_count(0),
+      CASCADEINLATA => BU2_rd_data_count(0),
+      CASCADEINLATB => BU2_rd_data_count(0),
+      CASCADEINREGA => BU2_rd_data_count(0),
+      CASCADEINREGB => BU2_rd_data_count(0),
+      CASCADEOUTLATA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATA_UNCONNECTED
+,
+      CASCADEOUTLATB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTLATB_UNCONNECTED
+,
+      CASCADEOUTREGA => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGA_UNCONNECTED
+,
+      CASCADEOUTREGB => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_CASCADEOUTREGB_UNCONNECTED
+,
+      DIA(31) => BU2_rd_data_count(0),
+      DIA(30) => BU2_rd_data_count(0),
+      DIA(29) => BU2_rd_data_count(0),
+      DIA(28) => BU2_rd_data_count(0),
+      DIA(27) => BU2_rd_data_count(0),
+      DIA(26) => BU2_rd_data_count(0),
+      DIA(25) => BU2_rd_data_count(0),
+      DIA(24) => BU2_rd_data_count(0),
+      DIA(23) => BU2_rd_data_count(0),
+      DIA(22) => BU2_rd_data_count(0),
+      DIA(21) => BU2_rd_data_count(0),
+      DIA(20) => BU2_rd_data_count(0),
+      DIA(19) => BU2_rd_data_count(0),
+      DIA(18) => BU2_rd_data_count(0),
+      DIA(17) => BU2_rd_data_count(0),
+      DIA(16) => BU2_rd_data_count(0),
+      DIA(15) => BU2_rd_data_count(0),
+      DIA(14) => BU2_rd_data_count(0),
+      DIA(13) => BU2_rd_data_count(0),
+      DIA(12) => BU2_rd_data_count(0),
+      DIA(11) => BU2_rd_data_count(0),
+      DIA(10) => BU2_rd_data_count(0),
+      DIA(9) => BU2_rd_data_count(0),
+      DIA(8) => BU2_rd_data_count(0),
+      DIA(7) => BU2_rd_data_count(0),
+      DIA(6) => BU2_rd_data_count(0),
+      DIA(5) => BU2_rd_data_count(0),
+      DIA(4) => BU2_rd_data_count(0),
+      DIA(3) => din_2(3),
+      DIA(2) => din_2(2),
+      DIA(1) => din_2(1),
+      DIA(0) => din_2(0),
+      DIPA(3) => BU2_rd_data_count(0),
+      DIPA(2) => BU2_rd_data_count(0),
+      DIPA(1) => BU2_rd_data_count(0),
+      DIPA(0) => BU2_rd_data_count(0),
+      DIB(31) => BU2_rd_data_count(0),
+      DIB(30) => BU2_rd_data_count(0),
+      DIB(29) => BU2_rd_data_count(0),
+      DIB(28) => BU2_rd_data_count(0),
+      DIB(27) => BU2_rd_data_count(0),
+      DIB(26) => BU2_rd_data_count(0),
+      DIB(25) => BU2_rd_data_count(0),
+      DIB(24) => BU2_rd_data_count(0),
+      DIB(23) => BU2_rd_data_count(0),
+      DIB(22) => BU2_rd_data_count(0),
+      DIB(21) => BU2_rd_data_count(0),
+      DIB(20) => BU2_rd_data_count(0),
+      DIB(19) => BU2_rd_data_count(0),
+      DIB(18) => BU2_rd_data_count(0),
+      DIB(17) => BU2_rd_data_count(0),
+      DIB(16) => BU2_rd_data_count(0),
+      DIB(15) => BU2_rd_data_count(0),
+      DIB(14) => BU2_rd_data_count(0),
+      DIB(13) => BU2_rd_data_count(0),
+      DIB(12) => BU2_rd_data_count(0),
+      DIB(11) => BU2_rd_data_count(0),
+      DIB(10) => BU2_rd_data_count(0),
+      DIB(9) => BU2_rd_data_count(0),
+      DIB(8) => BU2_rd_data_count(0),
+      DIB(7) => BU2_rd_data_count(0),
+      DIB(6) => BU2_rd_data_count(0),
+      DIB(5) => BU2_rd_data_count(0),
+      DIB(4) => BU2_rd_data_count(0),
+      DIB(3) => BU2_rd_data_count(0),
+      DIB(2) => BU2_rd_data_count(0),
+      DIB(1) => BU2_rd_data_count(0),
+      DIB(0) => BU2_rd_data_count(0),
+      DIPB(3) => BU2_rd_data_count(0),
+      DIPB(2) => BU2_rd_data_count(0),
+      DIPB(1) => BU2_rd_data_count(0),
+      DIPB(0) => BU2_rd_data_count(0),
+      ADDRAL(15) => BU2_rd_data_count(0),
+      ADDRAL(14) => BU2_rd_data_count(0),
+      ADDRAL(13) => BU2_rd_data_count(0),
+      ADDRAL(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAL(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAL(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAL(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAL(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAL(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAL(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAL(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAL(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAL(1) => BU2_rd_data_count(0),
+      ADDRAL(0) => BU2_rd_data_count(0),
+      ADDRAU(14) => BU2_rd_data_count(0),
+      ADDRAU(13) => BU2_rd_data_count(0),
+      ADDRAU(12) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      ADDRAU(11) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      ADDRAU(10) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      ADDRAU(9) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      ADDRAU(8) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      ADDRAU(7) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      ADDRAU(6) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      ADDRAU(5) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      ADDRAU(4) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      ADDRAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      ADDRAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      ADDRAU(1) => BU2_rd_data_count(0),
+      ADDRAU(0) => BU2_rd_data_count(0),
+      ADDRBL(15) => BU2_rd_data_count(0),
+      ADDRBL(14) => BU2_rd_data_count(0),
+      ADDRBL(13) => BU2_rd_data_count(0),
+      ADDRBL(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBL(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBL(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBL(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBL(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBL(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBL(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBL(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBL(4) => BU2_rd_data_count(0),
+      ADDRBL(3) => BU2_rd_data_count(0),
+      ADDRBL(2) => BU2_rd_data_count(0),
+      ADDRBL(1) => BU2_rd_data_count(0),
+      ADDRBL(0) => BU2_rd_data_count(0),
+      ADDRBU(14) => BU2_rd_data_count(0),
+      ADDRBU(13) => BU2_rd_data_count(0),
+      ADDRBU(12) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      ADDRBU(11) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      ADDRBU(10) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      ADDRBU(9) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      ADDRBU(8) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      ADDRBU(7) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      ADDRBU(6) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      ADDRBU(5) => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      ADDRBU(4) => BU2_rd_data_count(0),
+      ADDRBU(3) => BU2_rd_data_count(0),
+      ADDRBU(2) => BU2_rd_data_count(0),
+      ADDRBU(1) => BU2_rd_data_count(0),
+      ADDRBU(0) => BU2_rd_data_count(0),
+      WEAU(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAU(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(3) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(2) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(1) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEAL(0) => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      WEBU(7) => BU2_rd_data_count(0),
+      WEBU(6) => BU2_rd_data_count(0),
+      WEBU(5) => BU2_rd_data_count(0),
+      WEBU(4) => BU2_rd_data_count(0),
+      WEBU(3) => BU2_rd_data_count(0),
+      WEBU(2) => BU2_rd_data_count(0),
+      WEBU(1) => BU2_rd_data_count(0),
+      WEBU(0) => BU2_rd_data_count(0),
+      WEBL(7) => BU2_rd_data_count(0),
+      WEBL(6) => BU2_rd_data_count(0),
+      WEBL(5) => BU2_rd_data_count(0),
+      WEBL(4) => BU2_rd_data_count(0),
+      WEBL(3) => BU2_rd_data_count(0),
+      WEBL(2) => BU2_rd_data_count(0),
+      WEBL(1) => BU2_rd_data_count(0),
+      WEBL(0) => BU2_rd_data_count(0),
+      DOA(31) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_31_UNCONNECTED,
+      DOA(30) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_30_UNCONNECTED,
+      DOA(29) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_29_UNCONNECTED,
+      DOA(28) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_28_UNCONNECTED,
+      DOA(27) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_27_UNCONNECTED,
+      DOA(26) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_26_UNCONNECTED,
+      DOA(25) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_25_UNCONNECTED,
+      DOA(24) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_24_UNCONNECTED,
+      DOA(23) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_23_UNCONNECTED,
+      DOA(22) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_22_UNCONNECTED,
+      DOA(21) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_21_UNCONNECTED,
+      DOA(20) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_20_UNCONNECTED,
+      DOA(19) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_19_UNCONNECTED,
+      DOA(18) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_18_UNCONNECTED,
+      DOA(17) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_17_UNCONNECTED,
+      DOA(16) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_16_UNCONNECTED,
+      DOA(15) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_15_UNCONNECTED,
+      DOA(14) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_14_UNCONNECTED,
+      DOA(13) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_13_UNCONNECTED,
+      DOA(12) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_12_UNCONNECTED,
+      DOA(11) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_11_UNCONNECTED,
+      DOA(10) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_10_UNCONNECTED,
+      DOA(9) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_9_UNCONNECTED,
+      DOA(8) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_8_UNCONNECTED,
+      DOA(7) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_7_UNCONNECTED,
+      DOA(6) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_6_UNCONNECTED,
+      DOA(5) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_5_UNCONNECTED,
+      DOA(4) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_4_UNCONNECTED,
+      DOA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_3_UNCONNECTED,
+      DOA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_2_UNCONNECTED,
+      DOA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_1_UNCONNECTED,
+      DOA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOA_0_UNCONNECTED,
+      DOPA(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_3_UNCONNECTED,
+      DOPA(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_2_UNCONNECTED,
+      DOPA(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_1_UNCONNECTED,
+      DOPA(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPA_0_UNCONNECTED,
+      DOB(31) => BU2_U0_grf_rf_mem_dout_mem(115),
+      DOB(30) => BU2_U0_grf_rf_mem_dout_mem(114),
+      DOB(29) => BU2_U0_grf_rf_mem_dout_mem(113),
+      DOB(28) => BU2_U0_grf_rf_mem_dout_mem(112),
+      DOB(27) => BU2_U0_grf_rf_mem_dout_mem(99),
+      DOB(26) => BU2_U0_grf_rf_mem_dout_mem(98),
+      DOB(25) => BU2_U0_grf_rf_mem_dout_mem(97),
+      DOB(24) => BU2_U0_grf_rf_mem_dout_mem(96),
+      DOB(23) => BU2_U0_grf_rf_mem_dout_mem(83),
+      DOB(22) => BU2_U0_grf_rf_mem_dout_mem(82),
+      DOB(21) => BU2_U0_grf_rf_mem_dout_mem(81),
+      DOB(20) => BU2_U0_grf_rf_mem_dout_mem(80),
+      DOB(19) => BU2_U0_grf_rf_mem_dout_mem(67),
+      DOB(18) => BU2_U0_grf_rf_mem_dout_mem(66),
+      DOB(17) => BU2_U0_grf_rf_mem_dout_mem(65),
+      DOB(16) => BU2_U0_grf_rf_mem_dout_mem(64),
+      DOB(15) => BU2_U0_grf_rf_mem_dout_mem(51),
+      DOB(14) => BU2_U0_grf_rf_mem_dout_mem(50),
+      DOB(13) => BU2_U0_grf_rf_mem_dout_mem(49),
+      DOB(12) => BU2_U0_grf_rf_mem_dout_mem(48),
+      DOB(11) => BU2_U0_grf_rf_mem_dout_mem(35),
+      DOB(10) => BU2_U0_grf_rf_mem_dout_mem(34),
+      DOB(9) => BU2_U0_grf_rf_mem_dout_mem(33),
+      DOB(8) => BU2_U0_grf_rf_mem_dout_mem(32),
+      DOB(7) => BU2_U0_grf_rf_mem_dout_mem(19),
+      DOB(6) => BU2_U0_grf_rf_mem_dout_mem(18),
+      DOB(5) => BU2_U0_grf_rf_mem_dout_mem(17),
+      DOB(4) => BU2_U0_grf_rf_mem_dout_mem(16),
+      DOB(3) => BU2_U0_grf_rf_mem_dout_mem(3),
+      DOB(2) => BU2_U0_grf_rf_mem_dout_mem(2),
+      DOB(1) => BU2_U0_grf_rf_mem_dout_mem(1),
+      DOB(0) => BU2_U0_grf_rf_mem_dout_mem(0),
+      DOPB(3) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_3_UNCONNECTED,
+      DOPB(2) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_2_UNCONNECTED,
+      DOPB(1) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_1_UNCONNECTED,
+      DOPB(0) => 
+NLW_BU2_U0_grf_rf_mem_gbm_gbmg_gbmga_ngecc_bmg_blk_mem_generator_valid_cstr_ramloop_0_ram_r_v5_noinit_ram_SDP_SINGLE_PRIM36_TDP_DOPB_0_UNCONNECTED
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_1_INV_0 : INV
+    port map (
+      I => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(0),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_2_INV_0 : INV
+    port map (
+      I => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(1),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_3_INV_0 : INV
+    port map (
+      I => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_bin_xor0004_Result1 : LUT6
+    generic map(
+      INIT => X"6996966996696996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(9),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(8),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(7),
+      I3 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(10),
+      I4 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(5),
+      I5 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(6),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0004
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_bin_xor0004_Result1 : LUT6
+    generic map(
+      INIT => X"6996966996696996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(6),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(7),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(5),
+      I3 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(4),
+      I4 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(3),
+      I5 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(2),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0004
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_bin_xor0003_Result1 : LUT5
+    generic map(
+      INIT => X"96696996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(6),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(7),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(5),
+      I3 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(4),
+      I4 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(3),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0003
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_bin_xor0003_Result1 : LUT5
+    generic map(
+      INIT => X"96696996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(9),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(8),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(7),
+      I3 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(10),
+      I4 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(6),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0003
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_bin_xor0001_Result1 : LUT3
+    generic map(
+      INIT => X"96"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(6),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(7),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(5),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0001
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_bin_xor0001_Result1 : LUT3
+    generic map(
+      INIT => X"96"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(9),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(10),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(8),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0001
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_11_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(10),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(7),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(11)
+    );
+  BU2_U0_grf_rf_mem_tmp_ram_rd_en1 : LUT5
+    generic map(
+      INIT => X"FFFF2333"
+    )
+    port map (
+      I0 => rd_en,
+      I1 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_157,
+      I2 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1),
+      I3 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0),
+      I4 => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      O => BU2_U0_grf_rf_mem_tmp_ram_rd_en
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_bin_xor0006_Result1 : LUT5
+    generic map(
+      INIT => X"96696996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(3),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(4),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(5),
+      I3 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(6),
+      I4 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0002,
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0006
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_bin_xor0005_Result1 : LUT4
+    generic map(
+      INIT => X"6996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0002,
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(5),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(6),
+      I3 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(4),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0005
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or000046 : LUT6
+    generic map(
+      INIT => X"0000000000009099"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(3),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count(0),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(8),
+      I3 => BU2_U0_grf_rf_gl0_rd_rpntr_count(5),
+      I4 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_157,
+      I5 => BU2_N24,
+      O => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or000046_589
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or000046_SW0 : LUT5
+    generic map(
+      INIT => X"7D3C3C3C"
+    )
+    port map (
+      I0 => rd_en,
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(4),
+      I2 => BU2_U0_grf_rf_gl0_rd_rpntr_count(1),
+      I3 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0),
+      I4 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1),
+      O => BU2_N24
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_10_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(9),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(6),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(10)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_9_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(8),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(5),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_8_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(7),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(4),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_7_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(6),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(3),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_6_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(5),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_5_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(4),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(1),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut_4_Q : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(3),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(0),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(4)
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000150 : LUT6
+    generic map(
+      INIT => X"0000A52100000000"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(10),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(8),
+      I2 => BU2_U0_grf_rf_gl0_rd_rpntr_count(7),
+      I3 => BU2_U0_grf_rf_gl0_rd_rpntr_count(5),
+      I4 => BU2_N22,
+      I5 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000128_587,
+      O => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000150_590
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000150_SW0 : LUT4
+    generic map(
+      INIT => X"6FF6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(4),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(7),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(6),
+      I3 => BU2_U0_grf_rf_gl0_rd_rpntr_count(3),
+      O => BU2_N22
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000304 : LUT5
+    generic map(
+      INIT => X"00008421"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(8),
+      I3 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(7),
+      I4 => BU2_N20,
+      O => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000304_591
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000304_SW0 : LUT6
+    generic map(
+      INIT => X"6FF6FFFFFFFF6FF6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(3),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(4),
+      I3 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      I4 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(6),
+      I5 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      O => BU2_N20
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_bin_xor0006_Result1 : LUT5
+    generic map(
+      INIT => X"96696996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(0),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(1),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(2),
+      I3 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(3),
+      I4 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0002,
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0006
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_bin_xor0002_Result1 : LUT4
+    generic map(
+      INIT => X"6996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(6),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(7),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(5),
+      I3 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(4),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0002
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_bin_xor0005_Result1 : LUT4
+    generic map(
+      INIT => X"6996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0002,
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(3),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(2),
+      I3 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(1),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0005
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_bin_xor0002_Result1 : LUT4
+    generic map(
+      INIT => X"6996"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(9),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(8),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(7),
+      I3 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(10),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0002
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_10_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(10),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_10_rt_426
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_7_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(7),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_7_rt_293
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_0_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(0),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_0_rt_445
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_1_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(1),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_1_rt_444
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_2_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(2),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_2_rt_442
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_3_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(3),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_3_rt_440
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_4_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(4),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_4_rt_438
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_5_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(5),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_5_rt_436
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_6_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(6),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_6_rt_434
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_7_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(7),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_7_rt_432
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_8_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(8),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_8_rt_430
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_9_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(9),
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_9_rt_428
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_0_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(0),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_0_rt_306
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_1_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(1),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_1_rt_305
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_2_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(2),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_2_rt_303
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_3_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(3),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_3_rt_301
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_4_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(4),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_4_rt_299
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_5_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(5),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_5_rt_297
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_6_rt : LUT1
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(6),
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_6_rt_295
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_bin_xor0000_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(6),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(7),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0000
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_bin_xor0000_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(9),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(10),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0000
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000330 : LUT4
+    generic map(
+      INIT => X"EAC0"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000219_588,
+      I1 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or000046_589,
+      I2 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000150_590,
+      I3 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000304_591,
+      O => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000219 : LUT6
+    generic map(
+      INIT => X"8040201008040201"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(5),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(9),
+      I2 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(10),
+      I3 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      I4 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      I5 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      O => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000219_588
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000128 : LUT4
+    generic map(
+      INIT => X"9009"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count(6),
+      I1 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(9),
+      I2 => BU2_U0_grf_rf_gl0_rd_rpntr_count(2),
+      I3 => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(5),
+      O => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000128_587
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_i_or00001 : LUT4
+    generic map(
+      INIT => X"FF20"
+    )
+    port map (
+      I0 => wr_en,
+      I1 => BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_fb_i_160,
+      I2 => BU2_U0_grf_rf_gl0_wr_gwas_wsts_comp2,
+      I3 => BU2_U0_grf_rf_gl0_wr_gwas_wsts_comp1,
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_i_or0000
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1_0_and00001 : LUT2
+    generic map(
+      INIT => X"1"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(1),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(0),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1_0_and00001 : LUT2
+    generic map(
+      INIT => X"1"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(1),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count(0),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1_1_and00001 : LUT3
+    generic map(
+      INIT => X"09"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(0),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(3),
+      I2 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1_1_and00001 : LUT3
+    generic map(
+      INIT => X"09"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(0),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count(3),
+      I2 => BU2_U0_grf_rf_gl0_wr_wpntr_count(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(1)
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_RAM_RD_EN_FWFT1 : LUT4
+    generic map(
+      INIT => X"5515"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_157,
+      I1 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0),
+      I2 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1),
+      I3 => rd_en,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1_2_and00001 : LUT4
+    generic map(
+      INIT => X"9009"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(2),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(5),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(1),
+      I3 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(4),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1_2_and00001 : LUT4
+    generic map(
+      INIT => X"9009"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(2),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count(5),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(1),
+      I3 => BU2_U0_grf_rf_gl0_wr_wpntr_count(4),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_ram_wr_en_i1 : LUT2
+    generic map(
+      INIT => X"2"
+    )
+    port map (
+      I0 => wr_en,
+      I1 => BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_fb_i_160,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1_3_and00001 : LUT4
+    generic map(
+      INIT => X"9009"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(4),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(7),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(3),
+      I3 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(6),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1_3_and00001 : LUT4
+    generic map(
+      INIT => X"9009"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(4),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count(7),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(3),
+      I3 => BU2_U0_grf_rf_gl0_wr_wpntr_count(6),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1_4_and00001 : LUT4
+    generic map(
+      INIT => X"9009"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(6),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(9),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(5),
+      I3 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(8),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1_4_and00001 : LUT4
+    generic map(
+      INIT => X"9009"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(6),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count(9),
+      I2 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(5),
+      I3 => BU2_U0_grf_rf_gl0_wr_wpntr_count(8),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1_5_not00001 : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(10),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(7),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1_5_not00001 : LUT2
+    generic map(
+      INIT => X"9"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count(10),
+      I1 => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(7),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux000328 : LUT4
+    generic map(
+      INIT => X"8000"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(6),
+      I1 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(5),
+      I2 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux00038_585,
+      I3 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux000325_586,
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux0003
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux000325 : LUT5
+    generic map(
+      INIT => X"00008000"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(2),
+      I1 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(1),
+      I2 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(4),
+      I3 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(3),
+      I4 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_wr_rst_d1_372,
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux000325_586
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux00038 : LUT5
+    generic map(
+      INIT => X"80000000"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(8),
+      I1 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(7),
+      I2 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(11),
+      I3 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(10),
+      I4 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(9),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux00038_585
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_RAM_REGOUT_EN1 : LUT3
+    generic map(
+      INIT => X"A2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1),
+      I1 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0),
+      I2 => rd_en,
+      O => BU2_U0_grf_rf_ram_regout_en
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_not00011 : LUT2
+    generic map(
+      INIT => X"B"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_wr_rst_d1_372,
+      I1 => BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_fb_i_160,
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_not0001
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_i_mux00001 : LUT4
+    generic map(
+      INIT => X"8E8A"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_fb_316,
+      I1 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0),
+      I2 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1),
+      I3 => rd_en,
+      O => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_i_mux0000
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001_0_1 : LUT4
+    generic map(
+      INIT => X"08FF"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1),
+      I1 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0),
+      I2 => rd_en,
+      I3 => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_157,
+      O => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001(0)
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001_1_1 : LUT3
+    generic map(
+      INIT => X"F2"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0),
+      I1 => rd_en,
+      I2 => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1),
+      O => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001(1)
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_gc_xor0000_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0000
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_gc_xor0001_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0001
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_gc_xor0002_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0002
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_gc_xor0003_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0003
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_gc_xor0004_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0004
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_gc_xor0005_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0005
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_rd_pntr_gc_xor0006_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1),
+      I1 => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0),
+      O => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0006
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0000_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0000
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0001_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0001
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0002_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0002
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0003_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0003
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0004_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0004
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0005_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0005
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0006_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0006
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0007_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0007
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0008_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0008
+    );
+  BU2_U0_grf_rf_gcx_clkx_Mxor_wr_pntr_gc_xor0009_Result1 : LUT2
+    generic map(
+      INIT => X"6"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1),
+      I1 => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0),
+      O => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0009
+    );
+  BU2_U0_grf_rf_rstblk_rd_rst_comb1 : LUT2
+    generic map(
+      INIT => X"4"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_rstblk_rd_rst_asreg_d2_162,
+      I1 => BU2_U0_grf_rf_rstblk_rd_rst_asreg_165,
+      O => BU2_U0_grf_rf_rstblk_rd_rst_comb
+    );
+  BU2_U0_grf_rf_rstblk_wr_rst_comb1 : LUT2
+    generic map(
+      INIT => X"4"
+    )
+    port map (
+      I0 => BU2_U0_grf_rf_rstblk_wr_rst_asreg_d2_164,
+      I1 => BU2_U0_grf_rf_rstblk_wr_rst_asreg_166,
+      O => BU2_U0_grf_rf_rstblk_wr_rst_comb
+    );
+  BU2_U0_grf_rf_mem_dout_i_0 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(0),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(112)
+    );
+  BU2_U0_grf_rf_mem_dout_i_1 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(1),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(113)
+    );
+  BU2_U0_grf_rf_mem_dout_i_2 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(2),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(114)
+    );
+  BU2_U0_grf_rf_mem_dout_i_3 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(3),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(115)
+    );
+  BU2_U0_grf_rf_mem_dout_i_4 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(4),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(116)
+    );
+  BU2_U0_grf_rf_mem_dout_i_5 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(5),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(117)
+    );
+  BU2_U0_grf_rf_mem_dout_i_6 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(6),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(118)
+    );
+  BU2_U0_grf_rf_mem_dout_i_7 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(7),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(119)
+    );
+  BU2_U0_grf_rf_mem_dout_i_8 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(8),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(120)
+    );
+  BU2_U0_grf_rf_mem_dout_i_9 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(9),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(121)
+    );
+  BU2_U0_grf_rf_mem_dout_i_10 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(10),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(122)
+    );
+  BU2_U0_grf_rf_mem_dout_i_11 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(11),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(123)
+    );
+  BU2_U0_grf_rf_mem_dout_i_12 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(12),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(124)
+    );
+  BU2_U0_grf_rf_mem_dout_i_13 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(13),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(125)
+    );
+  BU2_U0_grf_rf_mem_dout_i_14 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(14),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(126)
+    );
+  BU2_U0_grf_rf_mem_dout_i_15 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(15),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(127)
+    );
+  BU2_U0_grf_rf_mem_dout_i_16 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(16),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(96)
+    );
+  BU2_U0_grf_rf_mem_dout_i_17 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(17),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(97)
+    );
+  BU2_U0_grf_rf_mem_dout_i_18 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(18),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(98)
+    );
+  BU2_U0_grf_rf_mem_dout_i_19 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(19),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(99)
+    );
+  BU2_U0_grf_rf_mem_dout_i_20 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(20),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(100)
+    );
+  BU2_U0_grf_rf_mem_dout_i_21 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(21),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(101)
+    );
+  BU2_U0_grf_rf_mem_dout_i_22 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(22),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(102)
+    );
+  BU2_U0_grf_rf_mem_dout_i_23 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(23),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(103)
+    );
+  BU2_U0_grf_rf_mem_dout_i_24 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(24),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(104)
+    );
+  BU2_U0_grf_rf_mem_dout_i_25 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(25),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(105)
+    );
+  BU2_U0_grf_rf_mem_dout_i_26 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(26),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(106)
+    );
+  BU2_U0_grf_rf_mem_dout_i_27 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(27),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(107)
+    );
+  BU2_U0_grf_rf_mem_dout_i_28 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(28),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(108)
+    );
+  BU2_U0_grf_rf_mem_dout_i_29 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(29),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(109)
+    );
+  BU2_U0_grf_rf_mem_dout_i_30 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(30),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(110)
+    );
+  BU2_U0_grf_rf_mem_dout_i_31 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(31),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(111)
+    );
+  BU2_U0_grf_rf_mem_dout_i_32 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(32),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(80)
+    );
+  BU2_U0_grf_rf_mem_dout_i_33 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(33),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(81)
+    );
+  BU2_U0_grf_rf_mem_dout_i_34 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(34),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(82)
+    );
+  BU2_U0_grf_rf_mem_dout_i_35 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(35),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(83)
+    );
+  BU2_U0_grf_rf_mem_dout_i_36 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(36),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(84)
+    );
+  BU2_U0_grf_rf_mem_dout_i_37 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(37),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(85)
+    );
+  BU2_U0_grf_rf_mem_dout_i_38 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(38),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(86)
+    );
+  BU2_U0_grf_rf_mem_dout_i_39 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(39),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(87)
+    );
+  BU2_U0_grf_rf_mem_dout_i_40 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(40),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(88)
+    );
+  BU2_U0_grf_rf_mem_dout_i_41 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(41),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(89)
+    );
+  BU2_U0_grf_rf_mem_dout_i_42 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(42),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(90)
+    );
+  BU2_U0_grf_rf_mem_dout_i_43 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(43),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(91)
+    );
+  BU2_U0_grf_rf_mem_dout_i_44 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(44),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(92)
+    );
+  BU2_U0_grf_rf_mem_dout_i_45 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(45),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(93)
+    );
+  BU2_U0_grf_rf_mem_dout_i_46 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(46),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(94)
+    );
+  BU2_U0_grf_rf_mem_dout_i_47 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(47),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(95)
+    );
+  BU2_U0_grf_rf_mem_dout_i_48 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(48),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(64)
+    );
+  BU2_U0_grf_rf_mem_dout_i_49 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(49),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(65)
+    );
+  BU2_U0_grf_rf_mem_dout_i_50 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(50),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(66)
+    );
+  BU2_U0_grf_rf_mem_dout_i_51 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(51),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(67)
+    );
+  BU2_U0_grf_rf_mem_dout_i_52 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(52),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(68)
+    );
+  BU2_U0_grf_rf_mem_dout_i_53 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(53),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(69)
+    );
+  BU2_U0_grf_rf_mem_dout_i_54 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(54),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(70)
+    );
+  BU2_U0_grf_rf_mem_dout_i_55 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(55),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(71)
+    );
+  BU2_U0_grf_rf_mem_dout_i_56 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(56),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(72)
+    );
+  BU2_U0_grf_rf_mem_dout_i_57 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(57),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(73)
+    );
+  BU2_U0_grf_rf_mem_dout_i_58 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(58),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(74)
+    );
+  BU2_U0_grf_rf_mem_dout_i_59 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(59),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(75)
+    );
+  BU2_U0_grf_rf_mem_dout_i_60 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(60),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(76)
+    );
+  BU2_U0_grf_rf_mem_dout_i_61 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(61),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(77)
+    );
+  BU2_U0_grf_rf_mem_dout_i_62 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(62),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(78)
+    );
+  BU2_U0_grf_rf_mem_dout_i_63 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(63),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(79)
+    );
+  BU2_U0_grf_rf_mem_dout_i_64 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(64),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(48)
+    );
+  BU2_U0_grf_rf_mem_dout_i_65 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(65),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(49)
+    );
+  BU2_U0_grf_rf_mem_dout_i_66 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(66),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(50)
+    );
+  BU2_U0_grf_rf_mem_dout_i_67 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(67),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(51)
+    );
+  BU2_U0_grf_rf_mem_dout_i_68 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(68),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(52)
+    );
+  BU2_U0_grf_rf_mem_dout_i_69 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(69),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(53)
+    );
+  BU2_U0_grf_rf_mem_dout_i_70 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(70),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(54)
+    );
+  BU2_U0_grf_rf_mem_dout_i_71 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(71),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(55)
+    );
+  BU2_U0_grf_rf_mem_dout_i_72 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(72),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(56)
+    );
+  BU2_U0_grf_rf_mem_dout_i_73 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(73),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(57)
+    );
+  BU2_U0_grf_rf_mem_dout_i_74 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(74),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(58)
+    );
+  BU2_U0_grf_rf_mem_dout_i_75 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(75),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(59)
+    );
+  BU2_U0_grf_rf_mem_dout_i_76 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(76),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(60)
+    );
+  BU2_U0_grf_rf_mem_dout_i_77 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(77),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(61)
+    );
+  BU2_U0_grf_rf_mem_dout_i_78 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(78),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(62)
+    );
+  BU2_U0_grf_rf_mem_dout_i_79 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(79),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(63)
+    );
+  BU2_U0_grf_rf_mem_dout_i_80 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(80),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(32)
+    );
+  BU2_U0_grf_rf_mem_dout_i_81 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(81),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(33)
+    );
+  BU2_U0_grf_rf_mem_dout_i_82 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(82),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(34)
+    );
+  BU2_U0_grf_rf_mem_dout_i_83 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(83),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(35)
+    );
+  BU2_U0_grf_rf_mem_dout_i_84 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(84),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(36)
+    );
+  BU2_U0_grf_rf_mem_dout_i_85 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(85),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(37)
+    );
+  BU2_U0_grf_rf_mem_dout_i_86 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(86),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(38)
+    );
+  BU2_U0_grf_rf_mem_dout_i_87 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(87),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(39)
+    );
+  BU2_U0_grf_rf_mem_dout_i_88 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(88),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(40)
+    );
+  BU2_U0_grf_rf_mem_dout_i_89 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(89),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(41)
+    );
+  BU2_U0_grf_rf_mem_dout_i_90 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(90),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(42)
+    );
+  BU2_U0_grf_rf_mem_dout_i_91 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(91),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(43)
+    );
+  BU2_U0_grf_rf_mem_dout_i_92 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(92),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(44)
+    );
+  BU2_U0_grf_rf_mem_dout_i_93 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(93),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(45)
+    );
+  BU2_U0_grf_rf_mem_dout_i_94 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(94),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(46)
+    );
+  BU2_U0_grf_rf_mem_dout_i_95 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(95),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(47)
+    );
+  BU2_U0_grf_rf_mem_dout_i_96 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(96),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(16)
+    );
+  BU2_U0_grf_rf_mem_dout_i_97 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(97),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(17)
+    );
+  BU2_U0_grf_rf_mem_dout_i_98 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(98),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(18)
+    );
+  BU2_U0_grf_rf_mem_dout_i_99 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(99),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(19)
+    );
+  BU2_U0_grf_rf_mem_dout_i_100 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(100),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(20)
+    );
+  BU2_U0_grf_rf_mem_dout_i_101 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(101),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(21)
+    );
+  BU2_U0_grf_rf_mem_dout_i_102 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(102),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(22)
+    );
+  BU2_U0_grf_rf_mem_dout_i_103 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(103),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(23)
+    );
+  BU2_U0_grf_rf_mem_dout_i_104 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(104),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(24)
+    );
+  BU2_U0_grf_rf_mem_dout_i_105 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(105),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(25)
+    );
+  BU2_U0_grf_rf_mem_dout_i_106 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(106),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(26)
+    );
+  BU2_U0_grf_rf_mem_dout_i_107 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(107),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(27)
+    );
+  BU2_U0_grf_rf_mem_dout_i_108 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(108),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(28)
+    );
+  BU2_U0_grf_rf_mem_dout_i_109 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(109),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(29)
+    );
+  BU2_U0_grf_rf_mem_dout_i_110 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(110),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(30)
+    );
+  BU2_U0_grf_rf_mem_dout_i_111 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(111),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(31)
+    );
+  BU2_U0_grf_rf_mem_dout_i_112 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(112),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(0)
+    );
+  BU2_U0_grf_rf_mem_dout_i_113 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(113),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(1)
+    );
+  BU2_U0_grf_rf_mem_dout_i_114 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(114),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(2)
+    );
+  BU2_U0_grf_rf_mem_dout_i_115 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(115),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(3)
+    );
+  BU2_U0_grf_rf_mem_dout_i_116 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(116),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(4)
+    );
+  BU2_U0_grf_rf_mem_dout_i_117 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(117),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(5)
+    );
+  BU2_U0_grf_rf_mem_dout_i_118 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(118),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(6)
+    );
+  BU2_U0_grf_rf_mem_dout_i_119 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(119),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(7)
+    );
+  BU2_U0_grf_rf_mem_dout_i_120 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(120),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(8)
+    );
+  BU2_U0_grf_rf_mem_dout_i_121 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(121),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(9)
+    );
+  BU2_U0_grf_rf_mem_dout_i_122 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(122),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(10)
+    );
+  BU2_U0_grf_rf_mem_dout_i_123 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(123),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(11)
+    );
+  BU2_U0_grf_rf_mem_dout_i_124 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(124),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(12)
+    );
+  BU2_U0_grf_rf_mem_dout_i_125 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(125),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(13)
+    );
+  BU2_U0_grf_rf_mem_dout_i_126 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(126),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(14)
+    );
+  BU2_U0_grf_rf_mem_dout_i_127 : FDRE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_ram_regout_en,
+      D => BU2_U0_grf_rf_mem_dout_mem(127),
+      R => BU2_U0_grf_rf_rstblk_rd_rst_reg(0),
+      Q => dout_3(15)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_0 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(0),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_1 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(1),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_2 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(2),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_3 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(3),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_4 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(4),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_5 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(5),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_6 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(6),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_7 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(7),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_8 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(8),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_9 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(9),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d2_10 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(10),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_0_Q : MUXCY
+    port map (
+      CI => BU2_N1,
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_0_rt_445,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_0_Q : XORCY
+    port map (
+      CI => BU2_N1,
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_0_rt_445,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_1_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(0),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_1_rt_444,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_1_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(0),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_1_rt_444,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count1
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_2_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(1),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_2_rt_442,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_2_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(1),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_2_rt_442,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count2
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_3_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(2),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_3_rt_440,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_3_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(2),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_3_rt_440,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count3
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_4_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(3),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_4_rt_438,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_4_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(3),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_4_rt_438,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count4
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_5_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(4),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_5_rt_436,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_5_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(4),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_5_rt_436,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count5
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_6_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(5),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_6_rt_434,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_6_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(5),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_6_rt_434,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count6
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_7_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(6),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_7_rt_432,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_7_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(6),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_7_rt_432,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count7
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_8_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(7),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_8_rt_430,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_8_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(7),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_8_rt_430,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count8
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_9_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(8),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_9_rt_428,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_9_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(8),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy_9_rt_428,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count9
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_10_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_cy(9),
+      LI => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count_xor_10_rt_426,
+      O => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count10
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_1 : FDPE
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count1,
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_0 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_4 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count4,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_2 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count2,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_3 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count3,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_7 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count7,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_5 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count5,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_6 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count6,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_10 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count10,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(10)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_8 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count8,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_9 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_Mcount_count9,
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_10 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(10),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(10)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_9 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(9),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_7 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(7),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_6 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(6),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_8 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(8),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_4 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(4),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_3 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(3),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_5 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(5),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_1 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(1),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_0 : FDPE
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(0),
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_wpntr_count_d1_2 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count(2),
+      Q => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_gmux_gm_0_gm1_m1 : MUXCY
+    port map (
+      CI => BU2_N1,
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(0),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_gmux_gm_1_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(0),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(1),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_gmux_gm_2_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(1),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_gmux_gm_3_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(2),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(3),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_gmux_gm_4_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(3),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(4),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_gmux_gm_5_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_carrynet(4),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c1_v1(5),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_comp1
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_gmux_gm_0_gm1_m1 : MUXCY
+    port map (
+      CI => BU2_N1,
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(0),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_gmux_gm_1_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(0),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(1),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_gmux_gm_2_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(1),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_gmux_gm_3_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(2),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(3),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_gmux_gm_4_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(3),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(4),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_gmux_gm_5_gms_ms : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_carrynet(4),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_wsts_c2_v1(5),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_wsts_comp2
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i : FDPE
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_not0001,
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_prog_full_i_mux0003,
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      Q => prog_full
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_wr_rst_d1 : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      D => BU2_rd_data_count(0),
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_wr_rst_d1_372
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(1),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_2 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(2),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(3),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(4),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(5),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(6),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(7),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_8 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(8),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_9 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(9),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_10 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(10),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(10)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_11 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(11),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad(11)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_0_Q : MUXCY
+    port map (
+      CI => BU2_rd_data_count(0),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_not0001,
+      S => BU2_rd_data_count(0),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(0)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_1_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(0),
+      DI => BU2_N1,
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(1),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_1_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(0),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(1),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(1)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_2_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(1),
+      DI => BU2_N1,
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_2_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(1),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(2),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(2)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_3_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(2),
+      DI => BU2_N1,
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(3),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_3_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(2),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(3),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(3)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_4_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(3),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(3),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(4),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_4_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(3),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(4),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(4)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_5_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(4),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(4),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(5),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_5_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(4),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(5),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(5)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_6_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(5),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(5),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(6),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_6_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(5),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(6),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(6)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_7_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(6),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(6),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(7),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_7_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(6),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(7),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(7)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_8_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(7),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(7),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(8),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_8_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(7),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(8),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(8)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_9_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(8),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(8),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(9),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_9_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(8),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(9),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(9)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy_10_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(9),
+      DI => BU2_U0_grf_rf_gl0_wr_wpntr_count_d1(9),
+      S => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(10),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(10)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_10_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(9),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(10),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(10)
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_xor_11_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_cy(10),
+      LI => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_Madd_diff_pntr_pad_add0000_lut(11),
+      O => BU2_U0_grf_rf_gl0_wr_gwas_gpf_wrpf_diff_pntr_pad_add0000(11)
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_0 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001(1),
+      Q => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(0)
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001(0),
+      Q => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state(1)
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_i : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_i_mux0000,
+      PRE => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      Q => empty
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_fb : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_i_mux0000,
+      PRE => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      Q => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_empty_fwft_fb_316
+    );
+  BU2_U0_grf_rf_gl0_rd_gr1_rfwft_user_valid : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_gr1_rfwft_curr_fwft_state_mux0001(1),
+      Q => valid
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_0 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(0),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(0)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_1 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(1),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(1)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_2 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(2),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(2)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_3 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(3),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(3)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_4 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(4),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(4)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_5 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(5),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(5)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_6 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(6),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(6)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_d1_7 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count(7),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_0_Q : MUXCY
+    port map (
+      CI => BU2_N1,
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_0_rt_306,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(0)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_0_Q : XORCY
+    port map (
+      CI => BU2_N1,
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_0_rt_306,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_1_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(0),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_1_rt_305,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(1)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_1_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(0),
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_1_rt_305,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count1
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_2_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(1),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_2_rt_303,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(2)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_2_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(1),
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_2_rt_303,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count2
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_3_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(2),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_3_rt_301,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(3)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_3_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(2),
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_3_rt_301,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count3
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_4_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(3),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_4_rt_299,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(4)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_4_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(3),
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_4_rt_299,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count4
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_5_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(4),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_5_rt_297,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(5)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_5_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(4),
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_5_rt_297,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count5
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_6_Q : MUXCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(5),
+      DI => BU2_rd_data_count(0),
+      S => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_6_rt_295,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(6)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_6_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(5),
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy_6_rt_295,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count6
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_7_Q : XORCY
+    port map (
+      CI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_cy(6),
+      LI => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count_xor_7_rt_293,
+      O => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count7
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_0 : FDPE
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count,
+      PRE => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(0)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_1 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count1,
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(1)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_2 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count2,
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(2)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_3 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count3,
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(3)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_4 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count4,
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(4)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_5 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count5,
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(5)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_6 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count6,
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(6)
+    );
+  BU2_U0_grf_rf_gl0_rd_rpntr_count_7 : FDCE
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_gl0_rd_rpntr_count_not0001,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_Mcount_count7,
+      Q => BU2_U0_grf_rf_gl0_rd_rpntr_count(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_0 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0009,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(0)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0008,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(1)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_2 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0007,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(2)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0006,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0005,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0004,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0003,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0002,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_8 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0001,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(8)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_9 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_xor0000,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(9)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_10 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gl0_wr_wpntr_count_d2(10),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(10)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_0 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0006,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(0)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0005,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(1)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_2 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0004,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(2)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0003,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0002,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0001,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_xor0000,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gl0_rd_rpntr_count_d1(7),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_0 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(0),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(0)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(1),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(1)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_2 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(2),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(2)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(3),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(4),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(5),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(6),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc(7),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_0 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(0),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(0)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(1),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(1)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_2 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(2),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(2)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(3),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(4),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(5),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(6),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(7),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_8 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(8),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(8)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_9 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(9),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(9)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_10 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc(10),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(10)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_0 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(0),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(0)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(1),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(1)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_2 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(2),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(2)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(3),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(4),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(5),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(6),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg(7),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(3),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(4),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(5),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(6),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(7),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_8 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(8),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(8)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_9 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(9),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(9)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1_10 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg(10),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(10)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0006,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0005,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0004,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0003,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0002,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(7)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_8 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0001,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(8)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_9 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_xor0000,
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(9)
+    );
+  BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin_10 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      CLR => BU2_U0_grf_rf_rstblk_rd_rst_reg(1),
+      D => BU2_U0_grf_rf_gcx_clkx_wr_pntr_gc_asreg_d1(10),
+      Q => BU2_U0_grf_rf_gcx_clkx_wr_pntr_bin(10)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_0 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0006,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(0)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_1 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0005,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(1)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_2 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0004,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(2)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_3 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0003,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(3)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_4 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0002,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(4)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_5 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0001,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(5)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_6 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_xor0000,
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(6)
+    );
+  BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin_7 : FDC
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      CLR => BU2_U0_grf_rf_rstblk_wr_rst_reg(0),
+      D => BU2_U0_grf_rf_gcx_clkx_rd_pntr_gc_asreg_d1(7),
+      Q => BU2_U0_grf_rf_gcx_clkx_rd_pntr_bin(7)
+    );
+  BU2_U0_grf_rf_rstblk_wr_rst_reg_0 : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      D => BU2_rd_data_count(0),
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_comb,
+      Q => BU2_U0_grf_rf_rstblk_wr_rst_reg(0)
+    );
+  BU2_U0_grf_rf_rstblk_wr_rst_reg_1 : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      D => BU2_rd_data_count(0),
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_comb,
+      Q => BU2_U0_grf_rf_rstblk_wr_rst_reg(1)
+    );
+  BU2_U0_grf_rf_rstblk_rd_rst_reg_0 : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_rd_data_count(0),
+      PRE => BU2_U0_grf_rf_rstblk_rd_rst_comb,
+      Q => BU2_U0_grf_rf_rstblk_rd_rst_reg(0)
+    );
+  BU2_U0_grf_rf_rstblk_rd_rst_reg_1 : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_rd_data_count(0),
+      PRE => BU2_U0_grf_rf_rstblk_rd_rst_comb,
+      Q => BU2_U0_grf_rf_rstblk_rd_rst_reg(1)
+    );
+  BU2_U0_grf_rf_rstblk_rd_rst_reg_2 : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_rd_data_count(0),
+      PRE => BU2_U0_grf_rf_rstblk_rd_rst_comb,
+      Q => BU2_U0_grf_rf_rstblk_rd_rst_reg(2)
+    );
+  BU2_U0_grf_rf_rstblk_rd_rst_asreg : FDPE
+    port map (
+      C => rd_clk,
+      CE => BU2_U0_grf_rf_rstblk_rd_rst_asreg_d1_161,
+      D => BU2_rd_data_count(0),
+      PRE => rst,
+      Q => BU2_U0_grf_rf_rstblk_rd_rst_asreg_165
+    );
+  BU2_U0_grf_rf_rstblk_wr_rst_asreg_d1 : FD
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      D => BU2_U0_grf_rf_rstblk_wr_rst_asreg_166,
+      Q => BU2_U0_grf_rf_rstblk_wr_rst_asreg_d1_163
+    );
+  BU2_U0_grf_rf_rstblk_wr_rst_asreg : FDPE
+    port map (
+      C => wr_clk,
+      CE => BU2_U0_grf_rf_rstblk_wr_rst_asreg_d1_163,
+      D => BU2_rd_data_count(0),
+      PRE => rst,
+      Q => BU2_U0_grf_rf_rstblk_wr_rst_asreg_166
+    );
+  BU2_U0_grf_rf_rstblk_rd_rst_asreg_d1 : FD
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_U0_grf_rf_rstblk_rd_rst_asreg_165,
+      Q => BU2_U0_grf_rf_rstblk_rd_rst_asreg_d1_161
+    );
+  BU2_U0_grf_rf_rstblk_wr_rst_asreg_d2 : FD
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => wr_clk,
+      D => BU2_U0_grf_rf_rstblk_wr_rst_asreg_d1_163,
+      Q => BU2_U0_grf_rf_rstblk_wr_rst_asreg_d2_164
+    );
+  BU2_U0_grf_rf_rstblk_rd_rst_asreg_d2 : FD
+    generic map(
+      INIT => '0'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_U0_grf_rf_rstblk_rd_rst_asreg_d1_161,
+      Q => BU2_U0_grf_rf_rstblk_rd_rst_asreg_d2_162
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_fb_i : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      D => BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_i_or0000,
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      Q => BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_fb_i_160
+    );
+  BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_i : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => wr_clk,
+      D => BU2_U0_grf_rf_gl0_wr_gwas_wsts_ram_full_i_or0000,
+      PRE => BU2_U0_grf_rf_rstblk_wr_rst_reg(1),
+      Q => full
+    );
+  BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i : FDP
+    generic map(
+      INIT => '1'
+    )
+    port map (
+      C => rd_clk,
+      D => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_or0000,
+      PRE => BU2_U0_grf_rf_rstblk_rd_rst_reg(2),
+      Q => BU2_U0_grf_rf_gl0_rd_gras_rsts_ram_empty_fb_i_157
+    );
+  BU2_XST_VCC : VCC
+    port map (
+      P => BU2_N1
+    );
+  BU2_XST_GND : GND
+    port map (
+      G => BU2_rd_data_count(0)
+    );
+
+end STRUCTURE;
+
+-- synthesis translate_on

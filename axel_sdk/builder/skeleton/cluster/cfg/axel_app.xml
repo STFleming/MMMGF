@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the map file for AXEL distributed application. -->
+
+<!--
+if multiple "application" entries exist, only the last one will be
+processed
+-->
+
+<!--
+The "./" before executable name is necessary for CUDA to work.
+-->
+
+<application name="myapp">
+
+  <module id="0" name="./myapp_m0" type="io" pe="cpu"> </module>
+  <module id="1" name="./myapp_m1" type="compute" pe="cpu"> </module>
+  <module id="2" name="./myapp_m2" type="compute" pe="cpu"> </module>
+
+  <group id="0" ofst="0" size="5">
+    <worker module="0" ofst="0" size="0"></worker>
+    <worker module="1" ofst="0" size="3"></worker>
+    <worker module="2" ofst="3" size="2"></worker>
+  </group>
+
+  <group id="1" ofst="5" size="5">
+    <worker module="0" ofst="0" size="0"></worker>
+    <worker module="1" ofst="5" size="2"></worker>
+    <worker module="2" ofst="7" size="3"></worker>
+    <output id="0"></output>
+  </group>
+
+  <group id="2" ofst="10" size="2">
+    <worker module="0" ofst="0" size="0"></worker>
+    <worker module="1" ofst="11" size="1"></worker>
+    <worker module="2" ofst="10" size="1"></worker>
+    <output id="0"></output>
+  </group>
+
+  <group id="3" ofst="12" size="8">
+    <worker module="0" ofst="0" size="0"></worker>
+    <worker module="1" ofst="12" size="4"></worker>
+    <worker module="2" ofst="16" size="4"></worker>
+    <output id="0"></output>
+  </group>
+
+</application>
+

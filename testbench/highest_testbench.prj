@@ -1,6 +1,6 @@
-vhdl work hdl/axel_interface.vhd
-vhdl work hdl/testbench.vhd
-vhdl work hdl/block_ram.vhdl
-vhdl work hdl/GFMMM.vhdl
-vhdl work hdl/processing_element.vhdl
-vhdl work hdl/systolic_array.vhdl
+vhdl work ../hdl/axel_interface.vhd
+vhdl work ../hdl/testbench.vhd
+vhdl work ../hdl/block_ram.vhdl
+vhdl work ../hdl/GFMMM.vhdl
+vhdl work ../hdl/processing_element.vhdl
+vhdl work ../hdl/systolic_array.vhdl

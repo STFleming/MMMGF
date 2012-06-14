@@ -1,0 +1,77 @@
+# admxrc5t2.xcf
+# modified from memory64 project
+
+##########################################################
+#                                                        #
+#   ADM-XRC-5T2 XST CONSTRAINTS FILE                     #
+#                                                        #
+#   project: <<<APPLICATION_NAME>>>                                #
+#                                                        #
+##########################################################
+
+##########################################################
+#                                                        #
+# Timing specifications for local bus clock domain       #
+# (all delays in nanoseconds)                            #
+#                                                        #
+# Assumptions:                                           #
+#                                                        #
+#   - Target freq. for this design = 66.0MHz             #
+#     => tlclk = 15.0ns                                  #
+#                                                        #
+#   - Safety margin for timing = 1.0ns                   #
+#     => tmargin = 1.0ns                                 #
+#                                                        #
+# Timing values from ADM-XPL Bridge rev01 manual:        #
+#                                                        #
+#   tsu(brdg) = 6.0ns (worst pin)                        #
+#   tco(brdg) = 4.5ns (worst pin)                        #
+#                                                        #
+#   Note that to keep the number of TIMESPECs small,     #
+#   we do not write individual TIMESPEC constraints      #
+#   for each pin of the Bridge. Instead, we write        #
+#   TIMESPECs for the worst pins. This trades off some   #
+#   performance, that could be gained by having loose    #
+#   TIMESPECs for some pins, for simplicity.             #
+#                                                        #
+# Derivation of TIMESPECs:                               #
+#                                                        #
+#   => tlclk' = tlclk - tmargin                          #
+#      tlclk' = 15.0 - 1.0 = 14.0ns                      #
+#                                                        #
+#   => tsu(FPGA) = tlclk - tco(brdg) - tmargin           #
+#      tsu(FPGA) = 14.0 - 4.5 - 1.0 = 8.5ns              #
+#                                                        #
+#   => tco(FPGA) = tlclk - tsu(brdg) - tmargin           #
+#      tco(FPGA) = 14.0 - 6.0 - 1.0 = 7.0ns              #
+#                                                        #
+##########################################################
+
+# Internal timing, tlclk'
+NET "lclk" PERIOD = 14.0ns HIGH 50%;
+
+##########################################################
+#                                                        #
+# Timing specifications for memory clock domain          #
+# (all delays in nanoseconds)                            #
+#                                                        #
+# Assumptions:                                           #
+#                                                        #
+#   - Target freq. for this design = <<<MCLK_FREQ>>>MHz           #
+#     => tmclk = <<<MCLK_PERIOD>>>ns                                   #
+#                                                        #
+#   - Safety margin for timing = 0.25ns                  #
+#     => tmargin = 0.25ns                                #
+#                                                        #
+# Derivation of TIMESPECs:                               #
+#                                                        #
+#   => tmclk' = tmclk - tmargin                          #
+#      tmclk' = <<<MCLK_PERIOD>>> - 0.25 = <<<STATIC_PERIOD>>>ns                      #
+#                                                        #
+##########################################################
+
+# Internal timing, tmclk'
+NET "mclka_ibufg" PERIOD = <<<STATIC_PERIOD>>>ns HIGH 50%;
+
+# Internal timing, trefclk'
+NET "refclk_ibufg" PERIOD = 4.5ns HIGH 50%;
