@@ -82,7 +82,7 @@ fpgaReg[USER_REG+5] = N;
 fpgaReg[USER_REG+6] = 0; 
 fpgaReg[USER_REG+7] = N;
 fpgaReg[USER_REG+8] = 0;
-fpgaReg[USER_REG+9] = N;
+fpgaReg[USER_REG+9] = 0;
 
   // kick start FPGA
   fpgaReg[USER_REG] = 0x00C;
@@ -93,6 +93,15 @@ fpgaReg[USER_REG+9] = N;
     sleep_us(2);
   }
   printf("status = %08X\n", fpgaReg[USER_REG]);
+
+//Initialise the upload array
+  for (i=0; i<SIZE + 4*NUM_PARAMETERS; i++) {
+    a[i] = 0;
+  }
+
+//Initialise second upload array
+for (i=0;i<SIZE;i++)
+        { b[i] = 0; }
 
   // get data from FPGA
   if (fpga_dmaread(a, (SIZE)*sizeof(int), BANK0_ADDR)) {
