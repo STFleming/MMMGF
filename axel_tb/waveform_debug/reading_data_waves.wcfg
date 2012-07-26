@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/homes/sf306/MMMGF/axel_tb/tb.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="math_real" />
+            <top_module name="my_types" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/tb/DUT/U_PE/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/DUT/U_PE/data_in0" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">data_in0[127:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in0[127:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/DUT/U_PE/vld0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vld0</obj_property>
+      <obj_property name="ObjectShortName">vld0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/DUT/U_PE/rd0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rd0</obj_property>
+      <obj_property name="ObjectShortName">rd0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/DUT/U_PE/data_in1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">data_in1[127:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in1[127:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/DUT/U_PE/vld1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vld1</obj_property>
+      <obj_property name="ObjectShortName">vld1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/DUT/U_PE/rd1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rd1</obj_property>
+      <obj_property name="ObjectShortName">rd1</obj_property>
+   </wvobject>
+</wave_config>

@@ -118,7 +118,7 @@ sma U_SMA1 (
 //  rd1, vld1, dout1, wr1, full1, din1);
 
  //-------- DEVICE UNDER TEST ----------
-axel_mem_test U_PE (
+axel_interface_ent U_PE (
   .clk (uclk), 
   .reset (rst),
   .full0 (full0),  

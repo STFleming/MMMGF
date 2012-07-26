@@ -1,0 +1,17 @@
+verilog work "../../hdl/mem_fifo.v"
+
+verilog work "../hdl/sma_cu.v"
+verilog work "../hdl/sma.v"
+verilog work "../../hdl/user_app_v.v"
+
+verilog work "../hdl/sim_extmem.v"
+verilog work "../hdl/sim_host.v"
+verilog work "../hdl/tb.v"
+
+vhdl work "../../hdl/axel_interface.vhd"
+vhdl work "../../hdl/GFMMM.vhdl"
+vhdl work "../../hdl/block_ram.vhdl"
+vhdl work "../../hdl/systolic_array.vhdl"
+vhdl work "../../hdl/processing_element.vhdl"
+
+

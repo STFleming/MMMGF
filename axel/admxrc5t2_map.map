@@ -1,0 +1,428 @@
+Release 13.1 Map O.40d (lin64)
+Xilinx Map Application Log File for Design 'admxrc5t2'
+
+Design Information
+------------------
+Command Line   : map -w -p xc5vlx330t-ff1738-1 -pr b -timing -cm speed -ol high
+-xe n -logic_opt on -o admxrc5t2_map.ncd admxrc5t2.ngd admxrc5t2.pcf 
+Target Device  : xc5vlx330t
+Target Package : ff1738
+Target Speed   : -1
+Stepping Level : ES
+Mapper Version : virtex5 -- $Revision: 1.55 $
+Mapped Date    : Thu Jun 14 17:45:18 2012
+
+Mapping design into LUTs...
+WARNING:MapLib:701 - Signal rc5<7> connected to top level port rc5<7> has been
+   removed.
+WARNING:MapLib:701 - Signal rc5<6> connected to top level port rc5<6> has been
+   removed.
+WARNING:MapLib:701 - Signal rc4<7> connected to top level port rc4<7> has been
+   removed.
+WARNING:MapLib:701 - Signal rc4<6> connected to top level port rc4<6> has been
+   removed.
+WARNING:MapLib:701 - Signal rc10<0> connected to top level port rc10<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc11<0> connected to top level port rc11<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc12<0> connected to top level port rc12<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc13<0> connected to top level port rc13<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc14<0> connected to top level port rc14<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc15<0> connected to top level port rc15<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd10<0> connected to top level port rd10<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd11<0> connected to top level port rd11<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd12<0> connected to top level port rd12<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd13<0> connected to top level port rd13<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd14<0> connected to top level port rd14<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd15<0> connected to top level port rd15<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc6<0> connected to top level port rc6<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc7<0> connected to top level port rc7<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc8<0> connected to top level port rc8<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rc9<0> connected to top level port rc9<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd6<0> connected to top level port rd6<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd7<0> connected to top level port rd7<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd8<0> connected to top level port rd8<0> has been
+   removed.
+WARNING:MapLib:701 - Signal rd9<0> connected to top level port rd9<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ramclko<0> connected to top level port ramclko<0>
+   has been removed.
+WARNING:MapLib:701 - Signal ra10<0> connected to top level port ra10<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra11<0> connected to top level port ra11<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra12<0> connected to top level port ra12<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra13<0> connected to top level port ra13<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra14<0> connected to top level port ra14<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra15<0> connected to top level port ra15<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra6<0> connected to top level port ra6<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra7<0> connected to top level port ra7<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra8<0> connected to top level port ra8<0> has been
+   removed.
+WARNING:MapLib:701 - Signal ra9<0> connected to top level port ra9<0> has been
+   removed.
+Writing file admxrc5t2_map.ngm...
+Running directed packing...
+Running delay-based LUT packing...
+Updating timing models...
+WARNING:Timing:3223 - Timing constraint TS_M_RAMS_TO_L_RAMS = MAXDELAY FROM
+   TIMEGRP "MEMCLK0_RAMS" TO TIMEGRP "LCLK_RAMS" 4 ns DATAPATHONLY ignored
+   during timing analysis.
+WARNING:Timing:3223 - Timing constraint TS_L_RAMS_TO_M_RAMS = MAXDELAY FROM
+   TIMEGRP "LCLK_RAMS" TO TIMEGRP "MEMCLK0_RAMS" 4 ns DATAPATHONLY ignored
+   during timing analysis.
+WARNING:Pack:2768 - At least one timing constraint is impossible to meet because
+   component switching limit violations have been detected for a constrained
+   component. A timing constraint summary below shows the failing constraints
+   (preceded with an Asterisk (*)). Please use the Timing Analyzer (GUI) or TRCE
+   (command line) with the Mapped NCD and PCF files to evaluate the component
+   switching limit violations in more detail. Evaluate the datasheet for
+   alternative configurations for the component that could allow the frequencies
+   requested in the constraint. Otherwise, the timing constraint covering this
+   component might need to be modified to satisfy the component switching limits
+   specified in the datasheet.
+WARNING:Timing:3223 - Timing constraint TS_M_RAMS_TO_L_RAMS = MAXDELAY FROM 
+   TIMEGRP "MEMCLK0_RAMS" TO TIMEGRP "LCLK_RAMS" 4 ns DATAPATHONLY ignored 
+   during timing analysis.
+WARNING:Timing:3223 - Timing constraint TS_L_RAMS_TO_M_RAMS = MAXDELAY FROM 
+   TIMEGRP "LCLK_RAMS" TO TIMEGRP "MEMCLK0_RAMS" 4 ns DATAPATHONLY ignored 
+   during timing analysis.
+INFO:Timing:3284 - This timing report was generated using estimated delay 
+   information.  For accurate numbers, please refer to the post Place and Route 
+   timing report.
+Number of Timing Constraints that were not applied: 6
+
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+----------------------------------------------------------------------------------------------------------
+  Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
+                                            |             |    Slack   | Achievable | Errors |    Score   
+----------------------------------------------------------------------------------------------------------
+* PERIOD analysis for net "admxrc5t2_main_0 | SETUP       |     1.376ns|     1.300ns|       0|           0
+  /memory_banks_0/memclk_0/mclk0_pll" deriv | HOLD        |    -0.014ns|            |     114|        1596
+  ed from  NET "mclka_ibufg" PERIOD = 2.75  | MINPERIOD   |    -1.249ns|     3.999ns|     160|      199840
+  ns HIGH 50%                               |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+* TS_mgt_clk = PERIOD TIMEGRP "mgt_clk" 6.4 | SETUP       |     6.154ns|     0.246ns|       0|           0
+   ns HIGH 50%                              | HOLD        |    -0.817ns|            |       8|        6536
+                                            | MINLOWPULSE |     5.582ns|     0.818ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+* PERIOD analysis for net "admxrc5t2_main_0 | SETUP       |     2.084ns|     1.332ns|       0|           0
+  /memory_banks_0/memclk_0/mclkdiv0_pll" de | HOLD        |    -0.009ns|            |     640|        5760
+  rived from  NET "mclka_ibufg" PERIOD = 2. | MINPERIOD   |     3.279ns|     2.221ns|       0|           0
+  75 ns HIGH 50%  multiplied by 2.00 to 5.5 |             |            |            |        |            
+  00 nS                                     |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  NET "mclka_ibufg" PERIOD = 2.75 ns HIGH 5 | MINPERIOD   |     0.529ns|     2.221ns|       0|           0
+  0%                                        |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PERIOD analysis for net "admxrc5t2_main_0 | SETUP       |     1.809ns|     0.941ns|       0|           0
+  /memory_banks_0/memclk_0/mclk90_pll" deri | HOLD        |     0.274ns|            |       0|           0
+  ved from  NET "mclka_ibufg" PERIOD = 2.75 | MINPERIOD   |     0.529ns|     2.221ns|       0|           0
+   ns HIGH 50%                              |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_FFS_MEM_PADS = MAXDELAY FROM TIMEGRP " | MAXDELAY    |     1.043ns|     2.457ns|       0|           0
+  MEMCLK_FFS" TO TIMEGRP "MEM_PADS" 3.5 ns  |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PERIOD analysis for net "admxrc5t2_main_0 | SETUP       |     1.308ns|     4.192ns|       0|           0
+  /memory_banks_0/memclk_0/mclkdiv90_pll" d | HOLD        |     0.148ns|            |       0|           0
+  erived from  NET "mclka_ibufg" PERIOD = 2 |             |            |            |        |            
+  .75 ns HIGH 50%  multiplied by 2.00 to 5. |             |            |            |        |            
+  500 nS                                    |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_L_FFS_TO_M_FFS = MAXDELAY FROM TIMEGRP | SETUP       |     2.178ns|     1.822ns|       0|           0
+   "LCLK_FFS" TO TIMEGRP "MEMCLK0_FFS" 4 ns | HOLD        |     0.195ns|            |       0|           0
+   DATAPATHONLY                             |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  NET "refclk_ibufg" PERIOD = 4.5 ns HIGH 5 | SETUP       |     3.692ns|     0.808ns|       0|           0
+  0%                                        | HOLD        |     0.219ns|            |       0|           0
+                                            | MINPERIOD   |     2.279ns|     2.221ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_M_RAMS_TO_L_FFS = MAXDELAY FROM TIMEGR | SETUP       |     2.461ns|     1.539ns|       0|           0
+  P "MEMCLK0_RAMS" TO TIMEGRP "LCLK_FFS" 4  | HOLD        |     1.175ns|            |       0|           0
+  ns DATAPATHONLY                           |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_L_RAMS_TO_M_FFS = MAXDELAY FROM TIMEGR | SETUP       |     2.461ns|     1.539ns|       0|           0
+  P "LCLK_RAMS" TO TIMEGRP "MEMCLK0_FFS" 4  | HOLD        |     1.175ns|            |       0|           0
+  ns DATAPATHONLY                           |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  NET "lclk_dcm_0/lclk_ibufg" PERIOD = 11.5 | MINPERIOD   |     3.168ns|     8.332ns|       0|           0
+   ns HIGH 50%                              |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  PERIOD analysis for net "lclk_dcm_0/lclk_ | SETUP       |     9.643ns|     1.857ns|       0|           0
+  unbuf" derived from  NET "lclk_dcm_0/lclk | HOLD        |     0.148ns|            |       0|           0
+  _ibufg" PERIOD = 11.5 ns HIGH 50%  duty c | MINPERIOD   |     3.168ns|     8.332ns|       0|           0
+  ycle corrected to 11.500 nS  HIGH 5.750 n |             |            |            |        |            
+  S                                         |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_M_FFS_TO_L_FFS = MAXDELAY FROM TIMEGRP | SETUP       |     3.522ns|     0.478ns|       0|           0
+   "MEMCLK0_FFS" TO TIMEGRP "LCLK_FFS" 4 ns | HOLD        |     0.195ns|            |       0|           0
+   DATAPATHONLY                             |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_L_FFS_TO_M_RAMS = MAXDELAY FROM TIMEGR | MAXDELAY    |     3.550ns|     0.450ns|       0|           0
+  P "LCLK_FFS" TO TIMEGRP "MEMCLK0_RAMS" 4  |             |            |            |        |            
+  ns DATAPATHONLY                           |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_M_FFS_TO_L_RAMS = MAXDELAY FROM TIMEGR | MAXDELAY    |     3.550ns|     0.450ns|       0|           0
+  P "MEMCLK0_FFS" TO TIMEGRP "LCLK_RAMS" 4  |             |            |            |        |            
+  ns DATAPATHONLY                           |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TIMEGRP "LBUS_PADS" OFFSET = IN 8 ns BEFO | SETUP       |     4.241ns|     3.759ns|       0|           0
+  RE COMP "lclk"                            |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TIMEGRP "LBUS_PADS" OFFSET = OUT 5.5 ns A | MAXDELAY    |     4.285ns|     1.215ns|       0|           0
+  FTER COMP "lclk"                          |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  NET "rst" MAXDELAY = 100 ns               | MAXDELAY    |   100.000ns|     0.000ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_M_RAMS_TO_L_RAMS = MAXDELAY FROM TIMEG | N/A         |         N/A|         N/A|     N/A|         N/A
+  RP "MEMCLK0_RAMS" TO TIMEGRP "LCLK_RAMS"  |             |            |            |        |            
+  4 ns DATAPATHONLY                         |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_L_RAMS_TO_M_RAMS = MAXDELAY FROM TIMEG | N/A         |         N/A|         N/A|     N/A|         N/A
+  RP "LCLK_RAMS" TO TIMEGRP "MEMCLK0_RAMS"  |             |            |            |        |            
+  4 ns DATAPATHONLY                         |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_tile0_txusrclk0_i = PERIOD TIMEGRP "ti | N/A         |         N/A|         N/A|     N/A|         N/A
+  le0_txusrclk0_i" 3.2 ns HIGH 50%          |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  NET "admxrc5t2_main_0/U_MGT/tile0_refclk_ | N/A         |         N/A|         N/A|     N/A|         N/A
+  i" PERIOD = 3.2 ns HIGH 50%               |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Review Timing Report for more details on the following derived constraints.
+To create a Timing Report, run "trce -v 12 -fastpaths -o design_timing_report design.ncd design.pcf"
+or "Run Timing Analysis" from Timing Analyzer (timingan).
+Derived Constraints for mclka_ibufg
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths
+Analyzed       |
+|           Constraint          | Requirement
+|-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    |
+Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+|mclka_ibufg                    |      2.750ns|      2.221ns|      3.999ns|            0|          914|            0|   
+  1513500|
+| admxrc5t2_main_0/memory_banks_|      2.750ns|      3.999ns|          N/A|          274|            0|         3542|   
+        0|
+| 0/memclk_0/mclk0_pll          |             |             |             |             |             |             |   
+         |
+| admxrc5t2_main_0/memory_banks_|      2.750ns|      2.221ns|          N/A|            0|            0|           64|   
+        0|
+| 0/memclk_0/mclk90_pll         |             |             |             |             |             |             |   
+         |
+| admxrc5t2_main_0/memory_banks_|      5.500ns|      4.192ns|          N/A|            0|            0|      1506370|   
+        0|
+| 0/memclk_0/mclkdiv90_pll      |             |             |             |             |             |             |   
+         |
+| admxrc5t2_main_0/memory_banks_|      5.500ns|      2.221ns|          N/A|          640|            0|         3524|   
+        0|
+| 0/memclk_0/mclkdiv0_pll       |             |             |             |             |             |             |   
+         |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+
+Derived Constraints for lclk_dcm_0/lclk_ibufg
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths
+Analyzed       |
+|           Constraint          | Requirement
+|-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    |
+Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+|lclk_dcm_0/lclk_ibufg          |     11.500ns|      8.332ns|      8.332ns|            0|            0|            0|   
+    46574|
+| lclk_dcm_0/lclk_unbuf         |     11.500ns|      8.332ns|          N/A|            0|            0|        46574|   
+        0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+
+3 constraints not met.
+INFO:Timing:2761 - N/A entries in the Constraints List may indicate that the 
+   constraint is not analyzed due to the following: No paths covered by this 
+   constraint; Other constraints intersect with this constraint; or This 
+   constraint was disabled by a Path Tracing Control. Please run the Timespec 
+   Interaction Report (TSI) via command line (trce tsi) or Timing Analyzer GUI.
+
+
+INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
+   (.mrp).
+Running timing-driven placement...
+Total REAL time at the beginning of Placer: 2 mins 5 secs 
+Total CPU  time at the beginning of Placer: 2 mins 4 secs 
+
+Phase 1.1  Initial Placement Analysis
+Phase 1.1  Initial Placement Analysis (Checksum:51632211) REAL time: 2 mins 25 secs 
+
+Phase 2.7  Design Feasibility Check
+Phase 2.7  Design Feasibility Check (Checksum:8802f191) REAL time: 2 mins 26 secs 
+
+Phase 3.31  Local Placement Optimization
+Phase 3.31  Local Placement Optimization (Checksum:8802f191) REAL time: 2 mins 26 secs 
+
+Phase 4.37  Local Placement Optimization
+Phase 4.37  Local Placement Optimization (Checksum:8802f191) REAL time: 2 mins 26 secs 
+
+Phase 5.33  Local Placement Optimization
+Phase 5.33  Local Placement Optimization (Checksum:8802f191) REAL time: 2 mins 56 secs 
+
+Phase 6.32  Local Placement Optimization
+Phase 6.32  Local Placement Optimization (Checksum:8802f191) REAL time: 2 mins 59 secs 
+
+Phase 7.2  Initial Clock and IO Placement
+
+Phase 7.2  Initial Clock and IO Placement (Checksum:175326db) REAL time: 3 mins 6 secs 
+
+Phase 8.36  Local Placement Optimization
+Phase 8.36  Local Placement Optimization (Checksum:175326db) REAL time: 3 mins 6 secs 
+
+Phase 9.30  Global Clock Region Assignment
+Phase 9.30  Global Clock Region Assignment (Checksum:175326db) REAL time: 3 mins 6 secs 
+
+Phase 10.3  Local Placement Optimization
+Phase 10.3  Local Placement Optimization (Checksum:175326db) REAL time: 3 mins 8 secs 
+
+Phase 11.5  Local Placement Optimization
+Phase 11.5  Local Placement Optimization (Checksum:175326db) REAL time: 3 mins 9 secs 
+
+Phase 12.8  Global Placement
+.................................................................
+...........
+..........................................................................
+................
+................
+................
+Phase 12.8  Global Placement (Checksum:9e40b603) REAL time: 5 mins 21 secs 
+
+Phase 13.29  Local Placement Optimization
+Phase 13.29  Local Placement Optimization (Checksum:9e40b603) REAL time: 5 mins 21 secs 
+
+Phase 14.5  Local Placement Optimization
+Phase 14.5  Local Placement Optimization (Checksum:9e40b603) REAL time: 5 mins 25 secs 
+
+Phase 15.18  Placement Optimization
+Phase 15.18  Placement Optimization (Checksum:58c482c2) REAL time: 9 mins 28 secs 
+
+Phase 16.5  Local Placement Optimization
+Phase 16.5  Local Placement Optimization (Checksum:58c482c2) REAL time: 9 mins 32 secs 
+
+Phase 17.34  Placement Validation
+Phase 17.34  Placement Validation (Checksum:58c482c2) REAL time: 9 mins 33 secs 
+
+Total REAL time to Placer completion: 9 mins 36 secs 
+Total CPU  time to Placer completion: 9 mins 35 secs 
+Running physical synthesis...
+........
+Physical synthesis completed.
+Running post-placement packing...
+Writing output files...
+WARNING:PhysDesignRules:1841 - One or more GTPs are being used in this design.
+   Evaluate the SelectIO-To-GTP Crosstalk section of the Virtex-5 RocketIO GTP
+   Transceiver User Guide to ensure that the design SelectIO usage meets the
+   guidelines to minimize the impact on GTP performance. 
+
+Design Summary
+--------------
+
+Design Summary:
+Number of errors:      0
+Number of warnings:   39
+Slice Logic Utilization:
+  Number of Slice Registers:                24,197 out of 207,360   11%
+    Number used as Flip Flops:              24,197
+  Number of Slice LUTs:                     21,747 out of 207,360   10%
+    Number used as logic:                   16,331 out of 207,360    7%
+      Number using O6 output only:          15,323
+      Number using O5 output only:             376
+      Number using O5 and O6:                  632
+    Number used as Memory:                   5,236 out of  54,720    9%
+      Number used as Dual Port RAM:          4,118
+        Number using O6 output only:         2,744
+        Number using O5 output only:           600
+        Number using O5 and O6:                774
+      Number used as Shift Register:         1,118
+        Number using O6 output only:         1,118
+    Number used as exclusive route-thru:       180
+  Number of route-thrus:                     1,051
+    Number using O6 output only:               504
+    Number using O5 output only:               547
+
+Slice Logic Distribution:
+  Number of occupied Slices:                11,457 out of  51,840   22%
+  Number of LUT Flip Flop pairs used:       33,273
+    Number with an unused Flip Flop:         9,076 out of  33,273   27%
+    Number with an unused LUT:              11,526 out of  33,273   34%
+    Number of fully used LUT-FF pairs:      12,671 out of  33,273   38%
+    Number of unique control sets:           2,107
+    Number of slice register sites lost
+      to control set restrictions:           4,277 out of 207,360    2%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+  OVERMAPPING of BRAM resources should be ignored if the design is
+  over-mapped for a non-BRAM resource or if placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                       464 out of     960   48%
+    Number of LOCed IOBs:                      464 out of     464  100%
+    IOB Flip Flops:                            441
+    Number of bonded IPADs:                     12
+      Number of LOCed IPADs:                    12 out of      12  100%
+    Number of bonded OPADs:                      8
+      Number of LOCed OPADs:                     8 out of       8  100%
+
+Specific Feature Utilization:
+  Number of BUFG/BUFGCTRLs:                     10 out of      32   31%
+    Number used as BUFGs:                       10
+  Number of IDELAYCTRLs:                        10 out of      34   29%
+  Number of BUFDSs:                              2 out of      12   16%
+  Number of DCM_ADVs:                            2 out of      12   16%
+    Number of LOCed DCM_ADVs:                    1 out of       2   50%
+  Number of GTP_DUALs:                           3 out of      12   25%
+    Number of LOCed GTP_DUALs:                   3 out of       3  100%
+  Number of ISERDESs:                          160
+  Number of OSERDESs:                          176
+  Number of PLL_ADVs:                            1 out of       6   16%
+
+Average Fanout of Non-Clock Nets:                3.51
+
+Peak Memory Usage:  1858 MB
+Total REAL time to MAP completion:  10 mins 24 secs 
+Total CPU time to MAP completion:   10 mins 23 secs 
+
+Mapping completed.
+See MAP report file "admxrc5t2_map.mrp" for details.

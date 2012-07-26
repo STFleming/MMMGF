@@ -121,19 +121,22 @@ WAIT UNTIL clk'EVENT AND clk='1';
 IF (transmit_counter0 = 0) THEN
 	data_in0 <= STD_LOGIC_VECTOR(TO_UNSIGNED(transmit_value0, DATA_WIDTH));
 	reset <= '0'; --Turn the reset signal off
-END IF;
+	transmit_counter0 <= transmit_counter0 + 1;
+ELSE
 
 
 vld0 <= '1'; --Data is safe to read
-IF ((rd0 = '1') AND (transmit_counter0 < matrix_size*matrix_size)) THEN --This means that a new value has been requested
+IF ((rd0 = '1') AND (transmit_counter0 < matrix_size*matrix_size+1)) THEN --This means that a new value has been requested
 	vld0 <= '0'; --Data is unstable as it is changing, NOT AUTHORISED TO READ
 	transmit_value0 <= transmit_value0 + 1; --Increment the value
 	transmit_counter0 <= transmit_counter0 + 1; --Increment counter
 	data_in0 <= STD_LOGIC_VECTOR(TO_UNSIGNED(transmit_value0, DATA_WIDTH));
 
 	--Test output to determine that the correct data is being fed into the array
-	--REPORT "Feeding the data: " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(data_in0))) & "  count:  " & INTEGER'IMAGE(transmit_counter0);	
+	REPORT "Feeding the data: " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(data_in0))) & "  count:  " & INTEGER'IMAGE(transmit_counter0);	
 END IF; 
+
+END IF;
 
 END PROCESS transmit_data_bank0;
 ----------------------------------------
@@ -155,10 +158,11 @@ WAIT UNTIL clk'EVENT AND clk='1';
 IF (transmit_counter1 = 0) THEN
         data_in1 <= STD_LOGIC_VECTOR(TO_UNSIGNED(transmit_value1, DATA_WIDTH));
         reset <= '0'; --Turn the reset signal off
-END IF;
+	transmit_counter1 <= transmit_counter1 + 1;
+ELSE
 
 vld1 <= '1'; --Data is safe to read
-IF ((rd1 = '1') AND (transmit_counter1 < matrix_size*matrix_size)) THEN --This means that a new value has been requested
+IF ((rd1 = '1') AND (transmit_counter1 < matrix_size*matrix_size+1)) THEN --This means that a new value has been requested
         vld1 <= '0'; --Data is unstable as it is changing, NOT AUTHORISED TO READ
         transmit_value1 <= transmit_value1 + 1; --Increment the value
         transmit_counter1 <= transmit_counter1 + 1; --Increment counter
@@ -166,8 +170,8 @@ IF ((rd1 = '1') AND (transmit_counter1 < matrix_size*matrix_size)) THEN --This m
 
         --Test output to determine that the correct data is being fed into the array
         --REPORT "Feeding the data: " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(data_in1))) & "  count:  " & INTEGER'IMAGE(transmit_counter1);        
+END IF;
 END IF; 
-
 END PROCESS transmit_data_bank1;
 ----------------------------------------
 						

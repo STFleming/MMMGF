@@ -35,7 +35,9 @@ port (
 end axel_interface_ent;
 
 ARCHITECTURE rtl of axel_interface_ent IS
-TYPE Tstate IS (read_config, Sload, read_data, pack_and_commit, word_ready,test3, read_data1, pack_and_commit1, word_ready1, Sload1); --posible states
+TYPE Tstate IS 
+(read_config, start_state,Sload, pre_data,read_data, pack_and_commit, word_ready,test3, read_data1, pack_and_commit1, word_ready1, Sload1); --posible states
+
 SIGNAL ss, ss_next 					: Tstate; --state signals
 SIGNAL val_reg, val_temp 				: STD_LOGIC_VECTOR (my_types.bit_width - 1 DOWNTO 0); --This is a temp storage for the read value
 SIGNAL count, count_next 				: UNSIGNED (DATA_WIDTH-1 DOWNTO 0);
@@ -95,6 +97,8 @@ memory_word_in_left <= memory_word_in_left_reg;
 -----------------------------------------------------------------------------
 
 CASE ss is
+	WHEN start_state => rd0 <= '1'; rd1 <= '1'; ss_next <= read_config;
+	REPORT "start_state: ";
 	-------------READ CONFIG & IDLE STATE----------------
 	--This state is the resting state of the device 
 	--It waits for the first read available signal and then loads in the
@@ -102,13 +106,15 @@ CASE ss is
 	--to read in the matrix data.	
 	WHEN read_config =>
 		IF (vld0 = '1') THEN
+			--REPORT "read_config: vld0";
 			expo <= UNSIGNED(data_in0); --Load in the exponent data from the memory bank
-			rd0 <= '1';
 			ss_next <= read_data;
 		ELSE
+			--REPORT "read_config: ~vld0";
 			ss_next <= read_config;
 		END IF;
 	-----------------------------------------------------	
+
 
 	---------------READ DATA & PACK THE DATA-------------
 	--This state gets data from the host and packs it together into
@@ -119,13 +125,22 @@ CASE ss is
 	WHEN read_data => --Read in the data in this state
 			IF (vld0 = '1') THEN
 				val_temp <= data_in0((my_types.bit_width - 1) DOWNTO 0); --In this case we are not using the full 128 bits
-				ss_next <= pack_and_commit;
-	
+				ss_next <= pack_and_commit; --ss_next <= pack_and_commit;
+
+				--=============DEBUGGING=================
+				--REPORT "Data in Value = " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(data_in0)));
+				--REPORT "Value read from host =  " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(val_temp)));
+				--=======================================
 			ELSE
 				ss_next <= read_data;
 			END IF;
 	
-	WHEN pack_and_commit =>  --This state packs the data into the triangular manner with the reset signals 
+	WHEN pack_and_commit =>  --This state packs the data into the triangular manner with the reset signals
+
+				--=============DEBUGGING=================
+                                --REPORT "Value read from host:  " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(val_temp)));
+                                --=======================================
+
 				IF commit_count_reg <= (my_types.matrix_size - 1) THEN 
 					--Here we pack the values in from the MSB down (i.e. left to right)
 					IF read_counter_reg <= commit_count_reg THEN
@@ -164,6 +179,14 @@ CASE ss is
 				END IF;
 	------------------------------------------------------
 	WHEN word_ready => rd0 <='1';
+				--===========DEBUGGING============================================================
+				--Code snippet to print out word to be added into block ram 
+				--REPORT 	"TOP :  " &
+				--	INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(11 DOWNTO 8)))) & " " &
+				--	INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(7 DOWNTO 4)))) & " " &
+				--	INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(3 DOWNTO 0))));		
+				--=================================================================================			
+
                                 memory_word_in_top <= default_entry; --Fill the entry with all p values for each segment
                                 commit_count <= commit_count_reg + 1; --Update the commit count
 
@@ -180,14 +203,15 @@ CASE ss is
                                 read_counter <= 1; --Reset the read counter back to one
 				ss_next <= read_data;
 
-				REPORT  "TOP: " &--INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(15 DOWNTO 12)))) & " " &
-                                        INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top_reg(11 DOWNTO 8)))) & "  " 
-                                      & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top_reg(7 DOWNTO 4)))) & "  " 
-                                      & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top_reg(3 DOWNTO 0)))); 
 	WHEN read_data1	=>
                        IF (vld1 = '1') THEN
                                 val_temp <= data_in1((my_types.bit_width - 1) DOWNTO 0); --In this case we are not using the full 128 bits
                                 ss_next <= pack_and_commit1; 
+			
+				--==========DEBUGGING==================
+					REPORT "Bank1 data read = " & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(data_in1)));
+				--=====================================
+	
                         ELSE
                                 ss_next <= read_data1;
                         END IF; 
@@ -231,8 +255,18 @@ CASE ss is
                                 END IF;
         ------------------------------------------------------
 	WHEN word_ready1 => rd1 <='1';
+
+				--===========DEBUGGING============================================================
+                                --Code snippet to print out word to be added into block ram 
+                                --REPORT        "LEFT :  " &
+                                --      INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_left(11 DOWNTO 8)))) & " " &
+                                --      INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_left(7 DOWNTO 4)))) & " " &
+                                --      INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_left(3 DOWNTO 0))));
+                                --=================================================================================                     
+				
                                 memory_word_in_left <= default_entry; --Fill the entry with all p values for each segment
                                 commit_count1 <= commit_count_reg1 + 1; --Update the commit count
+
 
                                 IF (commit_count_reg1 + 1 <= (my_types.matrix_size - 1)) THEN
                                  --Push the first value into the BRAM word
@@ -247,20 +281,16 @@ CASE ss is
                                 read_counter1 <= 1; --Reset the read counter back to one
                                 ss_next <= read_data1;
 
-                                REPORT  "LEFT: " &--INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_top(15 DOWNTO 12)))) & " " &
-                                        INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_left_reg(11 DOWNTO 8)))) & "  "
-                                      & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_left_reg(7 DOWNTO 4)))) & "  "
-                                      & INTEGER'IMAGE(TO_INTEGER(UNSIGNED(memory_word_in_left_reg(3 DOWNTO 0))));
 
 
 	WHEN test3 => ss_next <= Sload; --REPORT "Temp test state."
 	WHEN Sload =>
 		IF (full0= '0') THEN 					 		--output data if controler ready
-			--REPORT "Writing out data";
 			wr0 <= '1';							--initiate write 
 			data_out0(my_types.bit_width-1 DOWNTO 0) <= STD_LOGIC_VECTOR(val_reg);--STD_LOGIC_VECTOR(count);--write out the current count
 			count_next <= count+TO_UNSIGNED(1,DATA_WIDTH); --increase the data
-			ss_next <= Sload;
+		--	ss_next <= Sload;
+			ss_next <= read_data;
 		ELSE
 			ss_next <= Sload; --REPORT "Waiting to write data"; 
 		END IF;
@@ -291,7 +321,7 @@ BEGIN
 		memory_word_in_left_reg <= memory_word_in_left;
 
 	IF reset = '1' THEN
-		ss <= read_config; 				--sync reset state
+		ss <= start_state; 				--sync reset state
 		expo_reg <= (OTHERS => '0');
 		count <= TO_UNSIGNED(0, DATA_WIDTH);
 		read_counter_reg <= 0; --Default all the counters to zero

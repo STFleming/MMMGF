@@ -13,7 +13,7 @@
 volatile uint32_t* fpgaReg;
 volatile uint8_t*  fpgaMem;
 
-#define N 16
+#define N 9
 #define NUM_PARAMETERS 1
 #define SIZE 4*N
 
@@ -78,7 +78,7 @@ j=0;
 fpgaReg[USER_REG+2] = 0;
 fpgaReg[USER_REG+3] = N;
 fpgaReg[USER_REG+4] = 0; 
-fpgaReg[USER_REG+5] = N; 
+fpgaReg[USER_REG+5] = N-1; 
 fpgaReg[USER_REG+6] = 0; 
 fpgaReg[USER_REG+7] = N;
 fpgaReg[USER_REG+8] = 0;
@@ -86,22 +86,13 @@ fpgaReg[USER_REG+9] = 0;
 
   // kick start FPGA
   fpgaReg[USER_REG] = 0x00C;
-
+sleep_ms(200);
   // wait for FPGA
-  while (fpgaReg[USER_REG]&1) {
+  while (fpgaReg[USER_REG] &1) {
     printf("status = %08X\n", fpgaReg[USER_REG]);
     sleep_us(2);
   }
   printf("status = %08X\n", fpgaReg[USER_REG]);
-
-//Initialise the upload array
-  for (i=0; i<SIZE + 4*NUM_PARAMETERS; i++) {
-    a[i] = 0;
-  }
-
-//Initialise second upload array
-for (i=0;i<SIZE;i++)
-        { b[i] = 0; }
 
   // get data from FPGA
   if (fpga_dmaread(a, (SIZE)*sizeof(int), BANK0_ADDR)) {
