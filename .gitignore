@@ -13,6 +13,8 @@ axel/xlnx_auto_0_xdb/
 /axel/_xmsgs/
 /axel/xst/
 /axel/isim/
+/axel_tb/isim/
+/axel_tb/xst/
 
 #simulation outputs
 *.cmd
