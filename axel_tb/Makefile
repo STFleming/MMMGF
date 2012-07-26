@@ -22,4 +22,5 @@ clean:
 	rm -f tb.wdb isim.wdb usage_statistics_webtalk.html
 	rm -f webtalk.log
 	rm -f fuseRelaunch.cmd  fuse.xmsgs 
+	rm -R isim
 	rm  tb
