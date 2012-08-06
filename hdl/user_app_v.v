@@ -135,7 +135,14 @@ axel_interface_ent U_PE (
   .vld1 (vld1),
   .rd1 (rd1)
   ); 
-  
+
+//-----Printing Processes------------
+always @ (posedge clk)
+begin
+	$display("Data out bank0: %d", din0);
+//	$display("Data out bank1: %d", din1); 
+end
+
 //-------- User Registers ----------
 
 reg run0_reg, run1_reg;
