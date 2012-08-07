@@ -12,7 +12,7 @@ module tb ();
 
 `define clk_period 10
 `define rst_period 111
-`define sim_period 15000
+`define sim_period 3000
 
 parameter NUM_GTP = 4;
 parameter NUM_BANK = 6;
@@ -64,7 +64,7 @@ user_app_v DUT (
     gtp_clk, gtp_rdy, gtp_txd, gtp_txk, gtp_rxd, gtp_rxk, gtp_aligned,
     valid, q, qtag, ready, req, ce, w, a, tag, d, be);
 
-sim_extmem #(.BANK(0), .SIM_RAM_SIZE(144)) BANK0 (
+sim_extmem #(.BANK(0), .SIM_RAM_SIZE(288)) BANK0 (
     tb_clk,
     valid[0],
     q[DATA_WIDTH*0 +: DATA_WIDTH],
@@ -78,19 +78,19 @@ sim_extmem #(.BANK(0), .SIM_RAM_SIZE(144)) BANK0 (
     d[DATA_WIDTH*0 +: DATA_WIDTH],
     be[BE_WIDTH*0 +: BE_WIDTH]);
 
-sim_extmem #(.BANK(1), .SIM_RAM_SIZE(144)) BANK1 (
-    tb_clk,
-    valid[1],
-    q[DATA_WIDTH*1 +: DATA_WIDTH],
-    qtag[TAG_WIDTH*1 +: TAG_WIDTH],
-    ready[1],
-    req[1],
-    ce[1],
-    w[1],
-    a[ADDRESS_WIDTH*1 +: ADDRESS_WIDTH],
-    tag[TAG_WIDTH*1 +: TAG_WIDTH],
-    d[DATA_WIDTH*1 +: DATA_WIDTH],
-    be[BE_WIDTH*1 +: BE_WIDTH]);
+//sim_extmem #(.BANK(1), .SIM_RAM_SIZE(1024)) BANK1 (
+//    tb_clk,
+//    valid[1],
+//    q[DATA_WIDTH*1 +: DATA_WIDTH],
+//    qtag[TAG_WIDTH*1 +: TAG_WIDTH],
+//    ready[1],
+//    req[1],
+//    ce[1],
+//    w[1],
+//    a[ADDRESS_WIDTH*1 +: ADDRESS_WIDTH],
+//    tag[TAG_WIDTH*1 +: TAG_WIDTH],
+//    d[DATA_WIDTH*1 +: DATA_WIDTH],
+//    be[BE_WIDTH*1 +: BE_WIDTH]);
 
 sim_host #(.filename("sim_host.cmd")) HOST (tb_clk, reg_in, reg_wr, reg_out);
 
@@ -129,8 +129,8 @@ end
 initial begin
   wait (reg_out[0]);
   @ (posedge tb_clk);
-  BANK0.display_mem(1024);
-  BANK1.display_mem(1024);
+  BANK0.display_mem(288);
+//  BANK1.display_mem(1024);
   $display("Simulation terminate normally.");
   $finish;
 end

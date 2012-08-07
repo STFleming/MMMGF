@@ -59,9 +59,9 @@ wire run0, rd0, vld0, wr0, full0;
 reg  [ADDRESS_WIDTH-1:0] ral0, rah0, wal0, wah0;
 wire [DATA_WIDTH-1:0] din0, dout0;
 
-wire run1, rd1, vld1, wr1, full1;
-reg  [ADDRESS_WIDTH-1:0] ral1, rah1, wal1, wah1;
-wire [DATA_WIDTH-1:0] din1, dout1;
+//wire run1, rd1, vld1, wr1, full1;
+//reg  [ADDRESS_WIDTH-1:0] ral1, rah1, wal1, wah1;
+//wire [DATA_WIDTH-1:0] din1, dout1;
 
 reg  busy, done;
 
@@ -100,16 +100,16 @@ sma U_SMA0 (
 
     rd0, vld0, dout0, wr0, full0, din0);
 
-sma U_SMA1 (
-    mclk, uclk, rst,
-    run1, ral1, rah1, wal1, wah1,
+//sma U_SMA1 (
+//    mclk, uclk, rst,
+//    run1, ral1, rah1, wal1, wah1,
 
-    ready[1], valid[1], req[1], ce[1], w[1], 
-    a[ADDRESS_WIDTH*1 +: ADDRESS_WIDTH],
-    d[DATA_WIDTH*1 +: DATA_WIDTH],
-    q[DATA_WIDTH*1 +: DATA_WIDTH],
+//    ready[1], valid[1], req[1], ce[1], w[1], 
+//    a[ADDRESS_WIDTH*1 +: ADDRESS_WIDTH],
+//    d[DATA_WIDTH*1 +: DATA_WIDTH],
+//    q[DATA_WIDTH*1 +: DATA_WIDTH],
 
-    rd1, vld1, dout1, wr1, full1, din1);
+//    rd1, vld1, dout1, wr1, full1, din1);
 
 //-------- Processing Element ----------
 //pe U_PE (
@@ -119,30 +119,23 @@ sma U_SMA1 (
 
  //-------- DEVICE UNDER TEST ----------
 axel_interface_ent U_PE (
-  .clk (uclk), 
+  .clk (uclk),
   .reset (rst),
-  .full0 (full0),  
+  .full0 (full0),
   .wr0 (wr0),
   .data_out0 (din0),
   .data_in0 (dout0),
   .vld0 (vld0),
-  .rd0 (rd0),
-
-  .full1 (full1),
-  .wr1	 (wr1),
-  .data_out1 (din1),
-  .data_in1 (dout1),
-  .vld1 (vld1),
-  .rd1 (rd1)
-  ); 
+  .rd0 (rd0)
+  );
 
 //-----Printing Processes------------
 always @ (posedge clk)
 begin
-	$display("Data out bank0: %d", din0);
-//	$display("Data out bank1: %d", din1); 
+//        $display("Data out bank0: %d", din0);
+//      $display("Data out bank1: %d", din1); 
 end
-
+  
 //-------- User Registers ----------
 
 reg run0_reg, run1_reg;
@@ -163,19 +156,19 @@ always @ (posedge clk)
     rah0 <= 0;
     wal0 <= 0;
     wah0 <= 0;
-    ral1 <= 0;
-    rah1 <= 0;
-    wal1 <= 0;
-    wah1 <= 0;
+ //   ral1 <= 0;
+ //   rah1 <= 0;
+ //   wal1 <= 0;
+ //   wah1 <= 0;
   end else begin
     if (reg_wr[2*4]) ral0 <= #1 reg_in[31: 0];
     if (reg_wr[3*4]) rah0 <= #1 reg_in[63:32];
     if (reg_wr[4*4]) wal0 <= #1 reg_in[31: 0];
     if (reg_wr[5*4]) wah0 <= #1 reg_in[63:32];
-    if (reg_wr[6*4]) ral1 <= #1 reg_in[31: 0];
-    if (reg_wr[7*4]) rah1 <= #1 reg_in[63:32];
-    if (reg_wr[8*4]) wal1 <= #1 reg_in[31: 0];
-    if (reg_wr[9*4]) wah1 <= #1 reg_in[63:32];
+ //   if (reg_wr[6*4]) ral1 <= #1 reg_in[31: 0];
+ //   if (reg_wr[7*4]) rah1 <= #1 reg_in[63:32];
+ //   if (reg_wr[8*4]) wal1 <= #1 reg_in[31: 0];
+ //   if (reg_wr[9*4]) wah1 <= #1 reg_in[63:32];
   end
 
 assign reg_out[3   :  0] = {req[1], req[0], busy, done};
